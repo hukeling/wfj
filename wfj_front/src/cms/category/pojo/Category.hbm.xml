@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="cms.category.pojo.CmsCategory" table="cms_category" catalog="b2b2c">
+        <id name="categoryId" type="java.lang.Integer">
+            <column name="categoryId" />
+            <generator class="native" />
+        </id>
+        <property name="categoryName" type="java.lang.String">
+            <column name="categoryName" length="50">
+                <comment>这个字段的另一作用：服务于seo 用法：当前字段+主页title</comment>
+            </column>
+        </property>
+        <property name="parentId" type="java.lang.Integer">
+            <column name="parentId" />
+        </property>
+        <property name="sortCode" type="java.lang.Integer">
+            <column name="sortCode" />
+        </property>
+        <property name="keywords" type="java.lang.String">
+            <column name="keywords" length="300">
+                <comment>这个字段的另一作用：服务于seo 用法：当前字段+主页keywords</comment>
+            </column>
+        </property>
+         <property name="isLeaf" type="java.lang.Integer">
+            <column name="isLeaf" />
+        </property>
+    </class>
+</hibernate-mapping>

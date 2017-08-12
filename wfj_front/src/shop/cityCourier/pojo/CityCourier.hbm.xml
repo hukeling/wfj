@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="shop.cityCourier.pojo.CityCourier" table="shop_citycourier" schema="b2b2c" lazy="false" >
+            <cache usage="read-write"/>
+        <id name="cityCourierId" type="java.lang.Integer">
+            <column name="cityCourierId" precision="8" scale="0"/>
+            <generator class="native" />
+        </id>
+        <property name="cityCourierName" type="java.lang.String">
+            <column name="cityCourierName" length="20" not-null="true"/>
+        </property>
+        <property name="responsibleAreas" type="java.lang.String">
+            <column name="responsibleAreas" length="100" not-null="true"/>
+        </property>
+        <property name="phone" type="java.lang.String">
+            <column name="phone" length="20" not-null="true"/>
+        </property>
+        <property name="address" type="java.lang.String">
+            <column name="address" length="100" not-null="true"/>
+        </property>
+        <property name="cardIdNo" type="java.lang.String">
+            <column name="cardIdNo" length="18" not-null="true"/>
+        </property>
+        <property name="entryTime" type="java.util.Date">
+            <column name="entryTime" not-null="true"/>
+        </property>
+        <property name="introducer" type="java.lang.String">
+            <column name="introducer"/>
+        </property>
+    </class>
+</hibernate-mapping>

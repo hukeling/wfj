@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <!-- 团购商品 begin-->
+    <package name="tuan" namespace="/front/customer/tuan" extends="struts-default">
+	 	<action name="gotoGroupApply" class="tuanProductAction" method="gotoGroupApply">
+	 		<result>/WEB-INF/shop/group/tuanProductApply.jsp</result>
+	 	</action>
+	 	<action name="saveOrUpdateGroupProduct" class="tuanProductAction" method="saveOrUpdateGroupProduct">
+	 	   <result name="success" type="redirectAction">
+				<param name="actionName">gotoTuanProductListPage</param>
+			</result>
+	 	</action>
+	 	<action name="checkTuanProduct" class="tuanProductAction" method="checkTuanProduct"/>
+	 	<action name="uploadImage" class="tuanProductAction" method="uploadImage"/>
+	 	<action name="gotoTuanProductListPage" class="tuanProductAction" method="gotoTuanProductListPage">
+	 		<result>/WEB-INF/shop/group/tuanProductList.jsp</result>
+	 	</action>
+	 	<action name="updateStateOpen" class="tuanProductAction" method="updateStateOpen"/>
+	 	<action name="updateStateClose" class="tuanProductAction" method="updateStateClose"/>
+	</package>
+	<!-- 团购商品 end-->
+	
+	<!-- 一级导航团购商品展示begin -->
+	<package name="group" namespace="/tuan" extends="struts-default">
+	 	<action name="gotoTuanHome" class="groupAction" method="gotoTuanHome">
+	 		<result>/WEB-INF/shop/group/tuan_index.jsp</result>
+	 	</action >
+	 	<action name="productInfoById" class="groupAction" method="productInfoById">
+	 		<result>/WEB-INF/shop/group/tuan_detail.jsp</result>
+	 	</action >
+	 	<action name="checkTuanProduct" class="groupAction" method="checkTuanProduct"></action>
+	</package>
+    <!-- 一级导航团购商品展示end --> 
+</struts>    

@@ -1,0 +1,58 @@
+@charset "utf-8";
+/*尾部*/
+.tail_box {
+	width: 100%;
+}
+.tail {
+	width: 1200px;
+	margin: 0 auto;
+	border: 1px solid #ddd;
+	overflow: hidden;
+}
+.tail li {
+	float: left;
+	width: 198px;
+	margin: 8px 0;
+	margin-left: 80px;
+}
+.tail li img {
+	float: left;
+	margin-right: 6px;
+}
+.tail li p {
+	float: left;
+	color: #ff6600;
+	font-size: 16px;
+	margin: 8px;
+}
+.tail li span {
+	color: #666;
+	font-size: 16px;
+}
+.link_box {
+	margin: 12px auto;
+	overflow: hidden;
+	width: 1100px;
+}
+.bangzhu {
+	float: left;
+	width: 200px;
+	margin-left: 20px;
+}
+.bangzhu li {
+	margin-bottom: 8px;
+}
+.bangzhu h3 a {
+	font-size: 14px;
+	color: #666;
+	font-weight: bold;
+}
+.bangzhu p a {
+	font-size: 12px;
+	color: #666;
+}
+.bangzhu a:hover {
+	color: #cc0000;
+}
+
+

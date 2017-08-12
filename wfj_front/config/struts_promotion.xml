@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	
+	   <!-- 平台管理促销活动 begin-->
+    <package name="platformPromotion" namespace="/front/store/platformPromotion" extends="struts-default">
+	 	<action name="gotoPlatformPromotionListPage" class="platformPromotionAction" method="gotoPlatformPromotionListPage">
+	 		<result>/WEB-INF/promotion/platformPromotionList.jsp</result>
+	 	</action>
+	 	<action name="gotoStoreApplyPromotionListPage" class="platformPromotionAction" method="gotoStoreApplyPromotionListPage">
+	 		<result>/WEB-INF/promotion/storeApplyPromotionList.jsp</result>
+	 	</action>
+	 </package>
+    <!-- 平台管理促销活动 end -->
+    
+    <!-- 店铺申请参加促销 begin-->
+    <package name="storeApplyPromotion" namespace="/front/store/storeApplyPromotion" extends="struts-default">
+	 	<action name="batchApplication" class="storeApplyPromotionAction" method="batchApplication">
+	 		<interceptor-ref name="defaultStack" />
+            <interceptor-ref name="token" />
+            <!-- 如果重复提交，跳转到用户中心页面 -->
+            <result name="invalid.token" type="redirectAction">
+            	<param name="namespace">/front/store/platformPromotion</param>
+				<param name="actionName">gotoStoreApplyPromotionListPage</param>
+				<param name="promotionId">${promotionId}</param>
+				<param name="pageIndex">${pageHelper.pageIndex}</param>
+				<param name="pageIndex2">${pageHelper2.pageIndex}</param>
+            </result> 
+	 		<result>/WEB-INF/promotion/storeApplyPromotionList.jsp</result>
+	 	</action>
+	 </package>
+    <!-- 店铺申请参加促销end -->
+    
+    <!-- 前台促销商品 begin-->
+    <package name="salesPromotionCenter" namespace="/front/store/salesPromotionCenter" extends="struts-default">
+	 	<action name="gotoSalesPromotionCenter" class="salesPromotionCenterAction" method="gotoSalesPromotionCenter">
+	 		<result>/WEB-INF/promotion/sales_promotion_center.jsp</result>
+	 	</action>
+	 	<action name="getJson" class="salesPromotionCenterAction" method="getJson"></action>
+	 </package>
+    <!-- 前台促销商品 end -->
+</struts>

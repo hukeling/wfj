@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="cms.attachement.pojo.ArticleAttachment" table="cms_article_attachment" catalog="b2b2c">
+        <id name="attachmentId" type="java.lang.Integer">
+            <column name="attachmentId" />
+            <generator class="native" />
+        </id>
+        <property name="articleId" type="java.lang.Integer">
+            <column name="articleId" />
+        </property>
+        <property name="attUrl" type="java.lang.String">
+            <column name="attUrl" length="200" />
+        </property>
+        <property name="attName" type="java.lang.String">
+            <column name="attName" length="200" />
+        </property>
+        <property name="createTime" type="java.lang.String">
+            <column name="createTime" length="40" />
+        </property>
+        <property name="reduceIntegral" type="java.lang.Integer">
+            <column name="reduceIntegral" />
+        </property>
+        <property name="attType" type="java.lang.String">
+            <column name="attType" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="phone.pojo.CustomerFeedback" table="customer_feedback" catalog="b2b2c">
+        <id name="fbId" type="java.lang.Integer">
+            <column name="fbId" />
+            <generator class="native" />
+        </id>
+        <property name="customerId" type="java.lang.Integer">
+            <column name="customerId" not-null="true" />
+        </property>
+        <property name="fbtype" type="java.lang.Integer">
+            <column name="fbtype"/>
+        </property>
+        <property name="fbcontent" type="java.lang.String">
+            <column name="fbcontent" length="1000"/>
+        </property>
+        <property name="customerPhone" type="java.lang.String">
+            <column name="customerPhone" length="30"/>
+        </property>
+        <property name="customerEmail" type="java.lang.String">
+            <column name="customerEmail" length="50"/>
+        </property>
+        <property name="isDeal" type="java.lang.Integer">
+            <column name="isDeal"/>
+        </property>
+    </class>
+</hibernate-mapping>

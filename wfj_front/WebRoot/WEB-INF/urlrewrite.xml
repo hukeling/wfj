@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
+        "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
+
+<!--
+    Configuration file for UrlRewriteFilter
+    http://www.tuckey.org/urlrewrite/
+-->
+<urlrewrite>
+	<!-- 全局替换规则：shopFront\/queryProductInfo.do\?pType\=1\&productId\= -->
+	<!--
+【1】例如：要把http：//localhost/prjtest/user/view.jsp?cid=1&cname=admin转换成
+		http：//localhost/prjtest/user/view/1-admin.html
+		<rule>
+			<from>^/user/view/([0-9]+)-([a-z]+).html$</from>
+			<to>/shopFront/queryProductInfo.do?cid=$1&cname=$2</to>
+		</rule>
+		
+【2】例如：要把http://localhost/shopFront/queryProductInfo.do?pType=1&productId=64转换成
+		http://localhost/productInfo/1-64.html
+	<rule>
+		<from>^/productInfo/([0-9]+)-([0-9]+).html$</from>
+		<to>/shopFront/queryProductInfo.do?pType=$1&amp;productId=$2</to>
+	</rule>
+			符号：【&amp;】意思转义【&】
+	-->
+	<!-- 1、前台商品伪静态配置 -->
+	<rule>
+		<from>^/productInfo/([0-9]+).html$</from>
+		<to>/productsdetail/productInfoById.action?productId=$1</to>
+	</rule>
+	<rule>
+		<from>^/phoneProductInfo/([0-9]+).html$</from>
+		<to>/productsdetail/phoneProductInfoById.action?productId=$1</to>
+	</rule>
+	<!-- 3、前台新闻伪静态配置 -->
+	<rule>
+		<from>^/news/([0-9]+).html$</from>
+		<to>/helpFront/gotoFooterArticleList.action?articleId=$1</to>
+	</rule>
+	<!-- 4、商城首页伪静态配置 -->
+	<rule>
+		<from>^/index.html$</from>
+		<to>/shopHome/gotoHomePage.action</to>
+	</rule>
+	<!-- 5、商品预览伪静态配置 -->
+	<rule>
+		<from>^/commodityPreview/([0-9]+).html$</from>
+		<to>/productsdetail/productInfoById.action?productId=$1&amp;commodityPreview=1</to>
+	</rule>
+	<!-- 6、店铺主页面伪二级域名配置 -->
+	<rule>
+		<from>^/shop/(.*).html$</from>
+		<to>/store/frontShopMainPage/gotoShopInfoPage.action?shopInfoId=$1&amp;orderBy=normal</to>
+	</rule>
+	<!-- 7、前台商品伪静态配置  【新】 -->
+	<rule>
+		<from>^/productInfoPage/([0-9]+)-([0-9]+)-([0-9]+).html$</from>
+		<to>/productsdetail/productInfoById.action?brandId=$1&amp;productTypeId=$2&amp;categoryParams=$3</to>
+	</rule>
+	<!-- 8、前台商品伪静态配置  【新 点击规格时使用】 -->
+	<rule>
+		<from>^/productInfoPage/([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+).html$</from>
+		<to>/productsdetail/productInfoById.action?brandId=$1&amp;productTypeId=$2&amp;categoryParams=$3&amp;productId=$4</to>
+	</rule>
+	<!-- 9、前台商品伪静态配置  【新 点击首页推荐品牌时使用】 -->
+	<rule>
+		<from>^/productInfoPage/([0-9]+)-([0-9]+).html$</from>
+		<to>/productsdetail/productInfoById.action?brandId=$1&amp;categoryParams=$2</to>
+	</rule>
+	<!-- 10、前台团购商品伪静态配置 -->
+	<rule>
+		<from>^/tuan/([0-9]+).html$</from>
+		<to>/tuan/productInfoById.action?productId=$1</to>
+	</rule>
+	
+	<!-- 2、后台商品伪静态配置 
+	<rule>
+		<from>^/productInfo/([0-9]+)-([0-9]+)-([a-zA-Z]+).html$</from>
+		<to>/shopFront/queryProductInfo.do?pType=$1&amp;productId=$2&amp;backParams=$3</to>
+	</rule>
+	-->
+<!--
+    <rule>
+        <note>
+            The rule means that requests to /test/status/ will be redirected to /rewrite-status
+            the url will be rewritten.
+        </note>
+        <from>/test/status/</from>
+        <to type="redirect">%{context-path}/rewrite-status</to>
+    </rule>
+
+    <outbound-rule>
+        <note>
+            The outbound-rule specifies that when response.encodeURL is called (if you are using JSTL c:url)
+            the url /rewrite-status will be rewritten to /test/status/.
+            The above rule and this outbound-rule means that end users should never see the
+            url /rewrite-status only /test/status/ both in thier location bar and in hyperlinks
+            in your pages.
+        </note>
+        <from>/rewrite-status</from>
+        <to>/test/status/</to>
+    </outbound-rule>
+-->
+    <!--
+    【INSTALLATION】
+        in your web.xml add...
+        <filter>
+            <filter-name>UrlRewriteFilter</filter-name>
+            <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+            <init-param>
+                <param-name>logLevel</param-name>
+                <param-value>WARN</param-value>
+            </init-param>
+        </filter>
+        <filter-mapping>
+            <filter-name>UrlRewriteFilter</filter-name>
+            <url-pattern>/*</url-pattern>
+        </filter-mapping>
+        
+     【EXAMPLES】
+     Redirect one url
+        <rule>
+            <from>/some/old/page.html</from>
+            <to type="redirect">/very/new/page.html</to>
+        </rule>
+
+    【Redirect a directory】
+        <rule>
+            <from>/some/olddir/(.*)</from>
+            <to type="redirect">/very/newdir/$1</to>
+        </rule>
+
+    【Clean a url】
+        <rule>
+            <from>/products/([0-9]+)</from>
+            <to>/products/index.jsp?product_id=$1</to>
+        </rule>
+    eg, /products/1234 will be passed on to /products/index.jsp?product_id=1234 without the user noticing.
+
+    【Browser detection】
+        <rule>
+            <condition name="user-agent">Mozilla/[1-4]</condition>
+            <from>/some/page.html</from>
+            <to>/some/page-for-old-browsers.html</to>
+        </rule>
+    eg, will pass the request for /some/page.html on to /some/page-for-old-browsers.html only for older
+    browsers whose user agent srtings match Mozilla/1, Mozilla/2, Mozilla/3 or Mozilla/4.
+
+    【Centralised browser detection】
+        <rule>
+            <condition name="user-agent">Mozilla/[1-4]</condition>
+            <set type="request" name="browser">moz</set>
+        </rule>
+    eg, all requests will be checked against the condition and if matched
+    request.setAttribute("browser", "moz") will be called.
+    -->
+
+</urlrewrite>

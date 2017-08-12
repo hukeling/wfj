@@ -1,0 +1,71 @@
+.icon_address{
+    background-image:url('img/icon_address.png');
+}
+.btn_downArrow{
+    background-image:url('img/btn_downArrow.png');
+}
+.icon_notice{
+    background-image:url('img/icon_notice.png');
+}
+.btn_search{
+    background-image:url('img/btn_search.png');
+}
+.btn_index_food{
+    background-image:url('img/btn_index_food.png');
+}
+.btn_index_hotel{
+    background-image:url('img/btn_index_hotel.png');
+}
+.btn_index_kids{
+    background-image:url('img/btn_index_kids.png');
+}
+.btn_index_movie{
+    background-image:url('img/btn_index_movie.png');
+}
+.btn_index_service{
+    background-image:url('img/btn_index_service.png');
+}
+.btn_index_shopping{
+    background-image:url('img/btn_index_shopping.png');
+}
+.btn_index_weather{
+    background-image:url('img/btn_index_weather.png');
+}
+.btn_index_beauty{
+    background-image:url('img/btn_index_beauty.png');
+}   
+.btn_bk_home{
+    background-image:url('img/btn_bk_home.png');
+}
+.btn_bk_home_on{
+    background-image:url('img/btn_bk_home_on.png');
+}
+.btn_bk_shop{
+    background-image:url('img/btn_bk_shop.png');
+}
+.btn_bk_shop_on{
+    background-image:url('img/btn_bk_shop_on.png');
+}
+.btn_bk_list{
+    background-image:url('img/btn_bk_list.png');
+}
+.btn_bk_list_on{
+    background-image:url('img/btn_bk_list_on.png');
+}
+.btn_bk_disovery{
+    background-image:url('img/btn_bk_disovery.png');
+}
+.btn_bk_disovery_on{
+    background-image:url('img/btn_bk_disovery_on.png');
+}
+.btn_bk_user{
+    background-image:url('img/btn_bk_user.png');
+}
+.btn_bk_user_on{
+    background-image:url('img/btn_bk_user_on.png');
+}
+.btn_back{
+    background-image:url('img/btn_back.png');
+}
+
+

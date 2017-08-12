@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="shop.customer.pojo.ShopCustomerInfo" table="shop_customerinfo" schema="b2b2c" >
+        <id name="shopCustomerInfoId" type="java.lang.Integer">
+            <column name="shopCustomerInfoId"/>
+            <generator class="native"/>
+        </id>
+        <property name="customerId" type="java.lang.Integer">
+            <column name="customerId"/>
+        </property>
+        <property name="customerCreditId" type="java.lang.Integer">
+            <column name="customerCreditId"/>
+        </property>
+        <property name="trueName" type="java.lang.String">
+            <column name="trueName"/>
+        </property>
+        <property name="sex" type="java.lang.Integer">
+            <column name="sex"/>
+        </property>
+        <property name="birthday" type="java.util.Date">
+            <column name="birthday"/>
+        </property>
+        <property name="idCard" type="java.lang.String">
+            <column name="idCard"/>
+        </property>
+        <property name="regionLocation" type="java.lang.String">
+            <column name="regionLocation"/>
+        </property>
+        <property name="city" type="java.lang.String">
+            <column name="city"/>
+        </property>
+        <property name="country" type="java.lang.String">
+            <column name="country"/>
+        </property>
+        <property name="address" type="java.lang.String">
+            <column name="address"/>
+        </property>
+        <property name="postcode" type="java.lang.String">
+            <column name="postcode"/>
+        </property>
+        <property name="phone" type="java.lang.String">
+            <column name="phone"/>
+        </property>
+        <property name="telephone" type="java.lang.String">
+            <column name="telephone"/>
+        </property>
+        <property name="qq" type="java.lang.String">
+            <column name="qq"/>
+        </property>
+        <property name="accountBalance" type="java.math.BigDecimal">
+            <column name="accountBalance"/>
+        </property>
+        <property name="cardHolder" type="java.lang.String">
+            <column name="cardHolder"/>
+        </property>
+        <property name="cardNumber" type="java.lang.String">
+            <column name="cardNumber"/>
+        </property>
+        <property name="loginIp" type="java.lang.String">
+            <column name="loginIp"/>
+        </property>
+        <property name="loginDate" type="java.util.Date">
+            <column name="loginDate"/>
+        </property>
+        <property name="loginFailureCount" type="java.lang.Integer">
+            <column name="loginFailureCount"/>
+        </property>
+        <property name="passwordRandomCode" type="java.lang.String">
+            <column name="passwordRandomCode"/>
+        </property>
+        <property name="notes" type="java.lang.String">
+            <column name="notes"/>
+        </property>
+    </class>
+</hibernate-mapping>  

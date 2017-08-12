@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	
+	 
+	
+	<!-- 体验begin -->
+	<bean id="experienceDao" class="gou.experience.dao.imp.ExperienceDao"  parent="baseDao"/>
+	<bean id="experienceService" class="gou.experience.service.imp.ExperienceService" parent="baseService">
+		<property name="experienceDao"><ref bean="experienceDao" /></property>
+	</bean>
+	<bean id="experienceAction" class="gou.experience.action.ExperienceAction" scope="prototype">
+		<property name="experienceService"><ref bean="experienceService" /></property>
+		<property name="experienceInfoService"><ref bean="experienceInfoService" /></property>
+	</bean>
+	<!-- 体验end -->
+	
+	
+	
+	<!-- 体验详情begin -->
+	<bean id="experienceInfoDao" class="gou.experience.dao.imp.ExperienceInfoDao"  parent="baseDao"/>
+	<bean id="experienceInfoService" class="gou.experience.service.imp.ExperienceInfoService" parent="baseService">
+		<property name="experienceInfoDao"><ref bean="experienceInfoDao" /></property>
+	</bean> 
+	<!-- <bean id="experienceInfoAction" class="gou.experience.action.ExperienceInfoAction" scope="prototype">
+		<property name="experienceInfoService"><ref bean="experienceInfoService" /></property>
+		<property name="experienceService"><ref bean="experienceService" /></property>
+	</bean> -->
+	<!-- 体验详情end -->
+	
+	 
+ 
+	 
+	
+	
+	 
+</beans>

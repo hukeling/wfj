@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	
+	<!-- 平台管理促销活动begin -->
+		<bean id="promotionAction" class="promotion.action.PromotionAction" scope="prototype">
+			<property name="platformPromotionService"><ref bean="platformPromotionService" /></property>
+			<property name="salesPromotionDiscountService"><ref bean="salesPromotionDiscountService" /></property>
+		</bean>
+		<bean id="platformPromotionService" class="promotion.service.imp.PlatformPromotionService"  parent="baseService">
+			<property name="platformPromotionDao"><ref bean="platformPromotionDao" /></property>
+		</bean>
+		<bean id="platformPromotionDao" class="promotion.dao.imp.PlatformPromotionDao"  parent="baseDao"/>
+		<bean id="salesPromotionDiscountService" class="promotion.service.imp.SalesPromotionDiscountService"  parent="baseService">
+			<property name="salesPromotionDiscountDao"><ref bean="salesPromotionDiscountDao" /></property>
+		</bean>
+		<bean id="salesPromotionDiscountDao" class="promotion.dao.imp.SalesPromotionDiscountDao"  parent="baseDao"/>
+	<!-- 平台管理促销活动end -->
+	
+	<!-- 店铺申请参加促销begin -->
+		<bean id="disproductAction" class="promotion.action.DisproductAction" scope="prototype">
+			<property name="storeApplyPromotionService"><ref bean="storeApplyPromotionService" /></property>
+		</bean>
+		<bean id="storeApplyPromotionService" class="promotion.service.imp.StoreApplyPromotionService"  parent="baseService">
+			<property name="storeApplyPromotionDao"><ref bean="storeApplyPromotionDao" /></property>
+		</bean>
+		<bean id="storeApplyPromotionDao" class="promotion.dao.imp.StoreApplyPromotionDao"  parent="baseDao"/>
+	<!-- 店铺申请参加促销end -->
+		
+    <!-- 促销活动申请begin -->
+		<bean id="promotionApplyDao" class="promotion.dao.imp.PromotionApplyDao"  parent="baseDao"/>
+		<bean id="promotionApplyService" class="promotion.service.imp.PromotionApplyService"  parent="baseService">
+			<property name="promotionApplyDao" ref="promotionApplyDao" />
+		</bean>
+		<bean id="promotionApplyAction" class="promotion.action.PromotionApplyAction" scope="prototype">
+			<property name="promotionApplyService" ref="promotionApplyService"/>
+			<property name="shopInfoService" ref="shopInfoService"/>
+		</bean>
+	<!-- 促销活动申请end -->
+</beans>

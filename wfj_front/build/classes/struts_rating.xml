@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<!-- 买家等级策略 begin -->
+	<package name="buyersStrategy" namespace="/back/buyersStrategy" extends="functionPurview">
+		<action name="gotoBuyersStrategyPage" class="buyersStrategyAction" method="gotoBuyersStrategyPage">
+	  		<!-- 调用功能权限的拦截器 -->
+			<interceptor-ref name="functionPurviewStack"/>
+	  		<result name="success">/WEB-INF/rating/buyersStrategy/listBuyersStrategy.jsp</result>
+	  	</action>
+	  	<action name="listBuyersStrategy" class="buyersStrategyAction" method="listBuyersStrategy"></action>
+	  	<action name="savaOrUpdateBuyersStrategy" class="buyersStrategyAction" method="savaOrUpdateBuyersStrategy"></action>
+	  	<action name="getBuyersStrategyObject" class="buyersStrategyAction" method="getBuyersStrategyObject"></action>
+	  	<action name="deleteBuyersStrategy" class="buyersStrategyAction" method="deleteBuyersStrategy"></action>
+	  	<action name="uploadImage" class="buyersStrategyAction" method="uploadImage"></action>
+	  	<action name="checkBuyersLevel" class="buyersStrategyAction" method="checkBuyersLevel"></action>
+	</package>
+	<!-- 买家等级策略 end -->
+	
+	<!-- 买家等级升迁记录 begin -->
+	<package name="buyersRecord" namespace="/back/buyersRecord" extends="functionPurview">
+		<action name="gotoBRCustomerPage" class="buyersRecordAction" method="gotoBRCustomerPage">
+	  		<!-- 调用功能权限的拦截器 -->
+			<interceptor-ref name="functionPurviewStack"/>
+	  		<result name="success">/WEB-INF/rating/buyersRecord/listCustomer.jsp</result>
+	  	</action>
+	  	<action name="gotoBuyersRecordId" class="buyersRecordAction" method="gotoBuyersRecordId">
+	  		<!-- 调用功能权限的拦截器 -->
+			<interceptor-ref name="functionPurviewStack"/>
+	  		<result name="success">/WEB-INF/rating/buyersRecord/listBuyersRecord.jsp</result>
+	  	</action>
+	  	<action name="listBuyersRecord" class="buyersRecordAction" method="listBuyersRecord"></action>
+	  	<action name="savaOrUpdateBuyersRecord" class="buyersRecordAction" method="savaOrUpdateBuyersRecord"></action>
+	  	<action name="getBuyersRecordObject" class="buyersRecordAction" method="getBuyersRecordObject"></action>
+	  	<action name="deleteBuyersRecord" class="buyersRecordAction" method="deleteBuyersRecord"></action>
+	</package>
+	<!-- 买家等级升迁记录 end -->
+	
+	<!-- 卖家等级策略 begin -->
+	<package name="sellersStrategy" namespace="/back/sellersStrategy" extends="functionPurview">
+		<action name="gotoSellersStrategyPage" class="sellersStrategyAction" method="gotoSellersStrategyPage">
+	  		<!-- 调用功能权限的拦截器 -->
+			<interceptor-ref name="functionPurviewStack"/>
+	  		<result name="success">/WEB-INF/rating/sellersStrategy/listSellersStrategy.jsp</result>
+	  	</action>
+	  	<action name="listSellersStrategy" class="sellersStrategyAction" method="listSellersStrategy"></action>
+	  	<action name="savaOrUpdateSellersStrategy" class="sellersStrategyAction" method="savaOrUpdateSellersStrategy"></action>
+	  	<action name="getSellersStrategyObject" class="sellersStrategyAction" method="getSellersStrategyObject"></action>
+	  	<action name="deleteSellersStrategy" class="sellersStrategyAction" method="deleteSellersStrategy"></action>
+	  	<action name="uploadImage" class="sellersStrategyAction" method="uploadImage"></action>
+	  	<action name="checkSellersLevel" class="sellersStrategyAction" method="checkSellersLevel"></action>
+	</package>
+	<!-- 卖家等级策略 end -->
+	
+	<!-- 卖家等级升迁记录 begin -->
+	<package name="sellersRecord" namespace="/back/sellersRecord" extends="functionPurview">
+		<action name="gotoSRCustomerPage" class="sellersRecordAction" method="gotoSRCustomerPage">
+	  		<!-- 调用功能权限的拦截器 -->
+			<interceptor-ref name="functionPurviewStack"/>
+	  		<result name="success">/WEB-INF/rating/sellersRecord/listCustomer.jsp</result>
+	  	</action>
+	  	<action name="gotoSellersRecordId" class="sellersRecordAction" method="gotoSellersRecordId">
+	  		<!-- 调用功能权限的拦截器 -->
+			<interceptor-ref name="functionPurviewStack"/>
+	  		<result name="success">/WEB-INF/rating/sellersRecord/listSellersRecord.jsp</result>
+	  	</action>
+	  	<action name="listSellersRecord" class="sellersRecordAction" method="listSellersRecord"></action>
+	  	<action name="savaOrUpdateSellersRecord" class="sellersRecordAction" method="savaOrUpdateSellersRecord"></action>
+	  	<action name="getSellersRecordObject" class="sellersRecordAction" method="getSellersRecordObject"></action>
+	  	<action name="deleteSellersRecord" class="sellersRecordAction" method="deleteSellersRecord"></action>
+	</package>
+	<!-- 卖家等级升迁记录 end -->
+</struts>

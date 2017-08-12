@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+     <!-- 初始化加载虚拟金币赠送规则  -->
+	<bean id="initializingCoinRules" class="util.init.InitializingCoinRules" init-method="afterPropertiesSet" >
+		<property name="coinRulesService"><ref bean="coinRulesService" /></property>
+	</bean> 
+	
+    <!-- 初始化action名称对应模板到全局上下文中 ServletContext  -->
+	<bean id="initializingOPLogTemp" class="util.init.InitializingOPLogTemp" init-method="afterPropertiesSet" ></bean> 
+       
+    <!-- 操作日志记录 -->
+    <bean id="opLogAction" class="basic.action.OpLogAction" scope="prototype">
+		<property name="opLogService"><ref bean="opLogService" /></property>
+	</bean>
+	<bean id="opLogService" class="basic.service.imp.OPLogService"  parent="baseService">
+		<property name="opLogDao"><ref bean="opLogDao" /></property>
+	</bean>
+	<bean id="opLogDao" class="basic.dao.imp.OPLogDao"  parent="baseDao"/>
+	
+    <!-- 数据字典begin -->
+    <bean id="keyBookDao" class="basic.dao.imp.KeyBookDao"  parent="baseDao"/>
+	<bean id="keyBookService" class="basic.service.imp.KeyBookService"  parent="baseService">
+		<property name="keyBookDao"><ref bean="keyBookDao" /></property>
+	</bean>
+	<bean id="keyBookAction" class="basic.action.KeyBookAction" scope="prototype">
+		<property name="keyBookService"><ref bean="keyBookService" /></property>
+		<property name="articleService"><ref bean="articleService" /></property>
+		<property name="categoryService"><ref bean="categoryService" /></property>
+	</bean>
+	<!-- 数据字典end -->
+	
+    <!-- 虚拟金币赠送规则 begin -->
+    <bean id="coinRulesDao" class="shop.common.dao.imp.CoinRulesDao"  parent="baseDao"/>
+	<bean id="coinRulesService" class="shop.common.service.imp.CoinRulesService"  parent="baseService">
+		<property name="coinRulesDao"><ref bean="coinRulesDao" /></property>
+	</bean>
+	<bean id="coinRulesAction" class="shop.common.action.CoinRulesAction" scope="prototype">
+		<property name="coinRulesService"><ref bean="coinRulesService" /></property>
+	</bean>
+	<!-- 虚拟金币赠送规则 end -->
+	
+    <!-- 管理员 -->
+	<bean id="usersAction" class="basic.action.UsersAction" scope="prototype">
+		<property name="usersService"><ref bean="usersService" /></property>
+	</bean>
+	<bean id="usersService" class="basic.service.imp.UsersService"  parent="baseService">
+		<property name="usersDao"><ref bean="usersDao" /></property>
+	</bean>
+	<bean id="usersDao" class="basic.dao.imp.UsersDao"  parent="baseDao"/>
+	
+    <!-- 角色 -->
+	<bean id="actorAction" class="basic.action.ActorAction" scope="prototype">
+		<property name="actorService"><ref bean="actorService" /></property>
+	</bean>
+	<bean id="actorService" class="basic.service.imp.ActorService"  parent="baseService">
+		<property name="actorDao"><ref bean="actorDao" /></property>
+	</bean>
+	<bean id="actorDao" class="basic.dao.imp.ActorDao"  parent="baseDao"/>
+	
+    <!-- 模块权限-->
+	<bean id="purviewAction" class="basic.action.PurviewAction" scope="prototype">
+		<property name="purviewService"><ref bean="purviewService" /></property>
+	</bean>
+	<bean id="purviewService" class="basic.service.imp.PurviewService"  parent="baseService">
+		<property name="purviewDao"><ref bean="purviewDao" /></property>
+	</bean>
+	<bean id="purviewDao" class="basic.dao.imp.PurviewDao"  parent="baseDao"/>
+	<!-- 功能权限begin-->
+	<bean id="functionsAction" class="basic.action.FunctionsAction" scope="prototype">
+		<property name="functionsService"><ref bean="functionsService" /></property>
+	</bean>
+	<bean id="functionsService" class="basic.service.imp.FunctionsService"  parent="baseService">
+		<property name="functionsDao"><ref bean="functionsDao" /></property>
+	</bean>
+	<bean id="functionsDao" class="basic.dao.imp.FunctionsDao"  parent="baseDao"/>
+	<!-- 功能权限end-->
+	
+	<!-- 用户角色begin -->
+		<bean id="usersActorAction" class="basic.action.UsersActorAction" scope="prototype">
+			<property name="usersActorService"><ref bean="usersActorService" /></property>
+			<property name="actorService"><ref bean="actorService" /></property>
+		</bean>
+		<bean id="usersActorService" class="basic.service.imp.UsersActorService"  parent="baseService">
+			<property name="usersActorDao"><ref bean="usersActorDao" /></property>
+		</bean>
+		<bean id="usersActorDao" class="basic.dao.imp.UsersActorDao"  parent="baseDao"/>
+	<!-- 用户角色end -->
+	
+	<!-- 角色权限begin -->
+		<bean id="actorPurviewAction" class="basic.action.ActorPurviewAction" scope="prototype">
+			<property name="actorPurviewService"><ref bean="actorPurviewService" /></property>
+			<property name="purviewService"><ref bean="purviewService" /></property>
+			<property name="functionsService"><ref bean="functionsService" /></property>
+		</bean>
+		<bean id="actorPurviewService" class="basic.service.imp.ActorPurviewService"  parent="baseService">
+			<property name="actorPurviewDao"><ref bean="actorPurviewDao" /></property>
+		</bean>
+		<bean id="actorPurviewDao" class="basic.dao.imp.ActorPurviewDao"  parent="baseDao"/>
+	<!-- 角色权限end -->
+	
+	<!-- 测试后台管理员登录begin -->
+		<bean id="backLoginAction" class="basic.action.BackLoginAction" scope="prototype">
+			<property name="usersService"><ref bean="usersService" /></property>
+			<property name="purviewService"><ref bean="purviewService" /></property>
+			<property name="usersActorService"><ref bean="usersActorService" /></property>
+			<property name="actorPurviewService"><ref bean="actorPurviewService" /></property>
+		</bean>
+	<!-- 测试后台管理员登录end -->
+	
+	<!-- 初始化数据字典到全局上下文中 ServletContext -->
+		<bean id="initializingKeyBook" class="util.init.InitializingKeyBook" init-method="afterPropertiesSet" >
+			<property name="keyBookService"><ref bean="keyBookService" /></property>
+			<property name="articleService"><ref bean="articleService" /></property>
+			<property name="categoryService"><ref bean="categoryService" /></property>
+			<property name="productTypeService"><ref bean="productTypeService" /></property>
+			<property name="brandTypeService"><ref bean="brandTypeService" /></property>
+			<property name="brandService"><ref bean="brandService" /></property>
+			<property name="homeAdvertisementService"><ref bean="homeAdvertisementService" /></property>
+		</bean>
+	<!-- 初始化数据字典到全局上下文中 ServletContext -->
+	
+	<!-- 公告文件上传  -->
+	<bean id="fileOperatorAction" class="util.action.FileOperatorAction" scope="prototype">
+	</bean>
+	<!-- 全局地址区域 -->
+	<bean id="areaDao" class="basic.dao.imp.AreaDao"  parent="baseDao"/>	
+	<bean id="areaService" class="basic.service.imp.AreaService"  parent="baseService">
+		<property name="areaDao"><ref bean="areaDao" /></property>
+	</bean>
+	<bean id="areaAction" class="basic.action.AreaAction" scope="prototype">
+		<property name="areaService"><ref bean="areaService" /></property>
+	</bean>
+	
+	<!-- freemark静态化 -->
+	<bean id="freemarkerUtil" class="util.other.FreeMarker" init-method="afterPropertiesSet" >
+	</bean>
+	<!-- freemark -->
+	
+	<!-- 财付通支付 -->
+	<bean id="tenpayAction" class="util.tenpay.action.PayAction" scope="prototype">
+		<property name="shoppingCartOrderService"><ref bean="shoppingCartOrderService" /></property>
+		<property name="ordersService"><ref bean="ordersService" /></property>
+		<property name="safetyCertificateService"><ref bean="safetyCertificateService" /></property>
+	</bean>
+	<!-- 支付宝支付 -->
+	<bean id="alipayAction" class="util.newAlipay.action.AlipayAction" scope="prototype"></bean>  
+	<!-- 快钱支付 -->
+	<bean id="quickBuckAction" class="util.quickBuck.action.QuickBuckAction" scope="prototype">
+		<property name="ordersService"><ref bean="ordersService" /></property>
+	</bean>  
+	<!-- 搜索引擎service -->
+	<bean id="searchService" class="shop.search.service.imp.SearchService" scope="prototype">
+		<property name="compassTemplate"><ref bean="compassTemplate" /></property>
+	</bean>  
+	
+	<!--通用导出下载文件配置begin  -->
+	<bean id="exportExcelAction" class="util.action.ExportExcelAction" scope="prototype"></bean>
+	<!--通用导出下载文件配置end  -->
+</beans>

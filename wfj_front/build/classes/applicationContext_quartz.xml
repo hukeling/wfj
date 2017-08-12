@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"  
+   xmlns:task="http://www.springframework.org/schema/task"  
+   xsi:schemaLocation="http://www.springframework.org/schema/beans   
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+   http://www.springframework.org/schema/task   
+   http://www.springframework.org/schema/task/spring-task-3.0.xsd">  
+  
+        <!-- 生成首页任务 -->
+        <bean id="buildIndexTask" class="shop.prosceniumInstall.action.BuildFreeMarkAction" scope="prototype">
+        	<property name="shopHomeMiddleCategoryService"><ref bean="shopHomeMiddleCategoryService" /></property>
+			<property name="shopHomeMiddleCategoryBilateralService"><ref bean="shopHomeMiddleCategoryBilateralService" /></property>
+			<property name="shopHomeMiddleCategoryTABService"><ref bean="shopHomeMiddleCategoryTABService" /></property>
+			<property name="homeLBTService"><ref bean="homeLBTService" /></property>
+			<property name="homeAdvertisementService"><ref bean="homeAdvertisementService" /></property>
+			<property name="homeParticularlyTabService"><ref bean="homeParticularlyTabService" /></property>
+			<property name="articleService"><ref bean="articleService" /></property>
+			<property name="promotionService"><ref bean="platformPromotionService" /></property>
+        </bean>
+       <!-- 
+       <task:annotation-driven/>
+       <task:scheduled-tasks>
+			<task:scheduled ref="buildIndexTask" method="initFreemarkbuild" fixed-delay="300000" />
+       </task:scheduled-tasks>  --> 
+       
+    <!-- 订单中商品评价定时器-7天尚未评价则自动评价 --> 
+	<bean id="autoCommentService" class="shop.front.customer.service.imp.AutoCommentService">
+		<property name="productInfoService" ref="productInfoService"></property>
+		<property name="ordersService" ref="ordersService"></property>
+		<property name="shopInfoService" ref="shopInfoService"></property>
+		<property name="ordersOPLogService" ref="ordersOPLogService"></property>
+		<property name="ordersListService" ref="ordersListService"></property>
+		<property name="evaluateGoodsService" ref="evaluateGoodsService"></property>
+		<property name="customerService" ref="customerService"></property>
+		<property name="virtualCoinDao" ref="virtualCoinDao"></property>
+		<!-- <property name="systemVirtualCoinDao" ref="systemVirtualCoinDao"></property>
+		<property name="terminalToCustomerDao" ref="terminalToCustomerDao"></property>
+		<property name="distributorToTerminalDao" ref="distributorToTerminalDao"></property>
+		<property name="distributorInfoDao" ref="distributorInfoDao"></property>
+		<property name="superTerminalDao" ref="superTerminalDao"></property> -->
+	</bean>
+	<task:scheduled-tasks>
+		   <task:scheduled ref="autoCommentService" method="saveAutoComment" cron="00 01 00 * * ?" />
+    </task:scheduled-tasks>
+       
+   <!-- 扫描团购商品是否结束egin --> 
+   <bean id="tuanProductStateService" class="tuan.service.imp.TuanProductStateService" scope="prototype">
+   		<property name="tuanProductService" ref="tuanProductService"></property>
+   </bean>
+    <!--cron表达式:0秒 10分  0时  -->
+    <task:scheduled-tasks> 
+         <task:scheduled ref="tuanProductStateService" method="closeState" cron="0 10 0 * * ?" />   
+   	</task:scheduled-tasks>  
+   <!-- 扫描团购商品是否结束end --> 
+	
+	<!-- <bean id="autoCommentJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="autoCommentService" />
+		<property name="targetMethod" value="saveAutoComment"/>
+		<property name="concurrent" value="true" />
+	</bean>
+	<bean id="autoCommentTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="autoCommentJob" />
+		<property name="cronExpression" value="0 5 0 * * ?" />
+	</bean>
+	<bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="applicationContextSchedulerContextKey" value="applicationContext" />
+		<property name="triggers">
+			<list>
+				<ref bean="autoCommentTrigger" />
+			</list>
+		</property>
+	</bean> -->
+</beans>

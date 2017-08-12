@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	
+	<!-- 唐智府首页轮播图begin -->
+	 <bean id="tangLbtDao" class="tang.impression.dao.imp.TangLbtDao"  parent="baseDao"/>
+	<bean id="tangLbtService" class="tang.impression.service.imp.TangLbtService" parent="baseService">
+		<property name="tangLbtDao"><ref bean="tangLbtDao" /></property>
+	</bean>
+	<bean id="tangLbtAction" class="tang.impression.action.TangLbtAction" scope="prototype">
+		<property name="tangLbtService"><ref bean="tangLbtService" /></property>
+	</bean> 
+	<!-- 唐智府首页轮播图end -->
+	
+	<!-- 唐智府首页分类begin -->
+	 <bean id="tangHomeDao" class="tang.impression.dao.imp.TangHomeDao"  parent="baseDao"/>
+	<bean id="tangHomeService" class="tang.impression.service.imp.TangHomeService" parent="baseService">
+		<property name="tangHomeDao"><ref bean="tangHomeDao" /></property>
+	</bean>
+	<bean id="tangHomeAction" class="tang.impression.action.TangHomeAction" scope="prototype">
+		<property name="tangHomeService"><ref bean="tangHomeService" /></property>
+	</bean> 
+	<!-- 唐智府首页分类end -->
+	
+	<!-- 老字号信息begin -->
+	<bean id="oldBrandDao" class="tang.oldBrand.dao.imp.OldBrandDao"  parent="baseDao"/>
+	<bean id="oldBrandService" class="tang.oldBrand.service.imp.OldBrandService" parent="baseService">
+		<property name="oldBrandDao"><ref bean="oldBrandDao" /></property>
+	</bean>
+	<bean id="oldBrandAction" class="tang.oldBrand.action.OldBrandAction" scope="prototype">
+		<property name="oldBrandService"><ref bean="oldBrandService" /></property>
+	</bean>
+	<!-- 老字号信息end -->
+	
+	<!-- 老字号店铺信息 -->
+	<bean id="oldBrandTangStoreDao" class="tang.oldBrand.dao.imp.OldBrandTangStoreDao"  parent="baseDao"/>
+	<bean id="oldBrandTangStoreService" class="tang.oldBrand.service.imp.OldBrandTangStoreService" parent="baseService">
+		<property name="oldBrandTangStoreDao"><ref bean="oldBrandTangStoreDao" /></property>
+	</bean>
+	<bean id="oldBrandTangStoreAction" class="tang.oldBrand.action.OldBrandTangStoreAction" scope="prototype">
+		<property name="oldBrandTangStoreService"><ref bean="oldBrandTangStoreService" /></property>
+	</bean>
+	<!-- 老字号店铺信息 -->
+	
+	<!-- 唐智府店铺信息begin -->
+	<bean id="tangStoreDao" class="tang.tangstore.dao.imp.TangStoreDao"  parent="baseDao"/>
+	<bean id="tangStoreService" class="tang.tangstore.service.imp.TangStoreService" parent="baseService">
+		<property name="tangStoreDao"><ref bean="tangStoreDao" /></property>
+	</bean>
+	<bean id="tangStoreAction" class="tang.tangstore.action.TangStoreAction" scope="prototype">
+		<property name="tangStoreService"><ref bean="tangStoreService" /></property>
+		<property name="tangTrafficService"><ref bean="tangTrafficService" /></property>
+		<property name="tangProductService"><ref bean="tangProductService" /></property>
+		<property name="storeImgService"><ref bean="storeImgService" /></property>
+		<property name="storeServiceService"><ref bean="storeServiceService" /></property>
+		<property name="tangServiceService"><ref bean="tangServiceService" /></property>
+		
+	</bean>
+	<!-- 唐智府店铺信息end -->
+	
+	<!-- 唐智府店铺图片begin -->
+	<bean id="storeImgDao" class="tang.tangstore.dao.imp.StoreImgDao"  parent="baseDao"/>
+	<bean id="storeImgService" class="tang.tangstore.service.imp.StoreImgService" parent="baseService">
+		<property name="storeImgDao"><ref bean="storeImgDao" /></property>
+	</bean>
+	<!-- 唐智府店铺图片end -->
+	
+	
+	
+	<!-- 唐智府交通信息begin -->
+	<bean id="tangTrafficDao" class="tang.tangstore.dao.imp.TangTrafficDao"  parent="baseDao"/>
+	<bean id="tangTrafficService" class="tang.tangstore.service.imp.TangTrafficService" parent="baseService">
+		<property name="tangTrafficDao"><ref bean="tangTrafficDao" /></property>
+	</bean>
+	<!-- 唐智府交通信息end -->
+	
+	<!-- 唐智府服务信息begin -->
+	<bean id="tangServiceDao" class="tang.tangstore.dao.imp.TangServiceDao"  parent="baseDao"/>
+	<bean id="tangServiceService" class="tang.tangstore.service.imp.TangServiceService" parent="baseService">
+		<property name="tangServiceDao"><ref bean="tangServiceDao" /></property>
+	</bean>
+	<bean id="tangServiceAction" class="tang.tangstore.action.TangServiceAction" scope="prototype">
+		<property name="tangServiceService"><ref bean="tangServiceService" /></property>
+	</bean>
+	<!-- 唐智府服务信息end -->
+	
+	<!-- 唐智府店铺服务信息begin -->
+	<bean id="storeServiceDao" class="tang.tangstore.dao.imp.StoreServiceDao"  parent="baseDao"/>
+	<bean id="storeServiceService" class="tang.tangstore.service.imp.StoreServiceService" parent="baseService">
+		<property name="storeServiceDao"><ref bean="storeServiceDao" /></property>
+	</bean>
+	<!-- 唐智府店铺服务信息end -->
+	
+	<!-- 唐智府产品信息begin -->
+	<bean id="tangProductDao" class="tang.tangProduct.dao.imp.TangProductDao"  parent="baseDao"/>
+	<bean id="tangProductService" class="tang.tangProduct.service.imp.TangProductService" parent="baseService">
+		<property name="tangProductDao"><ref bean="tangProductDao" /></property>
+	</bean>
+	<bean id="tangProductAction" class="tang.tangProduct.action.TangProductAction" scope="prototype">
+		<property name="tangProductService"><ref bean="tangProductService" /></property>
+		<property name="tangStoreService"><ref bean="tangStoreService" /></property>
+	</bean>
+	<!-- 唐智府产品信息end -->
+	
+	<!-- 唐智府印象王府井begin -->
+	<bean id="tangImpressionDao" class="tang.impression.dao.imp.TangImpressionDao"  parent="baseDao"/>
+	<bean id="tangImpressionService" class="tang.impression.service.imp.TangImpressionService" parent="baseService">
+		<property name="tangImpressionDao"><ref bean="tangImpressionDao" /></property>
+	</bean>
+	<bean id="tangImpressionAction" class="tang.impression.action.TangImpressionAction" scope="prototype">
+		<property name="tangImpressionService"><ref bean="tangImpressionService" /></property>
+	</bean>
+	<!-- 唐智府印象王府井end -->
+	
+	
+	 
+</beans>

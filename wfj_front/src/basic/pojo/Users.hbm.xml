@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="basic.pojo.Users" table="basic_users" schema="b2b2c">
+        <id name="usersId" type="java.lang.Integer">
+            <column name="usersId" />
+            <generator class="native"/>
+        </id>
+        <property name="userName" type="java.lang.String">
+            <column name="userName"/>
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="password"/>
+        </property>
+        <property name="trueName" type="java.lang.String">
+            <column name="trueName"/>
+        </property>
+        <property name="email" type="java.lang.String">
+            <column name="email"/>
+        </property>
+        <property name="phone" type="java.lang.String">
+            <column name="phone"/>
+        </property>
+        <property name="comments" type="java.lang.String">
+            <column name="comments"/>
+        </property>
+        <property name="registerDate" type="java.util.Date">
+            <column name="registerDate"/>
+        </property>
+        <property name="lockState" type="java.lang.Integer">
+            <column name="lockState"/>
+        </property>
+    </class>
+</hibernate-mapping>  

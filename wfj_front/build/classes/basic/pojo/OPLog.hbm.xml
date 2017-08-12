@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="basic.pojo.OPLog" table="basic_oplog" schema="b2b2c">
+        <id name="opId" type="java.lang.Integer">
+            <column name="opId" />
+            <generator class="native"/>
+        </id>
+        <property name="ip" type="java.lang.String">
+            <column name="ip"/>
+        </property>
+        <property name="userTrueName" type="java.lang.String">
+            <column name="userTrueName"/>
+        </property>
+        <property name="opDesc" type="java.lang.String">
+            <column name="opDesc"/>
+        </property>
+        <property name="opParams" type="java.lang.String">
+            <column name="opParams"/>
+        </property>
+        <property name="opDate" type="java.util.Date">
+            <column name="opDate"/>
+        </property>
+    </class>
+</hibernate-mapping>  

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+       
+    <!-- 文章分类 begin-->
+	<!-- treeAction -->
+	<bean id="categoryTreeAction" class="cms.category.action.CategoryTreeAction" scope="prototype">
+		<property name="categoryService"><ref bean="categoryService" /></property>
+	</bean>
+	<!-- action范围国际化测试  -->
+	 <bean id="nativeAction" class="cms.category.action.NativeAction" scope="prototype">
+	</bean>
+	
+	<bean id="categoryService" class="cms.category.service.imp.CategoryService"  parent="baseService">
+		<property name="categoryDao"><ref bean="categoryDao" /></property>
+		<property name="articleService"><ref bean="articleService" /></property>
+	</bean>
+	<bean id="categoryDao" class="cms.category.dao.imp.CategoryDao"  parent="baseDao"/>
+    <!-- 文章分类 end-->
+    
+    <!-- 文章 begin-->
+	<bean id="acticleAction" class="cms.article.action.ActicleAction" scope="prototype">
+		<property name="articleService"><ref bean="articleService" /></property>
+		<property name="articleAttachmentService"><ref bean="articleAttachmentService" /></property>
+		<property name="categoryService"><ref bean="categoryService" /></property>
+		<property name="customerService"><ref bean="customerService" /></property>
+	</bean>
+	<bean id="articleService" class="cms.article.service.imp.ArticleService"  parent="baseService">
+		<property name="articleDao"><ref bean="articleDao" /></property>
+		<property name="articleAttachmentService"><ref bean="articleAttachmentService" /></property>
+	</bean>
+	<bean id="articleDao" class="cms.article.dao.imp.ArticleDao"  parent="baseDao"/>
+    <!-- 文章end-->
+    
+    <!-- 附件 begin-->
+	<bean id="attachmentActicleAction" class="cms.attachement.action.AttachmentActicleAction" scope="prototype">
+		<property name="articleAttachmentService"><ref bean="articleAttachmentService" /></property>
+	</bean>
+	<bean id="articleAttachmentService" class="cms.attachement.service.imp.ArticleAttachmentService"  parent="baseService">
+		<property name="articleAttachmentDao"><ref bean="articleAttachmentDao" /></property>
+	</bean>
+	<bean id="articleAttachmentDao" class="cms.attachement.dao.imp.ArticleAttachmentDao"  parent="baseDao"/>
+    <!-- 附件 end-->
+
+</beans>

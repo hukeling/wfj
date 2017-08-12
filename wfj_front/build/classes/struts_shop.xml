@@ -1,0 +1,1457 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="basePackage" extends="struts-default">
+		<interceptors>
+			<interceptor-stack name="baseStack">
+                <interceptor-ref name="exception" />
+                <interceptor-ref name="alias" />
+                <interceptor-ref name="servletConfig" />
+                <interceptor-ref name="i18n" />
+                <interceptor-ref name="prepare" />
+                <interceptor-ref name="chain" />
+                <interceptor-ref name="debugging" />
+                <interceptor-ref name="scopedModelDriven" />
+                <interceptor-ref name="modelDriven" />
+                <interceptor-ref name="fileUpload" />
+                <interceptor-ref name="checkbox" />
+                <interceptor-ref name="multiselect" />
+                <interceptor-ref name="staticParams" />
+                <interceptor-ref name="actionMappingParams" />
+                <interceptor-ref name="params">
+					<param name="excludeParams">dojo\..*,^struts\..*</param>
+                </interceptor-ref>
+                <interceptor-ref name="conversionError"/>
+                <!-- 配置方法级别的校验 -->
+                <interceptor-ref name="validation">
+                    <param name="excludeMethods">input,back,cancel,browse</param>
+                    <param name="validateAnnotatedMethodOnly">true</param>
+                </interceptor-ref>
+                <interceptor-ref name="workflow">
+                    <param name="excludeMethods">input,back,cancel,browse</param>
+                </interceptor-ref>
+            </interceptor-stack>
+		</interceptors>
+		<!-- 配置默认拦截器栈 -->
+		<default-interceptor-ref name="baseStack" />
+		<!-- 未到找Action指向页面 -->
+		<default-action-ref name="errorPage" />
+		<action name="errorPage">
+			<result type="redirect">/html/error_page_404.html</result>
+		</action>
+	</package>
+	
+	
+	
+	
+	
+	
+	<!-- 财付通支付文件配置(zpp) -->
+	<package name="tenpay" namespace="/tenpay" extends="struts-default"> 
+	   <!-- 支付请求 -->
+	   <action name="tradePay" class="tenpayAction" method="tradePay"></action>
+	   <!-- 支付成功通知、修改状态、返回结果 -->
+	   <action name="tradePayNotice" class="tenpayAction" method="tradePayNotice"></action>
+   </package>
+    <!-- 后台更新初始化金币赠送规则 同步前台数据 begin -->
+	 <package name="coinRules" namespace="/back/coinRules" extends="functionPurview">
+		<action name="updateInServletContextCoinRules" class="coinRulesAction" method="updateInServletContextCoinRules"></action>
+	</package>
+	 <!-- 后台更新初始化金币赠送规则 同步前台数据 end -->
+   
+	<!-- 支付宝支付文件配置(zpp) -->
+	<package name="alipay" namespace="/alipay" extends="struts-default"> 
+	   <!-- 支付请求 -->
+	   <action name="alipayapi" class="alipayAction" method="alipayapi">
+	   		<result name="success">/WEB-INF/shop/newAlipay/alipayapi.jsp</result>
+	   </action>
+	   	 	<!-- 支付宝回调同步方法 -->
+	 	<action name="toPaySuccessAlipay" class="shoppingCartOrderAction" method="toPaySuccessAlipay">
+	 		<result>/WEB-INF/shop/onlineBuy/cart_toPaySuccess.jsp</result>
+	 	</action>
+	 	<!-- 支付宝回调异步方法 -->
+	 	<action name="notifyUrlAlipay" class="shoppingCartOrderAction" method="notifyUrlAlipay"></action>
+   </package>
+   
+	<!-- SHOPJSP首页登录配置 -->
+	<package name="index" namespace="/" extends="struts-default"> 
+	   <action name="index">
+	   		<result name="success">/index_new.jsp</result>
+	   </action>
+	   <action name="companyIntroduce" class="shop.front.home.action.HomeAction" method="companyIntroduce">
+	   		<result name="success">/WEB-INF/shop/home/jiameng.jsp</result>
+	   </action>
+	   <action name="gotoPhoneHomePage" class="shopHomeAction" method="gotoPhoneHomePage">
+	 		<result>/WEB-INF/shop/home/test.jsp</result>
+	 	</action>
+   </package>
+	
+	<!-- 会员注册开始 -->
+	<package name="register" namespace="/register" extends="struts-default">
+		<action name="userRegister" class="registerAction" method="userRegister">
+			<result name="success" type="stream">
+             <param name="contentType">image/jpeg</param>
+             <param name="inputName">imageStream</param>
+             <param name="bufferSize">2048</param>
+            </result>
+	    </action>
+	    <action name="checkCode" class="registerAction" method="checkCode">
+	    </action>
+	    <action name="home" class="registerAction" method="home">
+	    	<result>/WEB-INF/shop/home/index_new.jsp</result>
+	    </action>
+	    <action name="gotoRegister" class="registerAction" method="gotoRegister">
+	    	<result>/WEB-INF/shop/register/registration.jsp</result>
+	    </action>
+	    <action name="gotoCustomerRegistrationPage" class="registerAction" method="gotoCustomerRegistrationPage">
+	    	<result>/WEB-INF/shop/register/customerRegistration.jsp</result>
+	    </action>
+	    
+	    <action name="getAgreement" class="registerAction" method="getAgreement">
+	    	<result>/WEB-INF/shop/register/agreement.jsp</result>
+	    </action>
+	    <action name="checkingCustomer" class="registerAction" method="checkingCustomer"/>
+	    <action name="checkReferrerAccount" class="registerAction" method="checkReferrerAccount"/>
+	    <action name="checkIDcard" class="registerAction" method="checkIDcard"/>
+	    <action name="checkTrueName" class="registerAction" method="checkTrueName"/>
+	    <action name="checkPhone" class="registerAction" method="checkPhone"/>
+	    <action name="checkEmail" class="registerAction" method="checkEmail"/>
+	    <action name="sentMessage" class="registerAction" method="sentMessage"/>
+	    <action name="checkYzm" class="registerAction" method="checkYzm"/>
+	    <action name="register" class="registerAction" method="register">
+	    	<interceptor-ref name="defaultStack" />
+            <interceptor-ref name="token" />
+            <!-- 如果重复提交，跳转到用户订单页面 -->
+            <result name="invalid.token" type="redirectAction">
+            	<param name="namespace">/repeatSubmit</param>  
+				<param name="actionName">repeatSubmit</param>
+            </result> 
+	    	<result name="success"  type="redirectAction">
+           		 <param name="namespace">/shopHome</param>  
+	    		 <param name="actionName">gotoHomePage</param>  
+	    	</result>
+	    </action>
+	</package>
+	<!-- 会员注册结束 -->
+	<package name="repeatSubmit" namespace="/repeatSubmit" extends="basePackage">
+	 	<action name="repeatSubmit" class="registerAction" method="repeatSubmit">
+	 		<result>/WEB-INF/basic/error/repeatSubmit.jsp</result>
+	 	</action>
+	</package>
+	<!-- 用户登录begin -->
+	 <package name="loginCustomer" namespace="/loginCustomer" extends="basePackage">
+	 	 <action name="gotoLoginPage" class="loginAction" method="gotoLoginPage">
+	 		<result>/WEB-INF/shop/login/login.jsp</result>
+	 		<result name="success2">/WEB-INF/shop/login/sellerslogin.jsp</result>
+	 		<result name="success3">/index_new.jsp</result>
+	 	</action>
+	 	<action name="loginValidate" class="loginAction" method="loginValidate">
+	 		<!-- <result name="failure" type="redirectAction">gotoLoginPage?message=${message}</result>
+	 		<result name="success" type="redirectAction">  
+             <param name="actionName">gotoHomePage</param>  
+             <param name="namespace">/home</param>  
+            </result>   -->
+	 	</action>
+	 	<action name="sentMessage" class="loginAction" method="sentMessage"/>
+	 	<action name="loginValidateByPhone" class="loginAction" method="loginValidateByPhone"/>
+	 	<action name="forGotPassword" class="loginAction" method="forGotPassword">
+	 		<result>/WEB-INF/shop/login/forgot_password.jsp</result>
+	 	</action> 
+	 	<action name="forGotValidate" class="loginAction" method="forGotValidate"/>
+	 	
+	 	<action name="reSetPassword" class="loginAction" method="reSetPassword">
+	 		<result>/WEB-INF/shop/login/reset_password.jsp</result>
+	 	</action>
+	 	<action name="reSetPasswordOk" class="loginAction" method="reSetPasswordOk">
+	 		<result>/WEB-INF/shop/login/reset_passwordOk.jsp</result>
+	 	</action>
+	 	
+	 	<action name="reSetPasswordValidate" class="loginAction" method="reSetPasswordValidate"/>
+	 	<action name="personalPassword" class="loginAction" method="personalPassword">
+	 		<result>/WEB-INF/shop/login/personal_password.jsp</result>
+	 	</action> 
+	 	<action name="personalValidate" class="loginAction" method="personalValidate"/>
+	 	
+	 	 <!-- 检测session中是否存在 -->
+	 	<action name="checkLogin" class="loginAction" method="checkLogin"/>
+	 	 <!-- 检测session中是否存在甲方用户 -->
+	 	<action name="checkFirstLogin" class="loginAction" method="checkFirstLogin"/>
+	 	
+	 	 <!-- 检测卖家 -->
+	 	<action name="checkSellerLogin" class="loginAction" method="checkSellerLogin"/>
+	 	
+	 	 <!-- 退出登录 -->
+	 	<action name="exitLogin" class="loginAction" method="exitLogin">
+	 		<result name="success" type="redirectAction">
+				<param name="namespace">/shopHome</param>
+				<param name="actionName">gotoHomePage</param>
+			</result>
+	 	</action>
+	 	
+	 	 <!-- 检测到未申请或者审核中 -->
+	 	<action name="appleSeller" class="loginAction" method="appleSeller">
+	 		<result>/WEB-INF/shop/shopinfo/checkAppleShopInfo.jsp</result>
+	 	</action>
+	 </package>
+	 <!-- 用户登录end -->	 
+	
+  	 <!-- 分类目录 begin -->
+	  	<package name="frontCategories" namespace="/frontCategories" extends="struts-default">
+	  		 <action name="gotoShopCategoriesPage" class="categoriesAction" method="gotoShopCategoriesPage">
+	  		 	<result name="success">/WEB-INF/shop/home/categories.jsp</result>
+	  		 </action>
+	  	</package>
+	  <!-- 分类目录 end -->
+	  
+	  <!-- 分类目录下的品牌和商品 begin-->
+	  	<package name="frontBrands" namespace="/frontBrands" extends="struts-default">
+	  		<action name="getShopsAndProductInfos" class="productsListAction" method="getShopsAndProductInfos">
+			   <result>/WEB-INF/shop/home/productsList_shop.jsp</result>	
+	  		</action> 
+	  		<action name="getBrandsAndProductInfos" class="productsListAction" method="getBrandsAndProductInfos">
+			   <result>/WEB-INF/shop/home/productsList_img.jsp</result>	
+	  		</action> 
+	  		<action name="list" class="productsListAction" method="list">
+			   <result>/WEB-INF/shop/home/productsList_item.jsp</result>
+			</action>
+	  	</package>
+	  <!-- 分类目录下的品牌和商品 end-->
+	  
+	  <!-- 搜索引擎的商品和品牌 begin-->
+	  	<package name="frontSearchProduct" namespace="/frontSearchProduct" extends="struts-default">
+	  		<action name="productInfoSearch" class="productsListAction" method="search">
+			   <result name="pictureSearch">/WEB-INF/shop/home/productsSearchList_img.jsp</result>
+			   <result name="tableSearch">/WEB-INF/shop/home/productsSearchList_item.jsp</result>
+			   <result name="noResults">/WEB-INF/shop/home/productsSearchList_noResult.jsp</result>
+	  		</action> 
+	  	</package>
+	  <!-- 搜索引擎里商品和品牌 begin-->
+	  
+	  <!-- 用户地址begin -->
+	   <package name="fontCustomerAddress" namespace="/front/customer/fontCustomerAddress" extends="struts-default"> 
+		   <action name="gotoCustomerAddressPage" class="customerAddressAction" method="gotoCustomerAddressPage">
+	       		<result name="success">/WEB-INF/shop/shoppingOnLine/cart_address.jsp</result>
+		   	</action>
+		   <action name="saveNewAdd" class="customerAddressAction" method="saveNewAdd"></action>
+		   <action name="setDefAddress" class="customerAddressAction" method="setDefAddress"></action>
+		   <action name="deleteAddress" class="customerAddressAction" method="deleteAddress"></action>
+		   <action name="findObjById" class="customerAddressAction" method="findObjById"></action>
+	   </package>
+	<!-- 用户地址end -->
+	  <!-- 收货地址begin -->
+	   <package name="addressAction" namespace="/front/customer/addressAction" extends="struts-default"> 
+		   <action name="findAreaList" class="addressAction" method="findAreaList"></action>
+		   <action name="getAddress" class="addressAction" method="getAddress"></action>
+		   <action name="deleteAddress" class="addressAction" method="deleteAddress"></action>
+		   <action name="setDefAddress" class="addressAction" method="setDefAddress"></action>
+		   <action name="saveOrUpdateAddress" class="addressAction" method="saveOrUpdateAddress">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/front/customer/shoppingOnline</param>
+				<param name="actionName">gotoCustomerAddressPage</param>
+			</result>
+		</action>
+	   </package>
+	<!-- 收货地址end -->
+
+	<!-- 用户订单列表begin --> 
+	  <package name="myOrders" namespace="/front/customer/myOrders" extends="struts-default"> 
+		   <action name="OrderList" class="accountOrderListAction" method="OrderList">
+	       		<result>/WEB-INF/shop/customer/myaccount_orderlist.jsp</result>
+		   </action>
+		   <action name="toPayOrdersList" class="accountOrderListAction" method="toPayOrdersList">
+	       		<result>/WEB-INF/shop/customer/myaccount_noPayOrderlist.jsp</result>
+		   </action>
+<!-- 		   <action name="ordersByStatus" class="accountOrderListAction" method="ordersByStatus"> -->
+<!-- 		   		<result>/WEB-INF/shop/customer/myaccount_orderlist.jsp</result> -->
+<!-- 		   </action>	 -->
+		   <action name="accountOrderDetail" class="accountOrderListAction" method="accountOrderDetail">
+		   		<result>/WEB-INF/shop/customer/myaccount_orderInfo.jsp</result>
+		   </action>	
+		   <!-- 从我的订单中取支付 -->
+		   <action name="orderToPay" class="accountOrderListAction" method="orderToPay">
+		   		<result>/WEB-INF/shop/customer/myaccount_order_toPay.jsp</result>
+		   		<result name="topay">/WEB-INF/shop/customer/myaccount_order_manyToPay.jsp</result>
+		   </action>
+		   <!-- 取消订单 -->
+		   <action name="cancelOrder" class="accountOrderListAction" method="cancelOrder">
+		   		<result name="success" type="redirectAction">OrderList</result>
+		   </action>	
+		   <!-- 确认订单 -->
+		   <action name="confirmOrder" class="accountOrderListAction" method="confirmOrder">
+		   		<result name="success" type="redirectAction">OrderList</result>
+		   </action>
+		   <action name="importExcelCom" class="accountOrderListAction" method="importExcelCom"></action>
+	   </package>
+	<!-- 用户订单列表end -->
+
+	<!-- 用户中心 -->
+	<package name="frontCustomer" namespace="/front/customer" extends="struts-default">
+		<action name="index" class="accountCenterAction" method="index">
+	       	<result name="success">/WEB-INF/shop/customer/myaccount.jsp</result>
+      	</action>
+      	<action name="wishList" class="accountWishListAction" method="wishList">
+      		<result name="success">/WEB-INF/shop/customer/wish_list.jsp</result>
+      	</action>
+      	<action name="wishGallery" class="accountWishListAction" method="wishGallery">
+      		<result name="success">/WEB-INF/shop/customer/wish_gallery.jsp</result>
+      	</action>
+      	<action name="deleteWishProduct" class="accountWishListAction" method="deleteWishProduct"></action>
+      	<action name="addToCart" class="accountWishListAction" method="addToCart"></action>
+  		
+  		<action name="followingShop" class="accountFollowingShopAction" method="followingShopList">
+  			<result name="success">/WEB-INF/shop/customer/following_shop.jsp</result>
+  		</action>    
+  		<action name="deleteFollowingShop" class="accountFollowingShopAction" method="deleteFollowingShop">
+  		</action>
+  		<action name="customerFollowingShop" class="accountFollowingShopAction" method="customerFollowingShop">
+  		</action>
+  		
+  		<action name="orderComment" class="accountCommentAction" method="orderComment">
+  			<result name="success">/WEB-INF/shop/customer/myaccount_addcomment.jsp</result>
+  		</action>
+  		<action name="addComment" class="accountCommentAction" method="addComment"></action>
+  		<action name="commentList" class="accountCommentAction" method="commentList">
+  			<result name="success">/WEB-INF/shop/customer/evaluation_list.jsp</result>
+  		</action>
+	</package>
+	<!-- 用户中心end -->
+	
+	<!-- 用户设置 -->
+	<package name="frontCustomerSetting" namespace="/front/customer/Setting" extends="struts-default">
+		<!-- 发票信息管理 -->
+		<action name="gotoForInvoicePage" class="forInvoiceAction" method="gotoForInvoicePage">
+			<result name="success">/WEB-INF/shop/customer/myaccount_forInvoice.jsp</result>
+		</action>
+		<action name="saveOrUpdateForInvoice" class="forInvoiceAction" method="saveOrUpdateForInvoice">
+			<result name="success">/WEB-INF/shop/customer/myaccount_forInvoice.jsp</result>
+		</action>
+			<!-- 发票的校验 begin -->
+		<action name="checkCompanyName" class="forInvoiceAction" method="checkCompanyName"></action>
+		<action name="checkTaxpayerNumber" class="forInvoiceAction" method="checkTaxpayerNumber"></action>
+		<action name="checkAddressForInvoice" class="forInvoiceAction" method="checkAddressForInvoice"></action>
+		<action name="checkPhoneForInvoice" class="forInvoiceAction" method="checkPhoneForInvoice"></action>
+		<action name="checkBankAccountNumber" class="forInvoiceAction" method="checkBankAccountNumber"></action>
+			<!-- 发票的校验 end -->
+		<!-- 子帐号管理 -->
+		<action name="gotoADFPage" class="sonaccountAction" method="gotoADFPage">
+			<result name="success">/WEB-INF/shop/customer/myaccount_sonaccount.jsp</result>
+		</action>
+		<action name="getSonaccountObject" class="sonaccountAction" method="getSonaccountObject">
+			<result name="success">/WEB-INF/shop/customer/myaccount_sonaccount.jsp</result>
+		</action>
+		<action name="saveOrUpdateSonaccount" class="sonaccountAction" method="saveOrUpdateSonaccount"></action>
+		<action name="listSonaccount" class="sonaccountAction" method="listSonaccount">
+			<result name="success">/WEB-INF/shop/customer/myaccount_sonlist.jsp</result>
+		</action>
+		<!-- 基础信息 -->
+		<action name="baseInfo" class="accountSettingAction" method="baseInfo">
+	       	<result name="success">/WEB-INF/shop/customer/myaccount_base_info.jsp</result>
+      	</action>
+		<!-- 修改密码 -->
+		<action name="changePass" class="accountSettingAction" method="changePass">
+	       	<result name="success">/WEB-INF/shop/customer/myaccount_password.jsp</result>
+      	</action>
+		<!-- 收货地址 -->
+		<action name="address" class="accountSettingAction" method="address">
+	       	<result name="success">/WEB-INF/shop/customer/myaccount_address.jsp</result>
+      	</action>
+		<action name="setDefAddress" class='accountSettingAction' method="setDefAddress"></action>
+		<action name="deleteAddress" class='accountSettingAction' method="deleteAddress"></action>
+		<action name="findObjById" class='accountSettingAction' method="findObjById"></action>
+		<action name="saveOrUpdate" class='accountSettingAction' method="saveOrUpdate">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/front/customer/shoppingOnline</param>
+				<param name="actionName">gotoCustomerAddressPage</param>
+			</result>
+			<result name="success2" type="redirectAction">
+				<param name="actionName">address</param>
+			</result>
+		</action>
+		<!-- 生成邀请注册链接 -->
+		<action name="gotoShareRegister" class="accountSettingAction" method="gotoShareRegister">
+	       	<result name="success">/WEB-INF/shop/customer/inviteShareRegister.jsp</result>
+      	</action>
+		<action name="makeUrl" class='accountSettingAction' method="makeUrl" ></action>
+		
+		<action name="editImage" class='accountSettingAction' method="editImage" ></action>
+		<action name="checkPassword" class='accountSettingAction' method="checkPassword" ></action>
+		<action name="changePassword" class='accountSettingAction' method="changePassword" ></action>
+		<action name="modifyBaseInfo" class="accountSettingAction" method="modifyBaseInfo" ></action>
+		<action name="addressList" class="shippingAddressesAction" method="addressList">
+			<result>/WEB-INF/shop/customer/shopping_address_list.jsp</result>
+		</action>
+		<!-- 查看安全认证begin -->
+		<action name="gotoSafetyCertificate" class="accountSettingAction" method="gotoSafetyCertificate">
+			<result>/WEB-INF/shop/customer/safetyCertificate_show.jsp</result>
+		</action>
+		<!-- 查看安全认证end -->
+		<!-- 修改或者保存安全认证begin -->
+		<action name="saveSafetyCertificate" class="accountSettingAction" method="saveSafetyCertificate">
+			<result>/WEB-INF/shop/customer/safetyCertificate_show.jsp</result>
+		</action>
+		<!-- 修改或者保存安全认证end -->
+		<!-- 前往分享记录页面begin -->
+		<action name="gotoShareRegisterDetail" class="shareRigsterAction" method="gotoShareRegisterDetail">
+			<result>/WEB-INF/shop/register/registrationDetail.jsp</result>
+		</action>
+		<!-- 导出分享记录EXCEL -->
+		<action name="exportShareRegisterExcel" class="shareRigsterAction" method="exportShareRegisterExcel">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/publicExport</param>
+				<param name="actionName">exportExcel</param>
+			</result>
+			<result name="error" >/error.jsp</result>
+		</action>
+	</package>
+	<!-- 用户设置end -->
+
+	<!-- 产品详细信息begin -->
+	   <package name="productsdetail" namespace="/productsdetail" extends="struts-default"> 
+	   		<action name="productInfoById" class="productsDetailAction" method="productInfoById">
+	  			<result>/WEB-INF/shop/home/products_detail.jsp</result>	
+	  		</action>
+	  		
+	  		<action name="phoneProductInfoById" class="productsDetailAction" method="phoneProductInfoById">
+	  			<result>/WEB-INF/shop/home/detail.jsp</result>	
+	  		</action>
+			<!-- 查询商品评价 -->
+	  		 <action name="evaluateProductList" class="productsDetailAction" method="evaluateProductList">
+		   		<result name="success">/WEB-INF/shop/home/evaluateProductList.jsp</result>
+	   		 </action>
+	   		 <!-- 查询商品评价分类列表 -->
+	  		 <action name="evaluateTypeList" class="productsDetailAction" method="evaluateTypeList">
+		   		<result name="success">/WEB-INF/shop/home/evaluateTypeList.jsp</result>
+	   		 </action>
+	   		 <!-- 异步查询商品，根据规格 -->
+	  		 <action name="selectSpecification" class="productsDetailAction" method="selectSpecification">
+	   		 </action>
+	  	</package>
+	   <package name="productsdetaill" namespace="/front/customer/productsdetail" extends="struts-default"> 
+	   		<action name="saveCustomerCollectProduct" class="productsDetailAction" method="saveCustomerCollectProduct">
+	  			<result type="redirectAction">
+	  				<param name="namespace">/front/customer</param>
+					<param name="actionName">wishList</param>
+	  			</result>	
+	  		</action>
+	   </package>
+	<!-- 产品详细信息end -->
+
+	<!-- 在线购买 begin-->
+     <package name="shoppingOnline" namespace="/front/customer/shoppingOnline" extends="struts-default">
+	 	<!-- 更新购物车 -->
+	 	<action name="toCheckOut" class="shoppingCartAction" method="toCheckOut">
+	 		<result type="redirectAction" name="toShopCartOrder">
+	 			<param name="namespace">/front/customer/shoppingOnline</param>
+	 			<param name="actionName">gotoShoppingCartOrder</param>
+	 			<param name="shopCartIds">${shopCartIds}</param>
+	 			<param name="discount">${discount}</param>
+	 		</result>
+	 	</action>
+	 	<!-- 确定订单 begin-->
+	 	<action name="gotoCustomerAddressPage" class="shoppingCartOrderAction" method="gotoCustomerAddressPage">
+	       		<result name="success">/WEB-INF/shop/onlineBuy/cart_address.jsp</result>
+		   	</action>
+	 	<action name="gotoShoppingCartOrder" class="shoppingCartOrderAction" method="gotoShoppingCartOrder">
+	 		<result>/WEB-INF/shop/onlineBuy/cart_order.jsp</result>
+	 	</action>
+	 	<action name="toSuccessOrder" class="shoppingCartOrderAction" method="toSuccessOrder">
+	 	 	<interceptor-ref name="defaultStack" />
+            <interceptor-ref name="token" />
+            <!-- 如果重复提交，跳转到用户订单页面 -->
+            <result name="invalid.token" type="redirectAction">
+            	<param name="namespace"> /front/customer/myOrders</param>
+				<param name="actionName">OrderList</param>
+            </result> 
+	 		<result>/WEB-INF/shop/onlineBuy/cart_success.jsp</result>
+	 	</action>
+	 	<!-- 团购订单 -->
+	 	<action name="toTuanSuccessOrder" class="shoppingCartOrderAction" method="toTuanSuccessOrder">
+	 	 	<interceptor-ref name="defaultStack" />
+            <interceptor-ref name="token" />
+            <!-- 如果重复提交，跳转到用户订单页面 -->
+            <result name="invalid.token" type="redirectAction">
+            	<param name="namespace"> /front/customer/myOrders</param>
+				<param name="actionName">OrderList</param>
+            </result> 
+	 		<result>/WEB-INF/shop/onlineBuy/cart_success.jsp</result>
+	 	</action>
+	 	<!-- 跳转到确定支付-->
+	 	<action name="toPay" class="shoppingCartOrderAction" method="toPay">
+	 		<result>/WEB-INF/shop/onlineBuy/cart_toPay.jsp</result>
+	 	</action>
+	 	<action name="checkProduct" class="shoppingCartOrderAction" method="checkProduct"></action>
+	 	<action name="checkTuanProduct" class="shoppingCartOrderAction" method="checkTuanProduct"></action>
+	 	<action name="toPaySuccess" class="shoppingCartOrderAction" method="toPaySuccess">
+	 		<result>/WEB-INF/shop/onlineBuy/cart_toPaySuccess.jsp</result>
+	 	</action>
+	 	<!-- 支付宝请求 -->
+	 	<action name="alipayapi" class="shoppingCartOrderAction" method="alipayapi"></action>	
+	 	<!-- 团购订单begin -->
+	 	<action name="gotoTuanOrder" class="tuanOrderAction" method="gotoTuanOrder">
+	 		<result>/WEB-INF/shop/group/tuan_order.jsp</result>
+	 	</action >
+        <!-- 团购订单end -->	
+	 </package>
+    <!-- 在线购买end -->
+    <!-- 购物车 begin-->
+     <package name="shoppingOnlineCar" namespace="/shopFront/shoppingCar" extends="struts-default">
+   	 	<!-- 加入购物车-->
+	 	<action name="addProductToShoppCart" class="shoppingCartAction" method="addProductToShoppCart">
+	 		<result type="redirectAction">gotoShoppingCart</result>
+	 	</action>
+   	 	<!-- 批量加入购物车-->
+	 	<action name="addProductsToShopCart" class="shoppingCartAction" method="addProductsToShopCart">
+	 		<result type="redirectAction">gotoShoppingCart</result>
+	 	</action>
+   	 	<!-- sku批量加入购物车-->
+	 	<action name="addSkusToShopCart" class="shoppingCartAction" method="addSkusToShopCart">
+	 		<result type="redirectAction">gotoShoppingCart</result>
+	 	</action>
+   	 	<!-- sku批量加入购物车 ajax方法-->
+	 	<action name="addSkusToShopCartAjax" class="shoppingCartAction" method="addSkusToShopCartAjax"></action>
+     	<!-- 购物车 begin-->
+	 	<action name="gotoShoppingCart" class="shoppingCartAction" method="gotoShoppingCart">
+	 		<result>/WEB-INF/shop/onlineBuy/cart.jsp</result>
+	 	</action>
+	 	<!-- 删除购物车 -->
+	 	<action name="deleteShoppingCart" class="shoppingCartAction" method="deleteShoppingCart"></action>
+	 	
+	 	<action name="gotoShoppingCartAjax" class="shoppingCartAction" method="gotoShoppingCartAjax"></action>
+   	 </package>
+   	  <!-- 购物车 end-->
+     <!--去支付宝支付 begin -->
+    <package name="toPay" namespace="/toPay" extends="struts-default">
+    	<action name="toPaySuccess" class="shoppingCartOrderAction" method="toPaySuccess">
+	 		<result>/WEB-INF/shop/onlineBuy/cart_toPaySuccess.jsp</result>
+	 	</action>
+    </package>
+    <!--去支付宝支付 end -->
+    
+     <!--快钱支付 begin -->
+    <package name="quickBuckPay" namespace="/quickBuckPay" extends="struts-default">
+    	<action name="toPaySuccess" class="shoppingCartOrderAction" method="toPaySuccess"></action>
+	 	<action name="gotoPaySuccessPage" class="shoppingCartOrderAction" method="gotoPaySuccessPage">
+	 		<result>/WEB-INF/shop/onlineBuy/cart_toPaySuccess.jsp</result>
+	 	</action>
+    </package>
+    <!--快钱支付 end -->
+    
+    <!-- 首页 begin-->
+     <package name="shopHome" namespace="/shopHome" extends="struts-default">
+	 	<action name="gotoHomePage" class="shopHomeAction" method="gotoHomePage">
+	 		<result>/WEB-INF/shop/home/index_new.jsp</result>
+	 	</action>
+	 	<action name="gotoHomePageNew" class="shopHomeAction" method="gotoHomePage">
+	 		<result>/WEB-INF/shop/home/index_new.jsp</result>
+	 	</action>
+	 	<action name="gotoPhoneHomePage" class="shopHomeAction" method="gotoPhoneHomePage">
+	 		<result>/WEB-INF/shop/home/test.jsp</result>
+	 	</action>
+	 	<!-- 新版品牌列表页面 -->
+	 	<action name="gotoType" class="shopHomeAction" method="gotoType">
+	 		<result>/WEB-INF/shop/home/index_type.jsp</result>
+	 	</action>
+	 	<action name="getParams" class="shopHomeAction" method="getParams" />
+	 	<!-- 易采快报的更多链接 -->
+	 	<action name="moreNews" class="shopHomeAction" method="moreNews">
+	 		<result>/WEB-INF/shop/help/moreNews.jsp</result>
+	 	</action>
+	 </package>
+    <!-- 在线购买end -->
+    
+    <!-- 唐智府轮播图begin -->
+    <package name="tangLbt" namespace="/phone/tangLbt" extends="struts-default">
+		<action name="getTangLbt" class="tangLbtAction" method="getTangLbt"/>
+	 </package>
+    <!-- 唐智府轮播图end -->
+    
+    <!-- 唐智府分类begin -->
+    <package name="tangHome" namespace="/phone/tangHome" extends="struts-default">
+		<action name="getTHomeCategory" class="tangHomeAction" method="getTHomeCategory"/>
+	 </package>
+    <!-- 唐智府分类end -->
+    
+    <!-- 印象王府井信息begin -->
+     <package name="tangImpression" namespace="/phone/tangImpression" extends="struts-default">
+		<action name="getImpression" class="tangImpressionAction" method="getImpression"/>
+	 </package>
+    <!-- 印象王府井信息end -->
+    
+     <!-- 唐智府店铺信息begin -->
+     <package name="tangStore" namespace="/phone/tangStore" extends="struts-default">
+		<action name="getStore" class="tangStoreAction" method="getStore"/>
+		<action name="listTangStore" class="tangStoreAction" method="listTangStore"/>
+		<action name="getOneStore" class="tangStoreAction" method="getOneStore"/>
+	 </package>
+    <!-- 唐智府店铺信息end -->
+    
+    
+    
+    <!-- 老字号信息begin -->
+    <!-- <package name="oldBrand" namespace="/back/oldBrand" extends="functionPurview">
+	 	<action name="gotoOldBrandPage" class="oldBrandAction" method="gotoOldBrandPage">
+	 		调用功能权限的拦截器
+			<interceptor-ref name="functionPurviewStack"/>
+	 		<result>/WEB-INF/tang/oldBrand/oldBrandList.jsp</result>
+	 	</action>
+	 	<action name="listOldBrand" class="oldBrandAction" method="listOldBrand"/>
+	 	<action name="saveOrUpdateOldBrand" class="oldBrandAction" method="saveOrUpdateOldBrand"/>
+	 	<action name="getOneOldBrand" class="oldBrandAction" method="getOneOldBrand"/>
+	 	<action name="deleteOldBrand" class="oldBrandAction" method="deleteOldBrand"/>
+	 </package> -->
+    <!-- 老字号信息end -->
+    
+   <!-- 唐智府服务信息begin -->
+    <!-- <package name="tangService" namespace="/back/tangService" extends="functionPurview">
+     	<action name="gotoTangServicePage" class="tangServiceAction" method="gotoTangServicePage">
+     	调用功能权限的拦截器
+			<interceptor-ref name="functionPurviewStack"/>
+			<result>/WEB-INF/tang/tangService/tangServiceList.jsp</result>
+		</action>
+		<action name="listTangService" class="tangServiceAction" method="listTangService"/>
+		<action name="getOnetangService" class="tangServiceAction" method="getOnetangService"/>
+	 	<action name="saveorUpdatetangService" class="tangServiceAction" method="saveorUpdatetangService"/>
+	 	<action name="deletetangService" class="tangServiceAction" method="deletetangService"/>
+	 	<action name="getShopCategory" class="tangServiceAction" method="getShopCategory"/>
+	 </package> -->
+    <!-- 唐智府服务信息end -->
+    
+    <!-- 唐智府产品信息begin -->
+   <!--  <package name="tangProduct" namespace="/back/tangProduct" extends="functionPurview">
+     	<action name="gotoProductPage" class="tangProductAction" method="gotoProductPage">
+     	调用功能权限的拦截器
+			<interceptor-ref name="functionPurviewStack"/>
+			<result>/WEB-INF/tang/tangProduct/tangProductList.jsp</result>
+		</action>
+		<action name="listProduct" class="tangProductAction" method="listProduct"/>
+		<action name="getOneProduct" class="tangProductAction" method="getOneProduct"/>
+	 	<action name="saveOrUpdateProduct" class="tangProductAction" method="saveOrUpdateProduct"/>
+	 	<action name="deleteproduct" class="tangProductAction" method="deleteproduct"/>
+	 </package> -->
+   <!--  唐智府产品信息end -->
+    
+    
+
+    <!-- 前台商品维护 begin-->
+     <package name="frontProduct" namespace="/front/store/frontProduct" extends="struts-default">
+	 	<action name="frontAddProduct" class="frontProductInfoAction" method="frontAddProduct">
+		   	<result name="success">/WEB-INF/shop/product/merchandise_add.jsp</result>
+		 </action>
+	 	<action name="getProductInfoByProductId" class="frontProductInfoAction" method="getProductInfoByProductId">
+		   	<result name="success">/WEB-INF/shop/product/merchandise_modify.jsp</result>
+		</action>
+	 	<action name="findAttrPara" class="frontProductInfoAction" method="findAttrPara">
+		</action>
+	 	<action name="saveOrUpdateFrontProduct" class="frontAddProductInfoAction" method="saveOrUpdateFrontProduct">
+		   	<result name="success" type="redirectAction">
+				<param name="namespace">/front/store/frontShopProduct</param>
+				<param name="actionName">gotoUndercarriageProductListPage</param>
+			</result>
+		 </action>
+	 	<action name="updateFrontProductInfo" class="frontAddProductInfoAction" method="updateFrontProductInfo">
+	 		<result name="success" type="redirectAction">
+				<param name="namespace">/front/store/frontShopProduct</param>
+				<param name="actionName">gotoUndercarriageProductListPage</param>
+			</result>
+	 	</action>
+	 	<action name="updateFrontProductReferral" class="frontAddProductInfoAction" method="updateFrontProductReferral">
+	 		<result name="success" type="redirectAction">
+				<param name="namespace">/front/store/frontShopProduct</param>
+				<param name="actionName">gotoPutawayProductListInfoPage</param>
+			</result>
+	 	</action>
+	 	<action name="updateFrontProductImg" class="frontAddProductInfoAction" method="updateFrontProductImg">
+	 		<result name="success" type="redirectAction">
+				<param name="namespace">/front/store/frontShopProduct</param>
+				<param name="actionName">gotoPutawayProductListInfoPage</param>
+			</result>
+	 	</action>
+	 	<action name="updateFrontProductAttribute" class="frontAddProductInfoAction" method="updateFrontProductAttribute">
+	 		<result name="success">/list.jsp</result>
+	 	</action>
+	 	<action name="uploadImageFront" class="frontAddProductInfoAction" method="uploadImageFront">
+	 	</action>
+	 	<action name="deleteProductImg" class="frontAddProductInfoAction" method="deleteProductImg">
+	 	</action>
+	 	<action name="updateFrontProductParameter" class="frontAddProductInfoAction" method="updateFrontProductParameter">
+	 		<result name="success" type="redirectAction">
+				<param name="namespace">/front/store/frontShopProduct</param>
+				<param name="actionName">gotoUndercarriageProductListPage</param>
+			</result>
+	 	</action>
+	 	<action name="updateFrontProductSpecification" class="frontProductInfoAction" method="updateFrontProductSpecification">
+	 		<result name="success" type="redirectAction">
+				<param name="namespace">/front/store/frontShopProduct</param>
+				<param name="actionName">gotoUndercarriageProductListPage</param>
+			</result>
+	 	</action>
+	 	<!-- new异步获取指定规格的规格值 -->
+	   	<action name="getSpecificationValueBySpecificationId" class="frontProductInfoAction" method="getSpecificationValueBySpecificationId"/>
+	 	<!-- new异步获取当前分类下的品牌，参数，属性，规格 -->
+	   	<action name="selectOtherInfoByProductTypeId" class="frontProductInfoAction" method="selectOtherInfoByProductTypeId"/>
+	   	<!-- new异步删除指定的商品图片 -->
+	   	<action name="deleteProductImgById" class="frontProductInfoAction" method="deleteProductImgById"/>
+	   	<!-- new获取产品组的给个产品的规格值 -->
+	   	<action name="getGoodsProductSpecificationValue" class="frontProductInfoAction" method="getGoodsProductSpecificationValue"/>
+	   	<!-- new解除该商品所在商品组的规格以及对应的规格值的关联关系 -->
+	   	<action name="removeProductSpecificationValueGoodsGuanlian" class="frontProductInfoAction" method="removeProductSpecificationValueGoodsGuanlian"/>
+	   	<!-- new解除该商品所在商品组的规格以及对应的规格值的关联关系
+	    <action name="updateFrontProductSpecification" class="frontProductInfoAction" method="updateFrontProductSpecification">
+	   		<result type="redirectAction"><param name="actionName">gotoProductInfoPage</param></result>  
+	   	</action> -->
+	 	<!-- 通过适用行业id获取适用场合标签信息 -->
+	   	<action name="getShopSituationTagInfoList" class="frontProductInfoAction" method="getShopSituationTagInfoList"/>
+	 </package>
+    <!-- 前台商品维护end -->
+
+    
+    <!-- 前台店铺信息begin -->
+     <package name="frontshopinfo" namespace="/front/store/frontshopinfo" extends="struts-default">
+	 	<!-- 卖家申请信息页 -->
+	 	<action name="gotoFrontShopInfoPage" class="frontShopInfoAction" method="gotoFrontShopInfoPage">
+	 		<result name="success">/WEB-INF/shop/shopinfo/shopinfo.jsp</result>
+	 		<result name="view">/WEB-INF/shop/shopinfo/viewShop_register_info.jsp</result>
+	 		<result name="isShop" type="redirectAction">
+				<param name="namespace">/front/store/frontshopinfo</param>
+   				<param name="actionName">goToShopLoginHome</param>
+	 		</result>
+	 	</action>
+	 	<action name="showShopInfo" class="frontShopInfoAction" method="showShopInfo">
+	 		<result name="success">/WEB-INF/shop/shopinfo/viewShop_register_info.jsp</result>
+	 	</action>
+	 	
+	 	<!-- 卖家申请成功信息 -->
+	 	<action name="saveOrUpdateShopInfo" class="frontShopInfoAction" method="saveOrUpdateShopInfo">
+	 		<interceptor-ref name="defaultStack" />
+            <interceptor-ref name="token" />
+            <!-- 如果重复提交，跳转到用户中心页面 -->
+            <result name="invalid.token" type="redirectAction">
+            	<param name="namespace">/front/customer</param>
+				<param name="actionName">index</param>
+            </result> 
+	 		<result name="success" type="redirectAction">
+	 			<param name="namespace">/front/store/frontshopinfo</param>
+   				<param name="actionName">gotoFrontShopInfoPage</param>
+	 		</result>
+	 	</action>
+	 	<!-- 卖家登录首页 -->
+	 	<action name="goToShopLoginHome" class="frontShopInfoAction" method="goToShopLoginHome">
+	 		<result name="success">/WEB-INF/shop/shopinfo/shop_login_Home.jsp</result>
+	 	</action>
+	 	<!-- 卖家基本信息 -->
+	 	<action name="sellerBasicInfo" class="frontShopInfoAction" method="sellerBasicInfo">
+	 		<result name="success">/WEB-INF/shop/shopinfo/shop_basic_info.jsp</result>
+	 	</action>
+	 	<!-- 保存卖家基本信息 -->
+	 	<action name="saveOrUpdateSellerInfo" class="frontShopInfoAction" method="saveOrUpdateSellerInfo">
+	 		<result name="success" type="redirectAction">goToShopLoginHome</result>
+	 	</action>
+	 	<action name="uploadImageFront" class="frontShopInfoAction" method="uploadImageFront"></action>
+	 	<action name="checkCompanyName" class="frontShopInfoAction" method="checkCompanyName"></action>
+	 	<action name="checkShopName" class="frontShopInfoAction" method="checkShopName"></action>
+	 	
+	 </package>
+    <!-- 前台店铺信息end -->
+    
+    <!-- 店铺商品 begin-->
+    <package name="frontShopProduct" namespace="/front/store/frontShopProduct" extends="struts-default">
+	 	<!-- 上架商品列表 -->
+	 	<action name="gotoPutawayProductListInfoPage" class="shopProductAction" method="gotoPutawayProductListInfoPage">
+	 		<result>/WEB-INF/shop/shopinfo/putawayProductList.jsp</result>
+	 	</action>
+	 	<!-- 下架商品列表 -->
+	 	<action name="gotoUndercarriageProductListPage" class="shopProductAction" method="gotoUndercarriageProductListPage">
+	 		<result>/WEB-INF/shop/shopinfo/undercarriageProductList.jsp</result>
+	 	</action>
+	 	<action name="checkPreviewInfo" class="shopProductAction" method="checkPreviewInfo"/>
+	 	<!-- 待审核商品列表 -->
+	 	<action name="gotoCheckPendingProductListPage" class="shopProductAction" method="gotoCheckPendingProductListPage">
+	 		<result>/WEB-INF/shop/shopinfo/checkPendingProductList.jsp</result>
+	 	</action>
+	 	<!-- 违规下架产品 -->
+	 	<action name="gotoIllegalProductListPage" class="shopProductAction" method="gotoIllegalProductListPage">
+	 		<result>/WEB-INF/shop/shopinfo/illegalProductList.jsp</result>
+	 	</action>
+	 	<!-- 单个商品申请上架操作 -->
+	 	<action name="changeIsPass" class="shopProductAction" method="changeIsPass"></action>
+	 	<!-- 商品批量申请上架操作 -->
+	 	<action name="changeIsPasses" class="shopProductAction" method="changeIsPasses"></action>
+	 	<!-- 单个商品修改库存操作 -->
+	 	<action name="updateStoreNumber" class="shopProductAction" method="updateStoreNumber"></action>
+	 </package>
+    <!-- 店铺商品 end -->
+    
+    <!-- 店铺商品 分类begin-->
+    <package name="frontShopCategory" namespace="/front/store/frontShopCategory" extends="struts-default">
+	 	<action name="toShopCategory" class="shopInfoProCategoryAction" method="toShopCategory">
+	 		<result>/WEB-INF/shop/shopinfo/shop_category.jsp</result>
+	 	</action>
+	 	<action name="addOrEditShopCategory" class="shopInfoProCategoryAction" method="addOrEditShopCategory">
+	 		<result>/WEB-INF/shop/shopinfo/shop_addOrEdit_category.jsp</result>
+	 	</action>
+	 	<action name="findCategoryProduct" class="shopInfoProCategoryAction" method="findCategoryProduct">
+	 		<result>/WEB-INF/shop/shopinfo/shop_category_product.jsp</result>
+	 	</action>
+	 	<action name="saveOrUpdateShopCategory" class="shopInfoProCategoryAction" method="saveOrUpdateShopCategory">
+	 	</action>
+	 	<action name="deleteShopCategory" class="shopInfoProCategoryAction" method="deleteShopCategory">
+	 	</action>
+	 	
+	 </package>
+    <!-- 店铺商品 分类 end -->
+    
+    <!-- 店铺订单列表begin -->
+    <package name="shopOrder" namespace="/front/store/shopOrder" extends="struts-default">
+    	<action name="shopOrderList" class="shopOrderAction" method="shopOrderList">
+	 		<result>/WEB-INF/shop/shopinfo/shop_order_list.jsp</result>
+	 	</action>
+    	<action name="shopNoPayOrderList" class="shopOrderAction" method="shopNoPayOrderList">
+	 		<result>/WEB-INF/shop/shopinfo/shop_order_noPay_list.jsp</result>
+	 	</action>
+    	<action name="shopApplyRecord" class="shopOrderAction" method="shopApplyRecord">
+	 		<result>/WEB-INF/shop/shopinfo/shop_order_record.jsp</result>
+	 	</action>
+    	<action name="settlementDetail" class="shopOrderAction" method="settlementDetail">
+	 		<result>/WEB-INF/shop/shopinfo/shop_order_settlementDetail.jsp</result>
+	 	</action>
+	 	<action name="shopOrderInfo" class="shopOrderAction" method="shopOrderInfo">
+	 		<result>/WEB-INF/shop/shopinfo/shop_order_Info.jsp</result>
+	 	</action>
+	 	<action name="shopOrderPrint" class="shopOrderAction" method="shopOrderPrint">
+	 		<result>/WEB-INF/shop/shopinfo/shop_order_print.jsp</result>
+	 	</action>
+	 	<action name="ordersByParams" class="shopOrderAction" method="ordersByParams">
+	 		<result>/WEB-INF/shop/shopinfo/shop_order_list.jsp</result>
+	 	</action>
+	 	<action name="getOrdersById" class="shopOrderAction" method="getOrdersById">
+	 		<result>/WEB-INF/shop/shopinfo/shop_order_list.jsp</result>
+	 	</action>
+<!-- 	 	<action name="ordersByStatus" class="shopOrderAction" method="ordersByStatus"> -->
+<!-- 	 		<result>/WEB-INF/shop/shopinfo/shop_order_list.jsp</result> -->
+<!-- 	 	</action> -->
+	 	<action name="changgeOrdersState" class="shopOrderAction" method="changgeOrdersState">
+	 		<result type="redirectAction">
+		 		 <param name="namespace">/front/store/shopOrder</param>
+			     <param name="actionName">shopOrderList</param>
+			     <param name="currentPage">${currentPage}</param>
+	 		</result>
+	 		<result name="loginHome" type="redirectAction">
+		 		 <param name="namespace">/front/store/frontshopinfo</param>
+			     <param name="actionName">goToShopLoginHome</param>
+	 		</result>
+	 	</action>
+	 	<action name="changeShipments" class="shopOrderAction" method="changeShipments">
+	 		<result type="redirectAction">
+	 			<param name="namespace">/front/store/shopOrder</param>
+			     <param name="actionName">shopOrderList</param>
+			     <param name="currentPage">${currentPage}</param>
+	 		</result>
+	 	</action>
+	 	<action name="shopEvaluationList" class="shopOrderAction" method="shopEvaluationList">
+	 		<result>/WEB-INF/shop/shopinfo/shop_evaluation_list.jsp</result>
+	 	</action>
+	 	<action name="updateOrdersState" class="shopOrderAction" method="updateOrdersState"></action>
+	 	<action name="importExcelDP" class="shopOrderAction" method="importExcelDP"></action>
+	 	<action name="findCityList" class="shopOrderAction" method="findCityList"></action>
+    </package>
+    <!-- 店铺订单列表end -->
+    
+    <!-- 展示优惠券begin -->
+    <package name="coupon" namespace="/coupon" extends="struts-default">
+	 	<action name="gotoCoupon" class="couponAction" method="gotoCoupon">
+	 		<result>/WEB-INF/shop/home/coupon.jsp</result>
+	 	</action>
+	 	<action name="gotoCouponList" class="couponAction" method="gotoCouponList">
+	 		<result>/WEB-INF/shop/home/coupon_list.jsp</result>
+	 	</action>
+	 	<action name="checkCoupons" class="couponAction" method="checkCoupons"></action>
+    </package>
+    <package name="couponfront" namespace="/front/customer/coupon" extends="struts-default">
+	 	<action name="gotoCustomerHaveCoupon" class="couponAction" method="gotoCustomerHaveCoupon"></action>
+    </package>
+    <!-- 展示优惠券end -->
+    
+    
+    <!-- 热销商品begin -->
+    <package name="hotsale" namespace="/hotsale" extends="struts-default">
+	 	<action name="gotoHotSale" class="hotSaleAction" method="gotoHotSale">
+	 		<result>/WEB-INF/shop/home/Hot_channel.jsp</result>
+	 	</action>
+	 	<action name="gotoHotSaleList" class="hotSaleAction" method="gotoHotSaleList">
+	 		<result>/WEB-INF/shop/home/Hot_channel_list.jsp</result>
+	 	</action>
+    </package>
+    <!-- 热销商品end -->
+
+
+
+	<!-- 商品优惠券发放begin -->
+    <package name="shopCoupon" namespace="/front/store/shopCoupon" extends="struts-default">
+	 	<action name="gotoShopCoupon" class="shopCouponAction" method="gotoShopCoupon">
+	 		<result>/WEB-INF/shop/home/frontShopCoupon.jsp</result>
+	 	</action>
+	 	<action name="deleteFrontShopCoupon" class="shopCouponAction" method="deleteFrontShopCoupon"></action>
+	 	<action name="saveFrontShopCoupon" class="shopCouponAction" method="saveFrontShopCoupon"></action>
+	 	<action name="uploadImageFront" class="shopCouponAction" method="uploadImageFront"></action>
+	 	<action name="changeCoupon" class="shopCouponAction" method="changeCoupon"></action>
+    </package>
+    <!-- 商品优惠券发放end -->
+    
+    <!-- 帮助天地文章begin -->
+    <package name="helpFront" namespace="/helpFront" extends="struts-default">
+	 	<action name="gotoHelpFront" class="helpFrontAction" method="gotoHelpFront">
+	 		<result type="redirectAction">
+ 			   <param name="namespace">/helpFront</param>
+			   <param name="actionName">gotoHelpFrontList</param>
+			   <param name="articleId">${cmsArticle.articleId}</param>
+	 		</result>
+	 	</action>
+	 	<action name="gotoHelpFrontList" class="helpFrontAction" method="gotoHelpFrontList">
+	 		<result>/WEB-INF/shop/help/help_list.jsp</result>
+	 	</action>
+	 	<action name="gotoSomeHelpFrontList" class="helpFrontAction" method="gotoSomeHelpFrontList">
+	 		<result>/WEB-INF/shop/help/article_list.jsp</result>
+	 	</action>
+	 	<action name="gotoFooterArticleList" class="helpFrontAction" method="gotoFooterArticleList">
+	 		<result>/WEB-INF/shop/help/help_list.jsp</result>
+	 	</action>
+    </package>
+    <!-- 帮助天地文章end -->
+    
+    <!-- 地址action begin -->
+    <package name="address" namespace="/address" extends="struts-default">
+    	<action name="getAllCountry" class="addressAction" method="getAllCountry">
+    		<result>/address.jsp</result>
+    	</action>
+    	
+    	<action name="getRegions" class="addressAction" method="getRegions"></action>
+    	<action name="getCitys" class="addressAction" method="getCitys"></action>
+    	<action name="getPostCode" class="addressAction" method="getPostCode"></action>
+    </package>
+    <!-- 地址action end -->
+    
+    <!-- 店铺首页 begin-->
+    <package name="shopHomePage" namespace="/shopHomePage" extends="struts-default">
+	 	<action name="gotoShopHomePage" class="shopHomePageAction" method="gotoShopHomePage">
+	 		<result>/WEB-INF/shop/shopinfo/shop_home_page.jsp</result>
+	 	</action>
+	 	<action name="index" class="shopHomePageAction" method="index">
+	 		<result>/WEB-INF/shop/shopinfo/shop_home_page.jsp</result>
+	 	</action>
+	 </package>
+    <!-- 店铺首页 end -->
+    
+    <!-- 品牌目录 begin-->
+    <package name="brandDirectory" namespace="/brandDirectory" extends="struts-default">
+	 	<action name="gotoBrandDirectoryPage" class="brandDirectoryAction" method="gotoBrandDirectoryPage">
+	 		<result>/WEB-INF/shop/home/brand_catalog.jsp</result>
+	 	</action>
+	 	<action name="queryByFlag" class="brandDirectoryAction" method="queryByFlag">
+	 		<result>/WEB-INF/shop/home/brand_catalog.jsp</result>
+	 	</action>
+	 </package>
+    <!-- 品牌目录 end -->
+    
+    <!-- 品牌频道 begin-->
+    <package name="brandChannel" namespace="/brandChannel" extends="struts-default">
+	 	<action name="gotoBrandChannelPage" class="brandChannelAction" method="gotoBrandChannelPage">
+	 		<result>/WEB-INF/shop/home/brand_channel.jsp</result>
+	 	</action>
+	 </package>
+    <!-- 品牌频道 end -->
+    
+    <!-- 我的优惠券 begin-->
+    <package name="frontMyCoupon" namespace="/front/customer/frontMyCoupon" extends="struts-default">
+	 	<action name="gotoMyCouponPage" class="myCouponAction" method="gotoMyCouponPage">
+	 		<result>/WEB-INF/shop/customer/my_coupon.jsp</result>
+	 	</action>
+	 </package>
+    <!-- 我的优惠券 end -->
+    
+    <!-- 前台店铺首页 begin-->
+    <package name="frontShopMainPage" namespace="/store/frontShopMainPage" extends="struts-default">
+	 	<action name="gotoShopInfoPage" class="shopMainPageAction" method="gotoShopInfoPage">
+<!-- 	 		模版一 -->
+	 		<result name="tempLateSet1">/WEB-INF/shop/home/shopInfo_tempLateSet1.jsp</result>
+<!-- 	 		模版二 -->
+	 		<result name="tempLateSet2">/WEB-INF/shop/home/shopInfo_tempLateSet2.jsp</result>
+<!-- 	 		模版三 -->
+	 		<result name="tempLateSet3">/WEB-INF/shop/home/shopInfo_tempLateSet3.jsp</result>
+<!-- 	 		模版四 -->
+	 		<result name="tempLateSet4">/WEB-INF/shop/home/shopInfo_tempLateSet4.jsp</result>
+<!-- 	 		模版五 -->
+	 		<result name="tempLateSet5">/WEB-INF/shop/home/shopInfo_tempLateSet5.jsp</result>
+	 	</action>
+	 </package>
+    <!-- 前台店铺首页 end -->
+    <package name="favoriteShops" namespace="/front/customer/favoriteShops" extends="struts-default">
+    <!--收藏店铺 -->
+	 	<action name="favoriteShops" class="shopMainPageAction" method="favoriteShops">
+	 		<result type="redirectAction">
+	 			<param name="namespace">/front/customer</param>  
+	    		<param name="actionName">followingShop</param>
+	 		</result>
+	 	</action>
+	</package>
+    
+    <!-- 前台店铺目录 begin-->
+    <package name="frontShopDirPage" namespace="/store/frontShopDirPage" extends="struts-default">
+	 	<action name="gotoShopDirPage" class="shopDirAction" method="gotoShopDirPage">
+	 		<result>/WEB-INF/shop/home/shopDirPage_list.jsp</result>
+	 	</action>
+	 </package>
+    <!-- 前台店铺目录 end -->
+    
+    <!-- 前台退换货-customer begin-->
+    <package name="frontCustomerComplaints" namespace="/front/customer/frontCustomerComplaints" extends="struts-default">
+	 	<action name="gotoCustomerComplaintsPage" class="frontReturnsApplyAction" method="gotoCustomerComplaintsPage">
+	 		<result>/WEB-INF/shop/customer/complaints_sales_list.jsp</result>
+	 	</action>
+	 	<action name="gotoComplaintsSalesInfoPage" class="frontReturnsApplyAction" method="gotoComplaintsSalesInfoPage">
+	 		<result>/WEB-INF/shop/customer/complaints_sales_info.jsp</result>
+	 	</action>
+	 	<action name="saveReturnApply" class="frontReturnsApplyAction" method="saveReturnApply">
+	 		<result name="success" type="redirectAction">gotoReturnsApplyListPage
+				<param name="actionName">gotoReturnsApplyListPage</param>
+			</result>
+	 	</action>
+	 	<action name="gotoReturnsApplyListPage" class="frontReturnsApplyAction" method="gotoReturnsApplyListPage">
+	 		<result>/WEB-INF/shop/customer/returnsApply_list.jsp</result>
+	 	</action>
+	 	<action name="gotoReturnsApplyListPageShop" class="frontReturnsApplyAction" method="gotoReturnsApplyListPageShop">
+	 		<result>/WEB-INF/shop/shopinfo/returnsApply_list.jsp</result>
+	 	</action>
+	 	<action name="updataSate" class="frontReturnsApplyAction" method="updataSate">
+	 		<result>/WEB-INF/shop/shopinfo/returnsApply_list.jsp</result>
+	 	</action>
+	 	<!-- 查看退换货详情页 begin-->
+	 	<action name="gotoComplaintsLogInfoPage" class="frontReturnsApplyAction" method="gotoComplaintsLogInfoPage">
+	 		<result>/WEB-INF/shop/customer/complaints_log_info.jsp</result>
+	 	</action>
+	 	<!-- 查看退换货详情页 end-->
+	 </package>
+    <!-- 前台退换货-customer end -->
+    
+    <!-- 前台退换货-store begin-->
+    <package name="frontShopComplaints" namespace="/front/store/frontShopComplaints" extends="struts-default">
+	 	<action name="gotoReturnsApplyListPageShop" class="frontStoreReturnsAction" method="gotoReturnsApplyListPageShop">
+	 		<result>/WEB-INF/shop/shopinfo/returnsApply_list.jsp</result>
+	 	</action>
+	 	<action name="gotoComplaintsLogInfoPage" class="frontStoreReturnsAction" method="gotoComplaintsLogInfoPage">
+	 		<result>/WEB-INF/shop/customer/complaints_log_info.jsp</result>
+	 	</action>
+	 	<action name="saveTradeOrder" class="frontStoreReturnsAction" method="saveTradeOrder">
+	 		<result name="success" type="redirectAction">
+	 			<param name="namespace">/front/store/frontShopComplaints</param>
+	 			<param name="actionName">gotoReturnsApplyListPageShop</param>
+	 		</result>
+	 	</action>
+	 </package>
+    <!-- 前台退换货-store end -->
+    
+    <!-- 前台退换货日志 begin-->
+    <package name="frontReturnsApplyOPLog" namespace="/front/store/frontReturnsApplyOPLog" extends="struts-default">
+	 	<action name="updataSate" class="frontReturnsApplyOPLogAction" method="updataSate">
+	 		<result name="success" type="redirectAction">
+	 			<param name="namespace">/front/store/frontShopComplaints</param>
+	 			<param name="actionName">gotoReturnsApplyListPageShop</param>
+	 		</result>
+	 	</action>
+	 </package>
+    <!-- 前台退换货日志 end -->
+    
+    <!-- 默认的跳转地址 -->
+    <!-- 用户商城信息(SendMessage) begin -->
+    <package name="frontMessageCenter" namespace="/front/customer/messageCenter" extends="struts-default">
+    	<action name="gotoNewMessagePage" class="messageCenterAction" method="gotoNewMessagePage">
+    		<result name="success">/WEB-INF/shop/messageCenter/newMessage.jsp</result>
+    	</action>
+    	<action name="checkCustomerName" class="messageCenterAction" method="checkCustomerName"></action>
+    	<action name="saveOrUpdateMessageCenterAjax" class="messageCenterAction" method="saveOrUpdateMessageCenterAjax"></action>
+    	<action name="listInBoxMessage" class="messageCenterAction" method="listInBoxMessage">
+    		<result name="success">/WEB-INF/shop/messageCenter/inBoxList.jsp</result>
+    	</action>
+    	<action name="getMessageObject" class="messageCenterAction" method="getMessageObject">
+    		<result name="success">/WEB-INF/shop/messageCenter/messageDetail.jsp</result>
+    	</action>
+    	<action name="getOutBoxMessageObject" class="messageCenterAction" method="getMessageObject">
+    		<result name="success">/WEB-INF/shop/messageCenter/outBoxMessageDetail.jsp</result>
+    	</action>
+    	<action name="listOutBoxMessage" class="messageCenterAction" method="listOutBoxMessage">
+    		<result name="success">/WEB-INF/shop/messageCenter/outBoxList.jsp</result>
+    	</action>
+    	<action name="listDraftsMessage" class="messageCenterAction" method="listDraftsMessage">
+    		<result name="success">/WEB-INF/shop/messageCenter/draftsList.jsp</result>
+    	</action>
+    	<action name="listSystemMessage" class="messageCenterAction" method="listSystemMessage">
+    		<result name="success">/WEB-INF/shop/messageCenter/systemMessageList.jsp</result>
+    	</action>
+    	<action name="deleteInBoxMessageCenter" class="messageCenterAction" method="customerDeleteMessage">
+    		<result type="redirectAction">listInBoxMessage</result>
+    	</action>
+    	<action name="deleteOutBoxMessageCenter" class="messageCenterAction" method="deleteFrontMessageCenter">
+    		<result type="redirectAction">listOutBoxMessage</result>
+    	</action>
+    	<action name="deleteSystemMessageCenter" class="messageCenterAction" method="customerDeleteMessage">
+    		<result type="redirectAction">listSystemMessage</result>
+    	</action>
+    	<action name="deleteDraftsMessageCenter" class="messageCenterAction" method="deleteMessageCenter">
+    		<result type="redirectAction">listDraftsMessage</result>
+    	</action>
+    	<action name="editorMessageCenter" class="messageCenterAction" method="getCusMessageObject">
+    		<result name="success">/WEB-INF/shop/messageCenter/editorMessage.jsp</result>
+    	</action>
+    	<action name="saveOrUpdateMessageCenter" class="messageCenterAction" method="saveOrUpdateMessageCenter">
+    		<result name="success" type="redirectAction">listOutBoxMessage</result>
+    		<result name="drafts" type="redirectAction">listDraftsMessage</result>
+    	</action>
+    </package>
+    <!-- 用户商城信息(SendMessage) end -->
+    
+    <!-- 用户购买商城币  begin-->
+    <package name="frontThcions" namespace="/front/customer/thcions" extends="struts-default">
+	    <action name="gotobuyTHCoins" class="buyTHCoinsAction" method="gotobuyTHCoins">
+			<result>/WEB-INF/shop/customer/buyTHCoins.jsp</result>
+		</action>
+	    <!-- <action name="saveBuyInfo" class="buyTHCoinsAction" method="saveBuyInfo">
+			<result type="redirectAction">
+				 <param name="namespace">/front/customer/brokerageManage</param>
+				 <param name="actionName">getSuperTerminalVirtualCoinDetail</param>
+			</result>
+		</action> -->
+	    <action name="saveBuyInfo" class="buyTHCoinsAction" method="saveBuyInfo">
+			<result>/WEB-INF/shop/customer/buyTHCoins_toPaySuccess.jsp</result>
+		</action>
+    </package>
+    <!-- 用户购买商城币  end-->
+    
+    <!-- 推荐好友 begin -->
+    <package name="adfAction" namespace="/front/customer/adf" extends="struts-default">
+    	<action name="gotoADFPage" class="adfAction" method="gotoADFPage">
+    		<result name="success">/WEB-INF/shop/customer/adf.jsp</result>
+    	</action>
+    	<action name="createUrl" class="adfAction" method="createUrl"></action>
+    </package>
+    <!-- 推荐好友 end -->
+    
+    <!-- 商城币提现 begin -->
+    <package name="thbtx" namespace="/front/customer/thbtx" extends="struts-default">
+    	<action name="gotoTHBTXPage" class="tHBTXAction" method="gotoTHBTXPage">
+    		<result name="success">/WEB-INF/shop/customer/customerTHBtx.jsp</result>
+    	</action>
+    	<action name="gotoListPage" class="tHBTXAction" method="gotoListPage">
+    		<result name="success">/WEB-INF/shop/customer/customerTHBtxList.jsp</result>
+    	</action>
+    	<action name="saveInfo" class="tHBTXAction" method="saveInfo">
+    		<result name="success" type="redirectAction">
+			   <param name="actionName">gotoListPage</param>
+			</result>
+    	</action>
+    	<action name="exportTHBTXExcel" class="tHBTXAction" method="exportTHBTXExcel">
+    		<result name="success" type="redirectAction">
+				<param name="namespace">/publicExport</param>
+				<param name="actionName">exportExcel</param>
+			</result>
+			<result name="error" >/error.jsp</result>
+    	</action>
+    </package>
+    <!-- 商城币提现 end -->
+    
+     <!-- 商城前台导航模块 --> 
+   <package name="homeModule" namespace="/homeModule" extends="struts-default">
+   		<!-- 每日推荐 -->
+    	<action name="dayRecommend" class="homeModuleAction" method="dayRecommend">
+	 		<result name="success">/WEB-INF/shop/home/dayRecommend.jsp</result>
+	 	</action>
+	 	<!-- 行业专用 -->
+	 	<action name="gotoIndustrySpecificPage" class="homeModuleAction" method="gotoIndustrySpecificPage">
+	 		<result name="success1">/WEB-INF/shop/home/tagesList_img.jsp</result>
+	 		<result name="success2">/WEB-INF/shop/home/tagesList_item.jsp</result>
+	 	</action>
+   		<!-- 资讯站 -->
+    	<action name="gotoInforMationPage" class="homeModuleAction" method="gotoInforMationPage">
+	 		<result name="success">/WEB-INF/shop/home/shopInformation_list.jsp</result>
+	 	</action>
+    	<action name="getMore" class="homeModuleAction" method="getMore">
+	 		<result name="success">/WEB-INF/shop/information/homePage.jsp</result>
+	 	</action>
+    	<action name="getInfo" class="homeModuleAction" method="getInfo">
+	 		<result name="success">/WEB-INF/shop/information/defaultPage.jsp</result>
+	 	</action>
+    	<action name="changeClickNum" class="homeModuleAction" method="changeClickNum">
+	 		<result name="success" type="redirectAction">
+			   <param name="actionName">getInfo</param>
+			   <param name="shopInfoId">${shopInfoId}</param>
+			   <param name="articleId">${articleId}</param>
+			</result>
+	 	</action>
+	 	<!-- 店铺搜索 begin-->
+	 	<action name="gotoShopsShopInfoList" class="homeModuleAction" method="gotoShopsShopInfoList">
+	 		<result name="success1">/WEB-INF/shop/home/shopsShopInfoList.jsp</result>
+	 		<result name="success2">/WEB-INF/shop/home/shopsShopInfoList.jsp</result>
+	 	</action>
+	 	<!-- 店铺搜索 end-->
+    </package>
+    
+   <!-- 店铺内部资讯分类begin -->
+   <package name="frontInfoMationCategoryStore" namespace="/front/store/infoMationCategory" extends="struts-default">
+    	<action name="gotoInformationCategoryPage" class="informationCategoryAction" method="gotoInformationCategoryPage">
+	 		<result name="success">/WEB-INF/shop/shopinfo/information_categoryList.jsp</result>
+	 	</action>
+	 	<action name="addOrEditShopCategory" class="informationCategoryAction" method="addOrEditShopCategory">
+	 		<result>/WEB-INF/shop/shopinfo/infomation_addOrEdit_category.jsp</result>
+	 	</action>
+	 	<action name="uploadImageFront" class="informationCategoryAction" method="uploadImageFront"></action>
+	 	<action name="saveOrUpdateShopCategory" class="informationCategoryAction" method="saveOrUpdateShopCategory"/>
+	 	<action name="deleteShopCategory" class="informationCategoryAction" method="deleteShopCategory"/>
+    </package>
+    <!-- 店铺内部资讯分类end -->
+    
+   <!-- 店铺内部资讯信息begin -->
+   <package name="frontInfoMationStore" namespace="/front/store/infoMation" extends="struts-default">
+    	<action name="gotoInformationPage" class="informationAction" method="gotoInformationPage">
+	 		<result name="success">/WEB-INF/shop/shopinfo/information_list.jsp</result>
+	 	</action>
+	 	<action name="addOrEditInforMation" class="informationAction" method="addOrEditInforMation">
+	 		<result>/WEB-INF/shop/shopinfo/infomation_addOrEdit_information.jsp</result>
+	 	</action>
+	 	<action name="uploadImageFront" class="informationAction" method="uploadImageFront"></action>
+	 	<action name="saveOrUpdateInforMation" class="informationAction" method="saveOrUpdateInforMation"/>
+	 	<action name="deleteInforMation" class="informationAction" method="deleteInforMation"/>
+	 	<action name="preview" class="informationAction" method="preview">
+	 		<result name="success" type="redirectAction">
+		    	<param name="namespace">/homeModule</param>
+			   <param name="actionName">getInfo</param>
+			   <param name="shopInfoId">${shopInfoId}</param>
+			   <param name="articleId">${articleId}</param>
+			   <param name="isOk">0</param>
+		    </result>
+		 </action>
+	 	 <action name="previewComment" class="informationAction" method="previewComment">
+ 			<result name="success">/WEB-INF/shop/information/commentList.jsp</result>
+	 	 </action>
+	 	<action name="deleteComment" class="informationAction" method="deleteComment"/>
+    </package>
+    <!-- 店铺内部资讯信息end -->
+   <!-- 资讯留言begin -->
+   <package name="frontInfoMationCommentCustomer" namespace="/front/customer/infoMationComment" extends="struts-default">
+    	<action name="addComment" class="informationCommentAction" method="addComment">
+    		<result name="success" type="redirectAction">
+		    	<param name="namespace">/homeModule</param>
+			   <param name="actionName">getInfo</param>
+			   <param name="shopInfoId">${shopInfoId}</param>
+			   <param name="articleId">${articleId}</param>
+			   <param name="isOk">1</param>
+		   </result>
+    	</action>
+    </package>
+   <package name="frontInfoMationComment" namespace="/front/infoMationComment" extends="struts-default">
+    	<action name="verificationCode" class="informationCommentAction" method="verificationCode"/>
+    </package>
+    <!-- 资讯留言end -->
+    
+    
+    <!-- 店铺销售申请结算前台 begin -->
+	<package name="settlementFront" namespace="/front/store/settlement" extends="struts-default">
+		<action name="gotoShopSettementDetail" class="frontShopSettlementDetailAction" method="gotoShopSettementDetail">
+			<result name="success">/WEB-INF/shop/shopinfo/shopSettlementDetail.jsp</result>
+		</action>
+		<action name="applySettlement" class="frontShopSettlementDetailAction" method="applySettlement">
+			
+		</action>
+		<action name="check" class="frontShopSettlementDetailAction" method="check"></action>
+	</package>
+	<!-- 店铺销售申请结算前台 end -->
+	
+	
+	<!-- 快速下单begin -->
+	<package name="quickOrder" namespace="/front/quickOrder" extends="struts-default">
+		<action name="quickOrder" class="quickOrderAction" method="quickOrder">
+			<result name="success">/WEB-INF/shop/home/quickOrderList.jsp</result>
+		</action>
+		<action name="getProductInfoBySku" class="quickOrderAction" method="getProductInfoBySku"></action>
+		<action name="listProductInfoBySku" class="quickOrderAction" method="listProductInfoBySku"></action>
+	</package>
+	<!-- 快速下单end -->
+	<!-- 更新初始化基础数据  begin-->
+		<!-- 商品分类begin -->
+		   <package name="producttype" namespace="/back/producttype" extends="struts-default"> 
+			   	<action name="initProdutTypeInfo" class="productTypeAction" method="initProdutTypeInfo"/>
+		   </package>
+		<!-- 商品分类end -->
+		
+		<!-- 新闻 begin -->
+		   <package name="frontHelpCenter" namespace="/front/helpCenter" extends="struts-default"> 
+			   	<action name="updateInServletContextArticle" class="helpFrontAction" method="updateInServletContextArticle"/>
+		   </package>
+		<!-- 新闻 end -->
+
+		<!-- 基础数据字典 begin -->
+		   <package name="frontBasicKeyBook" namespace="/front/basicKeyBook" extends="struts-default"> 
+		   		<!-- 底部新闻更新 -->
+			   	<action name="updateInServletContextArticle" class="helpFrontAction" method="updateInServletContextArticle"/>
+			   	<!-- 基础数据字典更新 -->
+			   	<action name="updateInServletContextKeyBook" class="keyBookAction" method="updateInServletContextKeyBook"></action>
+		   </package>
+		<!-- 基础数据字典 end -->
+		
+		<!-- 首页数据字典 begin -->
+		   <package name="frontHomeKeyBook" namespace="/front/homeKeyBook" extends="struts-default"> 
+			   	<action name="updateInServletContextHomeKeyBook" class="homeKeyBookAction" method="updateInServletContextHomeKeyBook"/>
+		   </package>
+		<!-- 首页数据字典 end -->
+		<!-- 物流公司begin -->
+		<package name="logistics" namespace="/back/logistics" extends="basePackage">
+		<action name="gotoLogisticsPage" class="logisticsAction" method="gotoLogisticsPage">
+			<result>/WEB-INF/shop/back/logistics/logisticsList.jsp</result>
+		</action>
+		<action name="listLogistics" class="logisticsAction" method="listLogistics"></action>
+		<action name="saveOrUpdateLogistics" class="logisticsAction" method="saveOrUpdateLogistics"></action>
+		<action name="getLogisticsObject" class="logisticsAction" method="getLogisticsObject"></action>
+		<action name="deleteLogistics" class="logisticsAction" method="deleteLogistics"></action>
+		<action name="initLogistics" class="logisticsAction" method="initLogistics"></action>
+		<action name="initCityCourier" class="logisticsAction" method="initCityCourier"></action>
+		</package>
+		<!-- 物流公司end -->
+		<!-- 快递100回调begin -->
+		<package name="backCallAction" namespace="/callBack" extends="struts-default" >
+			<action name="backMessage" class="backCallAction" method="backMessage">
+				<!-- <result name="success">/index1.jsp</result> -->
+			</action>
+		</package>
+		<!-- 快递100回调end -->
+		<!-- 快递100请求begin -->
+		<package name="callAction" namespace="/call" extends="struts-default" >
+			<action name="askFor" class="callAction" method="askFor">
+			<!-- <result name="success">/success.jsp</result>
+				<result name="error" >/MyJsp.jsp</result> -->
+			</action>
+		</package>
+		<!-- 快递100请求end -->
+		
+		<!-- 店铺会员begin -->
+		<package name="memberShip" namespace="/front/memberShip" extends="struts-default">
+			<action name="checkMember" class="memberShipAction" method="checkMember"></action>
+			<action name="memberApply" class="memberShipAction" method="memberApply">
+				<result name="success" type="redirectAction">
+					<param name="actionName">memberApplyList</param>
+				</result>
+			</action>
+			<action name="memberApplyList" class="memberShipAction" method="memberApplyList"> 
+				<result>/WEB-INF/shop/customer/myaccount_memberShip_list.jsp</result>
+			</action>
+			<action name="listMemberShip" class="memberShipAction" method="listMemberShip">
+				<result name="success">/WEB-INF/shop/shopinfo/shop_memberShip_list.jsp</result>
+			</action>
+			<action name="getCustomerShop" class="memberShipAction" method="getCustomerShop"></action>
+			<action name="getMemberShipObject" class="memberShipAction" method="getMemberShipObject"></action>
+			<action name="auditMemberShip" class="memberShipAction" method="auditMemberShip">
+				<!-- <result name="success" type="redirectAction">
+					<param name="actionName">listMemberShip</param>
+				</result> -->
+			</action>
+		</package>
+		<!-- 店铺会员end -->
+
+	<!-- 客服begin -->
+	<package name="customerService" namespace="/front/store/customerService" extends="functionPurview">
+		<action name="gotoCustomerServicePage" class="customerServiceAction" method="gotoCustomerServicePage">
+			<interceptor-ref name="functionPurviewStack"/>
+			<result>/WEB-INF/shop/customerService/addOrEditorCustomerService.jsp</result>
+		</action>
+		<action name="listCustomerService" class="customerServiceAction" method="listCustomerService"></action>
+		<action name="saveOrUpdateCustomerService" class="customerServiceAction" method="saveOrUpdateCustomerService">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/front/store/shopCustomerService</param>
+				<param name="actionName">listShopCustomerService</param>
+			</result>
+		</action>
+		<action name="getCustomerServiceInfo" class="customerServiceAction" method="getCustomerServiceInfo">
+			<interceptor-ref name="functionPurviewStack"/>
+			<result>/WEB-INF/shop/customerService/addOrEditorCustomerService.jsp</result>
+		</action>
+		<action name="deleteCustomerServices" class="customerServiceAction" method="deleteCustomerServices"></action>
+	</package>
+	<!-- 客服end -->
+	
+	<!-- 店铺-客服begin -->
+	<package name="shopCustomerService" namespace="/front/store/shopCustomerService" extends="basePackage">
+		<action name="gotoShopCustomerServicePage" class="shopCustomerServiceAction" method="gotoShopCustomerServicePage">
+			<result>/WEB-INF/shop/shopCustomerService/listShopCustomerService.jsp</result>
+		</action>
+		<action name="listShopCustomerService" class="shopCustomerServiceAction" method="listShopCustomerService">
+			<result>/WEB-INF/shop/shopCustomerService/listShopCustomerService.jsp</result>
+		</action>
+		<action name="listUnShopCustomerService" class="shopCustomerServiceAction" method="listUnShopCustomerService"></action>
+		<action name="savaOrUpdateShopCustomerService" class="shopCustomerServiceAction" method="savaOrUpdateShopCustomerService"></action>
+		<action name="deleteShopCustomerService" class="shopCustomerServiceAction" method="deleteShopCustomerService">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/front/store/shopCustomerService</param>
+				<param name="actionName">listShopCustomerService</param>
+			</result>
+		</action>
+	</package>
+	<!-- 店铺-客服end -->
+	
+	<!-- 前后台通用校验 begin -->
+	<package name="check" namespace="/shop/check" extends="struts-default">
+		<action name="checkPhone" class="checkAction" method="checkPhone"></action>
+		<action name="checkEmail" class="checkAction" method="checkEmail"></action>
+	</package>
+	<!-- 前后台通用校验 end -->
+	
+	<!-- 订单统计 begin -->
+	<package name="orderStatistics" namespace="/front/store/orderStatistics" extends="struts-default">
+		<action name="gotoCollectiveOrderPage" class="orderStatisticsAction" method="gotoCollectiveOrderPage">
+			<result>/WEB-INF/shop/shopinfo/orderStatistics.jsp</result>
+		</action>
+		<action name="importExcelTJDD" class="orderStatisticsAction" method="importExcelTJDD"></action>
+	</package>
+	<!-- 订单统计 end -->
+	
+	<!-- 供应商商城币 begin -->
+	<package name="supplierMallCoin" namespace="/front/store/supplierMallCoin" extends="struts-default">
+		<action name="gotoSCBTXPage" class="supplierMallCoinDetailAction" method="gotoSCBTXPage">
+			<result>/WEB-INF/shop/shopinfo/shopSCBtx.jsp</result>
+		</action>
+		<action name="saveSupplierMallCoinDetailInfo" class="supplierMallCoinDetailAction" method="saveSupplierMallCoinDetailInfo">
+			<result name="success" type="redirectAction">
+				<param name="actionName">gotoSCBTXListPage</param>
+			</result>
+		</action>
+		<action name="gotoSCBTXListPage" class="supplierMallCoinDetailAction" method="gotoSCBTXListPage">
+			<result>/WEB-INF/shop/shopinfo/listShopSCBtx.jsp</result>
+		</action>
+		<action name="gotoShopSupplierMallCoinDetailListPage" class="supplierMallCoinDetailAction" method="gotoShopSupplierMallCoinDetailListPage">
+			<result>/WEB-INF/shop/shopinfo/listSupplierMallCoinDetail.jsp</result>
+		</action>
+		<action name="gotoSupplierBrokerageCoinDetailListPage" class="supplierBrokerageCoinDetailAction" method="gotoSupplierBrokerageCoinDetailListPage">
+			<result>/WEB-INF/shop/shopinfo/listSupplierBrokerageCoinDetail.jsp</result>
+		</action>
+		<action name="exportSCBTXExcel" class="supplierMallCoinDetailAction" method="exportSCBTXExcel">
+    		<result name="success" type="redirectAction">
+				<param name="namespace">/publicExport</param>
+				<param name="actionName">exportExcel</param>
+			</result>
+			<result name="error" >/error.jsp</result>
+    	</action>
+	</package>
+	<!-- 供应商商城币 end -->
+	<!-- 用户商城币 begin -->
+	<package name="customerMallCoin" namespace="/front/customer/customerMallCoin" extends="struts-default">
+		<action name="getCustomerMallCoinDetail" class="mallCoinAction" method="getCustomerMallCoinDetail">
+			<result>/WEB-INF/shop/customer/customerMallCoinDetail.jsp</result>
+		</action>
+		<action name="exportExcel" class="mallCoinAction" method="exportExcel">
+    		<result name="success" type="redirectAction">
+			<param name="namespace">/publicExport</param>
+			<param name="actionName">exportExcel</param>
+			</result>
+			<result name="error" >/error.jsp</result>
+    	</action>
+	</package>
+	<!-- 用户商城币 end -->
+	
+</struts>
+
+

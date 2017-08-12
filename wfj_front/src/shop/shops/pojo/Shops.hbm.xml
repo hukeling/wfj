@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="shop.shops.pojo.Shops" table="shop_shops" schema="b2b2c">
+		<id name="shopsId" type="java.lang.Integer">
+			<column name="shopsId" />
+			<generator class="native" />
+		</id>
+		<property name="shopsCode" type="java.lang.String" not-null="true" length="50">
+			<column name="shopsCode" />
+		</property>
+		<property name="shopsName" type="java.lang.String" not-null="true" length="50">
+			<column name="shopsName" />
+		</property>
+		<property name="address" type="java.lang.String">
+			<column name="address" />
+		</property>
+		<property name="note" type="java.lang.String">
+			<column name="note" />
+		</property>
+		<property name="createTime" type="java.util.Date" not-null="true">
+			<column name="createTime" />
+		</property>
+		<property name="modifyTime" type="java.util.Date">
+			<column name="modifyTime" />
+		</property>
+		<property name="regionLocation" type="java.lang.String">
+            <column name="regionLocation" length="100" not-null="true"/>
+        </property>
+        <property name="city" type="java.lang.String">
+            <column name="city" length="100" not-null="true"/>
+        </property>
+	</class>
+</hibernate-mapping>

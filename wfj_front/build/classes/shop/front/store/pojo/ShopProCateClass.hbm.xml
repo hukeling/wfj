@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="shop.front.store.pojo.ShopProCateClass" table="shop_shopprocateclass" schema="b2b2c">
+        <composite-id>
+        	<key-property name="shopProCategoryId" type="java.lang.Integer">
+        		<column name="shopProCategoryId"/>
+        	</key-property>
+        	<key-property name="productId" type="java.lang.Integer">
+        		<column name="productId"/>
+        	</key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

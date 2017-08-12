@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="shop.store.pojo.ShopSettlementDetail" table="shop_settlement_detail" schema="b2b2c" >
+        <id name="settlementId" type="java.lang.Integer">
+            <column name="settlementId"/>
+            <generator class="native"/>
+        </id>
+        <property name="shopInfoId" type="java.lang.Integer">
+            <column name="shopInfoId"/>
+        </property>
+        <property name="shopName" type="java.lang.String">
+            <column name="shopName"/>
+        </property>
+        <property name="customerId" type="java.lang.Integer">
+            <column name="customerId"/>
+        </property>
+        <property name="loginName" type="java.lang.String">
+            <column name="loginName"/>
+        </property>
+        <property name="companyName" type="java.lang.String">
+            <column name="companyName"/>
+        </property>
+        <property name="ordersIds" type="java.lang.String">
+            <column name="ordersIds"/>
+        </property>
+        <property name="totalCost" type="java.math.BigDecimal">
+            <column name="totalCost"/>
+        </property>
+        <property name="status" type="java.lang.Integer">
+            <column name="status"/>
+        </property>
+        <property name="reviewer" type="java.lang.String">
+            <column name="reviewer"/>
+        </property>
+        <property name="reviewerDate" type="java.util.Date">
+            <column name="reviewerDate"/>
+        </property>
+        <property name="createDate" type="java.util.Date">
+            <column name="createDate"/>
+        </property>
+        <property name="commissionProportion" type="java.math.BigDecimal">
+            <column name="commissionProportion"/>
+        </property>
+        <property name="paymentInfo" type="java.lang.String">
+            <column name="paymentInfo"/>
+        </property>
+    </class>
+</hibernate-mapping>  

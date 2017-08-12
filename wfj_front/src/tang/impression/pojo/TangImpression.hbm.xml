@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="tang.impression.pojo.TangImpression" table="tang_impression" schema="b2b2c">
+        <id name="impressionId" type="java.lang.Integer">
+            <column name="impressionId"/>
+            <generator class="native" />
+        </id>
+        <property name="jianjie" type="java.lang.String">
+            <column name="jianjie"/>
+        </property>
+         <property name="jianjieImage" type="java.lang.String">
+            <column name="jianjieImage"/>
+        </property>
+        <property name="jianjieImage2" type="java.lang.String">
+            <column name="jianjieImage2"/>
+        </property>
+        <property name="yuanzi" type="java.lang.String">
+            <column name="yuanzi"/>
+        </property>
+         <property name="yuanziImage" type="java.lang.String">
+            <column name="yuanziImage"/>
+        </property>
+        <property name="yuanziImage2" type="java.lang.String">
+            <column name="yuanziImage2"/>
+        </property>
+        <property name="tedian" type="java.lang.String">
+            <column name="tedian"/>
+        </property>
+         <property name="tedianImage" type="java.lang.String">
+            <column name="tedianImage"/>
+        </property>
+        <property name="tedianImage2" type="java.lang.String">
+            <column name="tedianImage2"/>
+        </property>
+        <property name="guihua" type="java.lang.String">
+            <column name="guihua"/>
+        </property>
+         <property name="guihuaImage" type="java.lang.String">
+            <column name="guihuaImage"/>
+        </property>
+        <property name="guihuaImage2" type="java.lang.String">
+            <column name="guihuaImage2"/>
+        </property>
+        <property name="isShow" type="java.lang.Integer">
+            <column name="isShow"/>
+        </property>
+    </class>
+</hibernate-mapping>

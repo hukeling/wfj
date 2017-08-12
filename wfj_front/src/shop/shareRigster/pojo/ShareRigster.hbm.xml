@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="shop.shareRigster.pojo.ShareRigster" table="shop_sharerigster" schema="b2b2c">
+		<id name="shareRegisterId" type="java.lang.Integer">
+			<column name="shareRegisterId" />
+			<generator class="native" />
+		</id>
+		<property name="shareCustomerId" type="java.lang.Integer" not-null="true" length="50">
+			<column name="shareCustomerId" />
+		</property>
+		<property name="registerCustomerId" type="java.lang.Integer" not-null="true" length="50">
+			<column name="registerCustomerId" />
+		</property>
+		<property name="shareTime" type="java.util.Date">
+			<column name="shareTime" />
+		</property>
+		<property name="giveCoinNumber" type="java.math.BigDecimal">
+			<column name="giveCoinNumber" />
+		</property>
+	</class>
+</hibernate-mapping>

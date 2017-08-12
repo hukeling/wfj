@@ -1,0 +1,1342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- 购物车begin -->
+	<bean id="shoppingCartDao" class="shop.front.shoppingOnLine.dao.imp.ShoppingCartDao"
+		parent="baseDao" />
+	<bean id="shoppingCartService"
+		class="shop.front.shoppingOnLine.service.imp.ShoppingCartService"
+		parent="baseService">
+		<property name="shoppingCartDao">
+			<ref bean="shoppingCartDao" />
+		</property>
+		<property name="productInfoDao">
+			<ref bean="productInfoDao" />
+		</property>
+		<property name="buyersRecordDao">
+			<ref bean="buyersRecordDao" />
+		</property>
+		<property name="memberShipDao">
+			<ref bean="memberShipDao" />
+		</property>
+	</bean>
+	<bean id="shoppingCartAction" class="shop.front.shoppingOnLine.action.ShoppingCartAction"
+		scope="prototype">
+		<property name="shoppingCartService">
+			<ref bean="shoppingCartService" />
+		</property>
+		<property name="shoppingCartOrderService">
+			<ref bean="shoppingCartOrderService" />
+		</property>
+		<property name="productInfoService">
+			<ref bean="productInfoService" />
+		</property>
+		<property name="productSpecificationValueService">
+			<ref bean="productSpecificationValueService" />
+		</property>
+		<property name="buyersRecordService">
+			<ref bean="buyersRecordService" />
+		</property>
+		<property name="memberShipService">
+			<ref bean="memberShipService" />
+		</property>
+	</bean>
+	<!-- 购物车end -->
+	<!-- 购物车订单begin -->
+	<bean id="shoppingCartOrderDao" class="shop.front.shoppingOnLine.dao.imp.ShoppingCartOrderDao"
+		parent="baseDao" />
+	<bean id="shoppingCartOrderService"
+		class="shop.front.shoppingOnLine.service.imp.ShoppingCartOrderService"
+		parent="baseService">
+		<property name="shoppingCartOrderDao">
+			<ref bean="shoppingCartOrderDao" />
+		</property>
+		<property name="productInfoDao">
+			<ref bean="productInfoDao" />
+		</property>
+		<property name="customerAcceptAddressDao">
+			<ref bean="customerAcceptAddressDao" />
+		</property>
+		<property name="ordersDao">
+			<ref bean="ordersDao" />
+		</property>
+		<property name="ordersListDao">
+			<ref bean="ordersListDao" />
+		</property>
+		<property name="ordersOPLogDao">
+			<ref bean="ordersOPLogDao" />
+		</property>
+		<property name="incomePayDetailDao">
+			<ref bean="incomePayDetailDao" />
+		</property>
+		<property name="customerHaveCouponDao">
+			<ref bean="customerHaveCouponDao" />
+		</property>
+		<property name="customerDao">
+			<ref bean="customerDao" />
+		</property>
+		<property name="virtualCoinDao">
+			<ref bean="virtualCoinDao" />
+		</property>
+		<property name="mallCoinDao">
+			<ref bean="mallCoinDao" />
+		</property>
+		<property name="brandDao">
+			<ref bean="brandDao" />
+		</property>
+		<property name="shopInfoDao">
+			<ref bean="shopInfoDao" />
+		</property>
+		<property name="buyersRecordDao">
+			<ref bean="buyersRecordDao" />
+		</property>
+		<property name="lineofcreditItemDao">
+			<ref bean="lineofcreditItemDao" />
+		</property>
+		<property name="memberShipDao">
+			<ref bean="memberShipDao" />
+		</property>
+		<property name="supplierMallCoinDetailDao">
+			<ref bean="supplierMallCoinDetailDao" />
+		</property>
+		<property name="customerdiscountcouponDao">
+			<ref bean="customerdiscountcouponDao" />
+		</property>
+		<property name="tuanProductDao">
+			<ref bean="tuanProductDao" />
+		</property>
+	</bean>
+	<bean id="shoppingCartOrderAction"
+		class="shop.front.shoppingOnLine.action.ShoppingCartOrderAction"
+		scope="prototype">
+		<property name="shoppingCartOrderService">
+			<ref bean="shoppingCartOrderService" />
+		</property>
+		<property name="ordersOPLogService">
+			<ref bean="ordersOPLogService" />
+		</property>
+		<property name="areaService">
+			<ref bean="areaService" />
+		</property>
+		<property name="customerAcceptAddressService">
+			<ref bean="customerAcceptAddressService" />
+		</property>
+		<property name="virtualCoinService">
+			<ref bean="virtualCoinService" />
+		</property>
+		<property name="mallCoinService">
+			<ref bean="mallCoinService" />
+		</property>
+		<property name="shoppingCartService">
+			<ref bean="shoppingCartService" />
+		</property>
+		<property name="lineofcreditItemService">
+			<ref bean="lineofcreditItemService" />
+		</property>
+		<property name="ordersService">
+			<ref bean="ordersService" />
+		</property>
+		<property name="buyersRecordService">
+			<ref bean="buyersRecordService" />
+		</property>
+		<property name="shopInfoService">
+			<ref bean="shopInfoService" />
+		</property>
+		<property name="customerdiscountcouponService">
+			<ref bean="customerdiscountcouponService" />
+		</property>
+	</bean>
+
+	<!-- 店铺收藏 -->
+	<bean id="customerCollectShopDao" class="shop.customer.dao.imp.CustomerCollectShopDao"
+		parent="baseDao"></bean>
+	<bean id="customerCollectShopService" class="shop.customer.service.imp.CustomerCollectShopService"
+		parent="baseService">
+		<property name="customerCollectShopDao">
+			<ref bean="customerCollectShopDao" />
+		</property>
+	</bean>
+	<bean id="accountFollowingShopAction" class="shop.front.customer.action.AccountFollowingShopAction"
+		scope="prototype">
+		<property name="customerCollectShopService">
+			<ref bean="customerCollectShopService" />
+		</property>
+		<property name="shopInfoService">
+			<ref bean="shopInfoService" />
+		</property>
+		<property name="evaluateGoodsService">
+			<ref bean="evaluateGoodsService" />
+		</property>
+	</bean>
+	<!-- 店铺收藏end -->
+
+	<!-- 商品评价 -->
+	<bean id="evaluateGoodsDao" class="shop.customer.dao.imp.EvaluateGoodsDao"
+		parent="baseDao"></bean>
+	<bean id="evaluateGoodsService" class="shop.customer.service.imp.EvaluateGoodsService"
+		parent="baseService">
+		<property name="evaluateGoodsDao">
+			<ref bean="evaluateGoodsDao" />
+		</property>
+	</bean>
+	<bean id="accountCommentService" class="shop.front.customer.service.imp.AccountCommentService"
+		parent="baseService">
+		<property name="evaluateGoodsDao">
+			<ref bean="evaluateGoodsDao" />
+		</property>
+		<property name="shopInfoDao">
+			<ref bean="shopInfoDao" />
+		</property>
+		<property name="ordersListDao">
+			<ref bean="ordersListDao" />
+		</property>
+		<property name="ordersDao">
+			<ref bean="ordersDao" />
+		</property>
+		<property name="ordersOPLogDao">
+			<ref bean="ordersOPLogDao" />
+		</property>
+		<property name="mallCoinDao">
+			<ref bean="mallCoinDao" />
+		</property>
+		<property name="supplierMallCoinDetailDao">
+			<ref bean="supplierMallCoinDetailDao" />
+		</property>
+		<property name="productInfoDao">
+			<ref bean="productInfoDao" />
+		</property>
+	</bean>
+	<bean id="accountCommentAction" class="shop.front.customer.action.AccountCommentAction"
+		scope="prototype">
+		<property name="evaluateGoodsService">
+			<ref bean="evaluateGoodsService" />
+		</property>
+		<property name="ordersListService">
+			<ref bean="ordersListService" />
+		</property>
+		<property name="ordersService">
+			<ref bean="ordersService" />
+		</property>
+		<property name="productInfoService">
+			<ref bean="productInfoService" />
+		</property>
+		<property name="accountCommentService">
+			<ref bean="accountCommentService" />
+		</property>
+	</bean>
+	<!-- 商品评价 end -->
+
+	<!-- 会员注册信息begin -->
+	<bean id="registerAction" class="shop.front.register.action.RegisterAction"
+		scope="prototype">
+		<property name="customerService">
+			<ref bean="customerService" />
+		</property>
+		<property name="shareRigsterService">
+			<ref bean="shareRigsterService" />
+		</property>
+		<property name="articleService">
+			<ref bean="articleService" />
+		</property>
+		<property name="shopCustomerInfoService">
+			<ref bean="shopCustomerInfoService" />
+		</property>
+		<property name="virtualCoinService">
+			<ref bean="virtualCoinService" />
+		</property>
+		<property name="sonaccountService">
+			<ref bean="sonaccountService" />
+		</property>
+		<property name="shopInfoService">
+			<ref bean="shopInfoService" />
+		</property>
+		<property name="mallCoinService">
+			<ref bean="mallCoinService" />
+		</property>
+	</bean>
+	<!-- 会员注册信息end -->
+
+	<!-- 用户登录begin -->
+	<bean id="loginAction" class="shop.front.login.action.LoginAction"
+		scope="prototype">
+		<property name="customerService">
+			<ref bean="customerService" />
+		</property>
+		<property name="shopInfoService">
+			<ref bean="shopInfoService" />
+		</property>
+		<property name="shoppingCartService">
+			<ref bean="shoppingCartService" />
+		</property>
+		<property name="shopCustomerInfoService">
+			<ref bean="shopCustomerInfoService" />
+		</property>
+		<property name="sonaccountService">
+			<ref bean="sonaccountService" />
+		</property>
+	</bean>
+	<!-- 用户登录end -->
+
+	<!-- 分类目录begin -->
+	<bean id="categoriesAction" class="shop.front.home.action.CategoriesAction"
+		scope="prototype">
+	</bean>
+	<!-- 分类目录end -->
+
+	<!-- 分类目录下的品牌和商品 begin -->
+	<bean id="productsListAction" class="shop.front.home.action.ProductsListAction"
+		scope="prototype">
+		<property name="productInfoService">
+			<ref bean="productInfoService" />
+		</property>
+		<property name="productTypeService">
+			<ref bean="productTypeService" />
+		</property>
+		<property name="brandService">
+			<ref bean="brandService" />
+		</property>
+		<property name="specificationService">
+			<ref bean="specificationService" />
+		</property>
+		<property name="specificationValueService">
+			<ref bean="specificationValueService" />
+		</property>
+		<property name="brandTypeService">
+			<ref bean="brandTypeService" />
+		</property>
+		<property name="searchService">
+			<ref bean="searchService" />
+		</property>
+		<property name="productAttrIndexService">
+			<ref bean="productAttrIndexService" />
+		</property>
+		<property name="attributeValueService">
+			<ref bean="attributeValueService" />
+		</property>
+		<property name="productAttributeService">
+			<ref bean="productAttributeService" />
+		</property>
+		<property name="shopInfoService">
+			<ref bean="shopInfoService" />
+		</property>
+	</bean>
+	<!-- 分类目录下的品牌和商品 end -->
+
+	<!-- 用户订单列表 -->
+	<bean id="accountOrderListService" class="shop.front.customer.service.imp.AccountOrderListService"
+		parent="baseService">
+		<property name="productInfoDao">
+			<ref bean="productInfoDao" />
+		</property>
+		<property name="ordersDao">
+			<ref bean="ordersDao" />
+		</property>
+		<property name="ordersOPLogDao">
+			<ref bean="ordersOPLogDao" />
+		</property>
+		<property name="ordersListDao">
+			<ref bean="ordersListDao" />
+		</property>
+		<property name="virtualCoinDao">
+			<ref bean="virtualCoinDao" />
+		</property>
+		<property name="mallCoinDao">
+			<ref bean="mallCoinDao" />
+		</property>
+	</bean>
+	<bean id="accountOrderListAction" class="shop.front.customer.action.AccountOrderListAction"
+		scope="prototype">
+		<property name="areaService">
+			<ref bean="areaService" />
+		</property>
+		<property name="ordersService">
+			<ref bean="ordersService" />
+		</property>
+		<property name="productInfoService">
+			<ref bean="productInfoService" />
+		</property>
+		<property name="customerHaveCouponService">
+			<ref bean="customerHaveCouponService" />
+		</property>
+		<property name="shopInfoService">
+			<ref bean="shopInfoService" />
+		</property>
+		<property name="ordersOPLogService">
+			<ref bean="ordersOPLogService" />
+		</property>
+		<property name="accountOrderListService">
+			<ref bean="accountOrderListService" />
+		</property>
+		<property name="shippingService">
+			<ref bean="shippingService" />
+		</property>
+		<property name="safetyCertificateService">
+			<ref bean="safetyCertificateService" />
+		</property>
+		<property name="lineofcreditItemService">
+			<ref bean="lineofcreditItemService" />
+		</property>
+		<property name="ordersListService">
+			<ref bean="ordersListService" />
+		</property>
+	</bean>
+	<!-- 用户订单列表 -->
+
+	<!-- 填写地址begin -->
+	<bean id="customerAddressAction" class="shop.front.shoppingOnLine.action.CustomerAddressAction"
+		scope="prototype">
+		<property name="customerAcceptAddressService">
+			<ref bean="customerAcceptAddressService" />
+		</property>
+		<property name="areaService">
+			<ref bean="areaService" />
+		</property>
+	</bean>
+	<!-- 填写地址end -->
+	<!-- 收货地址begin -->
+	<bean id="addressAction" class="shop.front.customer.action.AddressAction"
+		scope="prototype">
+		<property name="customerAcceptAddressService">
+			<ref bean="customerAcceptAddressService" />
+		</property>
+		<property name="areaService">
+			<ref bean="areaService" />
+		</property>
+	</bean>
+	<!-- 收货地址end -->
+
+	<!-- 用户中心 -->
+	<bean id="accountCenterAction" class="shop.front.customer.action.AccountCenterAction"
+		scope="prototype">
+		<property name="shopCartService">
+			<ref bean="shoppingCartService" />
+		</property>
+		<property name="ordersService">
+			<ref bean="ordersService" />
+		</property>
+		<property name="customerHaveCouponService">
+			<ref bean="customerHaveCouponService" />
+		</property>
+		<property name="productImgService">
+			<ref bean="productImgService" />
+		</property>
+		<property name="customerService">
+			<ref bean="customerService" />
+		</property>
+		<property name="customerServiceService">
+			<ref bean="customerServiceService" />
+		</property>
+		<property name="shopCustomerServiceService">
+			<ref bean="shopCustomerServiceService" />
+		</property>
+	</bean>
+	<!-- 用户中心end -->
+
+	<!-- 用户设置 -->
+	<bean id="accountSettingAction" class="shop.front.customer.action.AccountSettingAction"
+		scope="prototype">
+		<property name="customerService">
+			<ref bean="customerService" />
+		</property>
+		<property name="customerAcceptAddressService">
+			<ref bean="customerAcceptAddressService" />
+		</property>
+		<property name="shopCustomerInfoService">
+			<ref bean="shopCustomerInfoService" />
+		</property>
+		<property name="areaService">
+			<ref bean="areaService" />
+		</property>
+		<property name="safetyCertificateService">
+			<ref bean="safetyCertificateService" />
+		</property>
+	</bean>
+	<!-- 用户设置end -->
+
+
+	<!-- 产品详细信息begin -->
+	<bean id="productsDetailAction" class="shop.front.home.action.ProductsDetailAction"
+		scope="prototype">
+		<property name="areaService">
+			<ref bean="areaService" />
+		</property>
+		<property name="productInfoService">
+			<ref bean="productInfoService" />
+		</property>
+		<property name="productImgService">
+			<ref bean="productImgService" />
+		</property>
+		<property name="shopInfoService">
+			<ref bean="shopInfoService" />
+		</property>
+		<property name="customerCollectProductService">
+			<ref bean="customerCollectProductService" />
+		</property>
+		<property name="productTypeService">
+			<ref bean="productTypeService" />
+		</property>
+		<property name="specificationService">
+			<ref bean="specificationService" />
+		</property>
+		<property name="specificationValueService">
+			<ref bean="specificationValueService" />
+		</property>
+		<property name="productSpecificationService">
+			<ref bean="productSpecificationService" />
+		</property>
+		<property name="productSpecificationValueService">
+			<ref bean="productSpecificationValueService" />
+		</property>
+		<property name="productAttributeService">
+			<ref bean="productAttributeService" />
+		</property>
+		<property name="evaluateGoodsService">
+			<ref bean="evaluateGoodsService" />
+		</property>
+		<property name="buyersRecordService">
+			<ref bean="buyersRecordService" />
+		</property>
+		<property name="brandService">
+			<ref bean="brandService" />
+		</property>
+		<property name="ordersService">
+			<ref bean="ordersService" />
+		</property>
+		<property name="ordersListService">
+			<ref bean="ordersListService" />
+		</property>
+		<property name="shopTradeTagService">
+			<ref bean="shopTradeTagService" />
+		</property>
+		<property name="shopSituationTagService">
+			<ref bean="shopSituationTagService" />
+		</property>
+		<property name="shopTradeSituationTagService">
+			<ref bean="shopTradeSituationTagService" />
+		</property>
+		<property name="shopProductTradeSituationTagService">
+			<ref bean="shopProductTradeSituationTagService" />
+		</property>
+		<property name="shopCustomerServiceService">
+			<ref bean="shopCustomerServiceService" />
+		</property>
+		<property name="memberShipService">
+			<ref bean="memberShipService" />
+		</property>
+	</bean>
+	<!-- 产品详细信息end -->
+
+	<!-- 商城首页begin -->
+	<bean id="shopHomeAction" class="shop.front.home.action.HomeAction"
+		scope="prototype">
+		<property name="homeLBTService">
+			<ref bean="homeLBTService" />
+		</property>
+		<property name="homeAdvertisementService">
+			<ref bean="homeAdvertisementService" />
+		</property>
+		<property name="homeParticularlyTabService">
+			<ref bean="homeParticularlyTabService" />
+		</property>
+		<property name="articleService">
+			<ref bean="articleService" />
+		</property>
+		<property name="promotionService">
+			<ref bean="platformPromotionService" />
+		</property>
+		<property name="shopHomeMiddleCategoryService">
+			<ref bean="shopHomeMiddleCategoryService" />
+		</property>
+		<property name="shopHomeMiddleCategoryBilateralService">
+			<ref bean="shopHomeMiddleCategoryBilateralService" />
+		</property>
+		<property name="shopHomeMiddleCategoryTABService">
+			<ref bean="shopHomeMiddleCategoryTABService" />
+		</property>
+		<property name="shoppingCartService">
+			<ref bean="shoppingCartService" />
+		</property>
+		<property name="brandService">
+			<ref bean="brandService" />
+		</property>
+		<property name="brandTypeService">
+			<ref bean="brandTypeService" />
+		</property>
+		<property name="productTypeService">
+			<ref bean="productTypeService" />
+		</property>
+	</bean>
+
+	<!-- 商城首页end -->
+
+	<!-- 购物地址 -->
+	<bean id="shippingAddressesAction" class="shop.front.customer.action.ShippingAddressesAction"
+		scope="prototype">
+		<property name="customerAcceptAddressService">
+			<ref bean="customerAcceptAddressService" />
+		</property>
+	</bean>
+
+	<!-- 购物地址 -->
+
+	<!-- 前台 商品维护start -->
+	<bean id="frontProductInfoDao" class="shop.front.frontProduct.dao.imp.FrontProductInfoDao"
+		parent="baseDao" />
+	<bean id="frontProductInfoService"
+		class="shop.front.frontProduct.service.imp.FrontProductInfoService"
+		parent="baseService">
+		<property name="frontProductInfoDao">
+			<ref bean="frontProductInfoDao" />
+		</property>
+		<property name="productImgDao">
+			<ref bean="productImgDao" />
+		</property>
+		<property name="productSpecificationDao">
+			<ref bean="productSpecificationDao" />
+		</property>
+		<property name="productSpecificationValueDao">
+			<ref bean="productSpecificationValueDao" />
+		</property>
+		<property name="shopProCateClassDao">
+			<ref bean="shopProCateClassDao" />
+		</property>
+		<property name="specificationValueDao">
+			<ref bean="specificationValueDao" />
+		</property>
+		<property name="shopProductTradeSituationTagDao">
+			<ref bean="shopProductTradeSituationTagDao" />
+		</property>
+		<property name="productAttrIndexDao">
+			<ref bean="productAttrIndexDao" />
+		</property>
+		<property name="brandDao">
+			<ref bean="brandDao" />
+		</property>
+	</bean>
+	<bean id="frontProductInfoAction" class="shop.front.frontProduct.action.FrontProductInfoAction"
+		scope="prototype">
+		<property name="areaService">
+			<ref bean="areaService" />
+		</property>
+		<property name="frontProductInfoService">
+			<ref bean="frontProductInfoService" />
+		</property>
+		<property name="brandService">
+			<ref bean="brandService" />
+		</property>
+		<property name="productTypeService">
+			<ref bean="productTypeService" />
+		</property>
+		<property name="deployShowPhotoService">
+			<ref bean="deployShowPhotoService" />
+		</property>
+		<property name="specificationService">
+			<ref bean="specificationService" />
+		</property>
+		<property name="specificationValueService">
+			<ref bean="specificationValueService" />
+		</property>
+		<property name="shopInfoService">
+			<ref bean="shopInfoService" />
+		</property>
+		<property name="productParametersService">
+			<ref bean="productParametersService" />
+		</property>
+		<property name="productAttributeService">
+			<ref bean="productAttributeService" />
+		</property>
+		<property name="productSpecificationService">
+			<ref bean="productSpecificationService" />
+		</property>
+		<property name="productSpecificationValueService">
+			<ref bean="productSpecificationValueService" />
+		</property>
+		<property name="productImgService">
+			<ref bean="productImgService" />
+		</property>
+		<property name="shopBrandService">
+			<ref bean="shopBrandService" />
+		</property>
+		<property name="shopProCateClassService">
+			<ref bean="shopProCateClassService" />
+		</property>
+		<property name="shopProCategoryService">
+			<ref bean="shopProCategoryService" />
+		</property>
+		<property name="brandTypeService">
+			<ref bean="brandTypeService" />
+		</property>
+		<property name="shopTradeTagService">
+			<ref bean="shopTradeTagService" />
+		</property>
+		<property name="shopSituationTagService">
+			<ref bean="shopSituationTagService" />
+		</property>
+		<property name="shopTradeSituationTagService">
+			<ref bean="shopTradeSituationTagService" />
+		</property>
+		<property name="shopProductTradeSituationTagService">
+			<ref bean="shopProductTradeSituationTagService" />
+		</property>
+		<property name="productMeasuringUnitService">
+			<ref bean="productMeasuringUnitService" />
+		</property>
+		<property name="measuringUnitService">
+			<ref bean="measuringUnitService" />
+		</property>
+		<property name="attributeValueService">
+			<ref bean="attributeValueService" />
+		</property>
+		<property name="productAttrIndexService">
+			<ref bean="productAttrIndexService" />
+		</property>
+	</bean>
+	<!-- 前台 商品维护end -->
+
+
+	<!-- 店铺商品 begin -->
+	<bean id="shopProductAction" class="shop.front.store.action.ShopProductAction"
+		scope="prototype">
+		<property name="shopProductService">
+			<ref bean="shopProductService" />
+		</property>
+		<property name="productInfoService">
+			<ref bean="productInfoService" />
+		</property>
+		<property name="shopInfoService">
+			<ref bean="shopInfoService" />
+		</property>
+		<property name="productTypeService">
+			<ref bean="productTypeService" />
+		</property>
+	</bean>
+	<!-- 店铺商品 end -->
+
+	<!-- 前台店铺信息begin -->
+	<bean id="frontShopInfoAction" class="shop.front.store.action.FrontShopInfoAction"
+		scope="prototype">
+		<property name="shopInfoService">
+			<ref bean="shopInfoService" />
+		</property>
+		<property name="shopCategoryService">
+			<ref bean="shopCategoryService" />
+		</property>
+		<property name="ordersService">
+			<ref bean="ordersService" />
+		</property>
+		<property name="productInfoService">
+			<ref bean="productInfoService" />
+		</property>
+		<property name="storeApplyPromotionService">
+			<ref bean="storeApplyPromotionService" />
+		</property>
+		<property name="customerService">
+			<ref bean="customerService" />
+		</property>
+		<property name="areaService">
+			<ref bean="areaService" />
+		</property>
+	</bean>
+	<!-- 前台店铺信息end -->
+
+	<!-- 前台店铺内商品分类 -->
+	<bean id="shopInfoProCategoryAction" class="shop.front.store.action.ShopInfoProCategoryAction"
+		scope="prototype">
+		<property name="shopInfoService">
+			<ref bean="shopInfoService" />
+		</property>
+		<property name="shopProCategoryService">
+			<ref bean="shopProCategoryService" />
+		</property>
+	</bean>
+	<!-- 前台店铺内商品分类end -->
+
+	<!-- 店铺订单列表begin -->
+	<bean id="shopOrdersService" class="shop.front.store.service.imp.ShopOrdersService"
+		parent="baseService">
+		<property name="ordersDao">
+			<ref bean="ordersDao" />
+		</property>
+		<property name="shippingDao">
+			<ref bean="shippingDao" />
+		</property>
+		<property name="ordersOPLogDao">
+			<ref bean="ordersOPLogDao" />
+		</property>
+	</bean>
+	<bean id="shopOrderAction" class="shop.front.store.action.ShopOrderAction"
+		scope="prototype">
+		<property name="areaService">
+			<ref bean="areaService" />
+		</property>
+		<property name="shopInfoService">
+			<ref bean="shopInfoService" />
+		</property>
+		<property name="ordersService">
+			<ref bean="ordersService" />
+		</property>
+		<property name="customerService">
+			<ref bean="customerService" />
+		</property>
+		<property name="shopOrdersService">
+			<ref bean="shopOrdersService" />
+		</property>
+		<property name="productInfoService">
+			<ref bean="productInfoService" />
+		</property>
+		<property name="ordersOPLogService">
+			<ref bean="ordersOPLogService" />
+		</property>
+		<property name="shippingService">
+			<ref bean="shippingService" />
+		</property>
+		<property name="evaluateGoodsService">
+			<ref bean="evaluateGoodsService" />
+		</property>
+		<property name="customerHaveCouponService">
+			<ref bean="customerHaveCouponService" />
+		</property>
+		<property name="shopSettlementDetailService">
+			<ref bean="shopSettlementDetailService" />
+		</property>
+		<property name="ordersListService">
+			<ref bean="ordersListService" />
+		</property>
+		<property name="logisticsService">
+			<ref bean="logisticsService" />
+		</property>
+		<property name="cityCourierService">
+			<ref bean="cityCourierService" />
+		</property>
+	</bean>
+
+	<!-- 店铺订单列表end -->
+
+	<!-- 用户收藏 -->
+	<bean id="accountWishListAction" class="shop.front.customer.action.AccountWishListAction"
+		scope="prototype">
+		<property name="productInfoService">
+			<ref bean="productInfoService" />
+		</property>
+		<property name="productImgService">
+			<ref bean="productImgService" />
+		</property>
+		<property name="customerCollectProductService">
+			<ref bean="customerCollectProductService" />
+		</property>
+		<property name="shoppingCartService">
+			<ref bean="shoppingCartService" />
+		</property>
+		<property name="buyersRecordService">
+			<ref bean="buyersRecordService" />
+		</property>
+	</bean>
+	<!-- 用户收藏 end -->
+
+	<!-- 热销商品Action -->
+	<bean id="hotSaleAction" class="shop.front.hotsale.action.HotSaleAction"
+		scope="prototype">
+		<property name="productInfoService">
+			<ref bean="productInfoService" />
+		</property>
+		<property name="productTypeService">
+			<ref bean="productTypeService" />
+		</property>
+	</bean>
+	<!-- 热销商品end -->
+
+	<!-- 前台商品添加begin -->
+	<bean id="frontAddProductInfoAction"
+		class="shop.front.frontProduct.action.FrontAddProductInfoAction"
+		scope="prototype">
+		<property name="productTypeService">
+			<ref bean="productTypeService" />
+		</property>
+		<property name="shopInfoService">
+			<ref bean="shopInfoService" />
+		</property>
+		<property name="brandService">
+			<ref bean="brandService" />
+		</property>
+		<property name="frontProductInfoService">
+			<ref bean="frontProductInfoService" />
+		</property>
+		<property name="shopProCateClassService">
+			<ref bean="shopProCateClassService" />
+		</property>
+		<property name="shopProCategoryService">
+			<ref bean="shopProCategoryService" />
+		</property>
+		<property name="productInfoService">
+			<ref bean="productInfoService" />
+		</property>
+		<property name="productImgService">
+			<ref bean="productImgService" />
+		</property>
+		<property name="productSpecificationService">
+			<ref bean="productSpecificationService" />
+		</property>
+		<property name="productSpecificationValueService">
+			<ref bean="productSpecificationValueService" />
+		</property>
+		<property name="specificationValueService">
+			<ref bean="specificationValueService" />
+		</property>
+		<property name="shopProductTradeSituationTagService">
+			<ref bean="shopProductTradeSituationTagService" />
+		</property>
+		<property name="productAttrIndexService">
+			<ref bean="productAttrIndexService" />
+		</property>
+	</bean>
+	<!-- 前台商品添加end -->
+
+	<!-- 帮助天地文章begin -->
+	<bean id="helpFrontAction" class="shop.front.help.action.HelpFrontAction"
+		scope="prototype">
+		<property name="articleService">
+			<ref bean="articleService" />
+		</property>
+		<property name="categoryService">
+			<ref bean="categoryService" />
+		</property>
+	</bean>
+	<!-- 帮助天地文章end -->
+
+	<!-- 店铺内部商品分类和商品关系begin -->
+	<bean id="shopProCateClassDao" class="shop.front.store.dao.imp.ShopProCateClassDao"
+		parent="baseDao" />
+	<bean id="shopProCateClassService" class="shop.front.store.service.imp.ShopProCateClassService"
+		parent="baseService">
+		<property name="shopProCateClassDao">
+			<ref bean="shopProCateClassDao" />
+		</property>
+	</bean>
+	<!-- 店铺内部商品分类和商品关系end -->
+
+	<!-- 店铺首页 begin -->
+	<bean id="shopHomePageAction" class="shop.front.store.action.ShopHomePageAction"
+		scope="prototype">
+		<property name="shopInfoService">
+			<ref bean="shopInfoService" />
+		</property>
+		<property name="productInfoService">
+			<ref bean="productInfoService" />
+		</property>
+		<property name="discountCouponService">
+			<ref bean="discountCouponService" />
+		</property>
+		<property name="shopBrandService">
+			<ref bean="shopBrandService" />
+		</property>
+		<property name="brandService">
+			<ref bean="brandService" />
+		</property>
+		<property name="shopProCategoryService">
+			<ref bean="shopProCategoryService" />
+		</property>
+		<property name="evaluateGoodsService">
+			<ref bean="evaluateGoodsService" />
+		</property>
+	</bean>
+	<!-- 店铺首页 end -->
+
+	<!-- 品牌目录 begin -->
+	<bean id="brandDirectoryAction" class="shop.front.home.action.BrandDirectoryAction"
+		scope="prototype">
+		<property name="brandService">
+			<ref bean="brandService" />
+		</property>
+	</bean>
+	<!-- 品牌目录 end -->
+
+	<!-- 品牌频道 begin -->
+	<bean id="brandChannelAction" class="shop.front.home.action.BrandChannelAction"
+		scope="prototype">
+		<property name="brandService">
+			<ref bean="brandService" />
+		</property>
+	</bean>
+	<!-- 品牌频道 end -->
+
+	<!-- 前台店铺首页 begin -->
+	<bean id="shopMainPageAction" class="shop.front.home.action.ShopMainPageAction"
+		scope="prototype">
+		<property name="shopInfoService">
+			<ref bean="shopInfoService" />
+		</property>
+		<property name="productInfoService">
+			<ref bean="productInfoService" />
+		</property>
+		<property name="brandService">
+			<ref bean="brandService" />
+		</property>
+		<property name="shopProCategoryService">
+			<ref bean="shopProCategoryService" />
+		</property>
+		<property name="evaluateGoodsService">
+			<ref bean="evaluateGoodsService" />
+		</property>
+		<property name="shopBrandService">
+			<ref bean="shopBrandService" />
+		</property>
+		<property name="customerCollectShopService">
+			<ref bean="customerCollectShopService" />
+		</property>
+		<property name="shopCustomerServiceService">
+			<ref bean="shopCustomerServiceService" />
+		</property>
+	</bean>
+	<!-- 前台店铺首页 end -->
+
+	<!-- 前台店铺目录 begin -->
+	<bean id="shopDirAction" class="shop.front.home.action.ShopDirAction"
+		scope="prototype">
+		<property name="shopInfoService">
+			<ref bean="shopInfoService" />
+		</property>
+		<property name="productInfoService">
+			<ref bean="productInfoService" />
+		</property>
+		<property name="shopCategoryService">
+			<ref bean="shopCategoryService" />
+		</property>
+		<property name="evaluateGoodsService">
+			<ref bean="evaluateGoodsService" />
+		</property>
+		<property name="homeAdvertisementService">
+			<ref bean="homeAdvertisementService" />
+		</property>
+		<property name="areaService">
+			<ref bean="areaService" />
+		</property>
+		<property name="shopsShopinfoService">
+			<ref bean="shopsShopinfoService" />
+		</property>
+		<property name="shopsService">
+			<ref bean="shopsService" />
+		</property>
+	</bean>
+	<!-- 前台店铺目录 end -->
+
+	<!-- 前台退换货 begin -->
+	<bean id="frontReturnsApplyAction" class="shop.front.customer.action.ReturnsApplyAction"
+		scope="prototype">
+		<property name="shopInfoService">
+			<ref bean="shopInfoService" />
+		</property>
+		<property name="productInfoService">
+			<ref bean="productInfoService" />
+		</property>
+		<property name="returnsApplyService">
+			<ref bean="returnsApplyService" />
+		</property>
+		<property name="ordersService">
+			<ref bean="ordersService" />
+		</property>
+		<property name="ordersListService">
+			<ref bean="ordersListService" />
+		</property>
+		<property name="returnsApplyOPLogService">
+			<ref bean="returnsApplyOPLogService" />
+		</property>
+	</bean>
+	<!-- 前台退换货 end -->
+
+	<!-- 前台退换货日志 begin -->
+	<bean id="frontReturnsApplyOPLogAction" class="shop.front.customer.action.ReturnsApplyOPLogAction"
+		scope="prototype">
+		<property name="returnsApplyService">
+			<ref bean="returnsApplyService" />
+		</property>
+		<property name="returnsApplyOPLogService">
+			<ref bean="returnsApplyOPLogService" />
+		</property>
+		<property name="shopInfoService">
+			<ref bean="shopInfoService" />
+		</property>
+		<property name="productInfoService">
+			<ref bean="productInfoService" />
+		</property>
+	</bean>
+	<!-- 前台退换货日志 end -->
+
+	<!-- 用户商城信息(SendMessage) begin -->
+	<bean id="messageCenterAction" class="shop.front.customer.action.MessageCenterAction"
+		scope="prototype">
+		<property name="messageCenterService">
+			<ref bean="messageCenterService" />
+		</property>
+		<property name="customerService">
+			<ref bean="customerService" />
+		</property>
+	</bean>
+	<!-- 用户商城信息(SendMessage) end -->
+
+	<!-- 用户购买天海币 begin -->
+	<bean id="buyTHCoinsAction" class="shop.front.customer.action.BuyTHCoinsAction"
+		scope="prototype">
+		<property name="coinRulesService">
+			<ref bean="coinRulesService" />
+		</property>
+		<property name="buyTHCoinsService">
+			<ref bean="buyTHCoinsService" />
+		</property>
+	</bean>
+	<bean id="buyTHCoinsService" class="shop.front.customer.service.imp.BuyTHCoinsService"
+		scope="prototype">
+		<property name="incomePayDetailDao">
+			<ref bean="incomePayDetailDao" />
+		</property>
+		<property name="virtualCoinDao">
+			<ref bean="virtualCoinDao" />
+		</property>
+	</bean>
+	<!-- 用户购买天海币 end -->
+
+	<!-- 推荐好友 begin -->
+	<bean id="adfAction" class="shop.front.customer.action.ADFAction"
+		scope="prototype"></bean>
+	<!-- 推荐好友 end -->
+	<!-- 天海币提现 begin -->
+	<bean id="tHBTXAction" class="shop.front.customer.action.THBTXAction"
+		scope="prototype">
+		<property name="virtualCoinService">
+			<ref bean="virtualCoinService" />
+		</property>
+		<property name="incomePayDetailService">
+			<ref bean="incomePayDetailService" />
+		</property>
+	</bean>
+	<!-- 天海币提现 end -->
+
+	<!-- 前台导航模块 -->
+	<bean id="homeModuleAction" class="shop.front.home.action.HomeModuleAction"
+		scope="prototype">
+		<property name="productInfoService">
+			<ref bean="productInfoService" />
+		</property>
+		<property name="dayRecommendLBTService">
+			<ref bean="dayRecommendLBTService" />
+		</property>
+		<property name="shopInfoService">
+			<ref bean="shopInfoService" />
+		</property>
+		<property name="shopCategoryService">
+			<ref bean="shopCategoryService" />
+		</property>
+		<property name="informationService">
+			<ref bean="informationService" />
+		</property>
+		<property name="informationCategoryService">
+			<ref bean="informationCategoryService" />
+		</property>
+		<property name="informationCommentService">
+			<ref bean="informationCommentService" />
+		</property>
+		<property name="shopTradeTagService">
+			<ref bean="shopTradeTagService" />
+		</property>
+		<property name="shopSituationTagService">
+			<ref bean="shopSituationTagService" />
+		</property>
+		<property name="shopTradeSituationTagService">
+			<ref bean="shopTradeSituationTagService" />
+		</property>
+		<property name="shopProductTradeSituationTagService">
+			<ref bean="shopProductTradeSituationTagService" />
+		</property>
+	</bean>
+	<!-- 前台店铺退换货 -->
+	<bean id="frontStoreReturnsAction" class="shop.front.store.action.FrontStoreReturnsAction"
+		scope="prototype">
+		<property name="returnsApplyService">
+			<ref bean="returnsApplyService" />
+		</property>
+		<property name="returnsApplyOPLogService">
+			<ref bean="returnsApplyOPLogService" />
+		</property>
+		<property name="shopInfoService">
+			<ref bean="shopInfoService" />
+		</property>
+		<property name="ordersListService">
+			<ref bean="ordersListService" />
+		</property>
+		<property name="ordersService">
+			<ref bean="ordersService" />
+		</property>
+		<property name="logisticsService">
+			<ref bean="logisticsService" />
+		</property>
+	</bean>
+
+	<!-- 店铺内部资讯分类begin -->
+	<bean id="informationCategoryAction" class="shop.information.action.InformationCategoryAction"
+		scope="prototype">
+		<property name="informationCategoryService" ref="informationCategoryService" />
+		<property name="shopInfoService" ref="shopInfoService" />
+	</bean>
+	<!-- 店铺内部资讯分类end -->
+
+	<!-- 店铺内部资讯信息begin -->
+	<bean id="informationAction" class="shop.information.action.InformationAction"
+		scope="prototype">
+		<property name="informationCategoryService" ref="informationCategoryService" />
+		<property name="shopInfoService" ref="shopInfoService" />
+		<property name="informationService" ref="informationService" />
+		<property name="informationCommentService" ref="informationCommentService" />
+	</bean>
+	<!-- 店铺内部资讯信息end -->
+	<!-- 资讯留言begin -->
+	<bean id="informationCommentAction" class="shop.information.action.InformationCommentAction"
+		scope="prototype">
+		<property name="informationCategoryService" ref="informationCategoryService" />
+		<property name="shopInfoService" ref="shopInfoService" />
+		<property name="informationService" ref="informationService" />
+		<property name="informationCommentService" ref="informationCommentService" />
+	</bean>
+	<!-- 资讯留言end -->
+
+	<!-- 快速下单begin -->
+	<bean id="quickOrderAction" class="shop.homeModule.action.QuickOrderAction"
+		scope="prototype">
+		<property name="productInfoService" ref="productInfoService" />
+		<property name="brandService" ref="brandService" />
+		<property name="shopInfoService" ref="shopInfoService" />
+	</bean>
+	<!-- 快速下单end -->
+
+	<!-- 商品属性关系表begin -->
+	<bean id="productAttrIndexDao" class="shop.product.dao.imp.ProductAttrIndexDao"
+		parent="baseDao" />
+	<bean id="productAttrIndexService" class="shop.product.service.imp.ProductAttrIndexService"
+		scope="prototype">
+		<property name="productAttrIndexDao">
+			<ref bean="productAttrIndexDao" />
+		</property>
+	</bean>
+	<!-- 商品属性关系表end -->
+
+	<!-- 店铺会员begin -->
+	<bean id="memberShipAction" class="shop.store.action.MemberShipAction"
+		scope="prototype">
+		<property name="memberShipService">
+			<ref bean="memberShipService" />
+		</property>
+		<!-- <property name="shopInfoService"><ref bean="shopInfoService" /></property> -->
+		<!-- <property name="customerService"><ref bean="customerService" /></property> -->
+	</bean>
+	<!-- 店铺会员end -->
+
+	<!-- 客服信息begin -->
+	<bean id="customerServiceDao" class="shop.customer.dao.imp.CustomerServiceDao"
+		parent="baseDao" />
+	<bean id="customerServiceService" class="shop.customer.service.imp.CustomerServiceService"
+		parent="baseService">
+		<property name="shopCustomerServiceDao">
+			<ref bean="shopCustomerServiceDao" />
+		</property>
+	</bean>
+	<bean id="customerServiceAction" class="shop.customer.action.CustomerServiceAction"
+		scope="prototype">
+		<property name="customerServiceService">
+			<ref bean="customerServiceService" />
+		</property>
+	</bean>
+	<!-- 客服信息end -->
+
+	<!-- 店铺-客服begin -->
+	<bean id="shopCustomerServiceDao" class="shop.customer.dao.imp.ShopCustomerServiceDao"
+		parent="baseDao" />
+	<bean id="shopCustomerServiceService" class="shop.customer.service.imp.ShopCustomerServiceService"
+		parent="baseService">
+		<property name="shopCustomerServiceDao">
+			<ref bean="shopCustomerServiceDao" />
+		</property>
+	</bean>
+	<bean id="shopCustomerServiceAction" class="shop.customer.action.ShopCustomerServiceAction"
+		scope="prototype">
+		<property name="customerServiceService">
+			<ref bean="customerServiceService" />
+		</property>
+		<property name="shopCustomerServiceService">
+			<ref bean="shopCustomerServiceService" />
+		</property>
+	</bean>
+	<!-- 店铺-客服end -->
+
+	<!-- 商城begin -->
+	<bean id="shopsDao" class="shop.shops.dao.imp.ShopsDao" parent="baseDao" />
+	<bean id="shopsService" class="shop.shops.service.imp.ShopsService"
+		parent="baseService">
+		<property name="shopsDao">
+			<ref bean="shopsDao" />
+		</property>
+	</bean>
+	<bean id="shopsAction" class="shop.shops.action.ShopsAction"
+		scope="prototype">
+		<property name="shopsService">
+			<ref bean="shopsService" />
+		</property>
+		<property name="areaService">
+			<ref bean="areaService" />
+		</property>
+	</bean>
+	<!-- 商城end -->
+
+	<!-- 商城-店铺begin -->
+	<bean id="shopsShopinfoDao" class="shop.shops.dao.imp.ShopsShopinfoDao"
+		parent="baseDao" />
+	<bean id="shopsShopinfoService" class="shop.shops.service.imp.ShopsShopinfoService"
+		parent="baseService">
+		<property name="shopsShopinfoDao">
+			<ref bean="shopsShopinfoDao" />
+		</property>
+	</bean>
+	<bean id="shopsShopinfoAction" class="shop.shops.action.ShopsShopinfoAction"
+		scope="prototype">
+		<property name="shopsShopinfoService">
+			<ref bean="shopsShopinfoService" />
+		</property>
+		<property name="shopsService">
+			<ref bean="shopsService" />
+		</property>
+		<property name="shopInfoService">
+			<ref bean="shopInfoService" />
+		</property>
+		<property name="shopCategoryService">
+			<ref bean="shopCategoryService" />
+		</property>
+	</bean>
+	<!-- 商城-店铺end -->
+
+	<!-- 订单统计 begin -->
+	<bean id="orderStatisticsAction" class="shop.front.store.action.OrderStatisticsAction"
+		scope="prototype">
+		<property name="ordersService">
+			<ref bean="ordersService" />
+		</property>
+	</bean>
+	<!-- 订单统计 end -->
+
+	<!-- 用户商城币 begin -->
+	<bean id="mallCoinAction" class="shop.front.customer.action.MallCoinAction"
+		scope="prototype">
+		<property name="mallCoinService">
+			<ref bean="mallCoinService" />
+		</property>
+	</bean>
+	<!-- 用户商城币 end -->
+
+	<!-- 手机用户登录模块 -->
+	<bean id="phoneLoginAction" class="phone.action.PhoneLoginAction"
+		scope="prototype">
+		<property name="customerService" ref="customerService"></property>
+		<property name="customerCollectProductService" ref="customerCollectProductService"></property>
+		<property name="customerCollectShopService" ref="customerCollectShopService"></property>
+		<property name="productInfoService" ref="productInfoService"></property>
+	</bean>
+</beans>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="shop.information.pojo.InformationComment" table="shop_information_comment" schema="b2b2c">
+        <id name="discussId" type="java.lang.Integer">
+            <column name="discussId"/>
+            <generator class="native" />
+        </id>
+        <property name="articleId" type="java.lang.Integer">
+            <column name="articleId"/>
+        </property>
+        <property name="customerId" type="java.lang.Integer">
+            <column name="customerId"/>
+        </property>
+        <property name="content" type="java.lang.String">
+            <column name="content"/>
+        </property>
+        <property name="state" type="java.lang.Integer">
+            <column name="state"/>
+        </property>
+        <property name="ip" type="java.lang.String">
+            <column name="ip"/>
+        </property>
+        <property name="createTime" type="java.util.Date">
+            <column name="createTime"/>
+        </property>
+    </class>
+</hibernate-mapping>

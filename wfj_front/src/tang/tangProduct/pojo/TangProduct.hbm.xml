@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="tang.tangProduct.pojo.TangProduct" table="tang_product" schema="b2b2c">
+        <id name="tangProductId" type="java.lang.Integer">
+            <column name="tangProductId"/>
+            <generator class="native" />
+        </id>
+         <property name="productName" type="java.lang.String">
+            <column name="productName"/>
+        </property>
+         <property name="salesPrice" type="java.lang.Double">
+            <column name="salesPrice"/>
+        </property>
+        <property name="productImg" type="java.lang.String">
+            <column name="productImg"/>
+        </property>
+        <property name="isShow" type="java.lang.Integer">
+            <column name="isShow"/>
+        </property>
+        <property name="isRecommend" type="java.lang.Integer">
+            <column name="isRecommend"/>
+        </property>
+        <property name="productTypeId" type="java.lang.Integer">
+            <column name="productTypeId"/>
+        </property>
+        <property name="storeId" type="java.lang.Integer">
+            <column name="storeId"/>
+        </property>
+    </class>
+</hibernate-mapping>

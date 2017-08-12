@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="shop.store.pojo.SupplierBrokerageCoinDetail" table="shop_supplierbrokeragecoindetail" schema="b2b2c" >
+		<id name="supplierBrokerageCoinDetailId" type="java.lang.Integer">
+			<column name="supplierBrokerageCoinDetailId"/>
+			<generator class="native"/>
+  		</id>
+		<property name="supplierId" type="java.lang.Integer">
+			<column name="supplierId"/>
+		</property>
+		<property name="supplierLoginName" type="java.lang.String">
+            <column name="supplierLoginName"/>
+        </property>
+        <property name="ordersId" type="java.lang.Integer">
+            <column name="ordersId"/>
+        </property>
+        <property name="ordersNo" type="java.lang.String">
+            <column name="ordersNo"/>
+        </property>
+        <property name="tradingTime" type="java.util.Date">
+            <column name="tradingTime"/>
+        </property>
+        <property name="giveBrokerageCoin" type="java.math.BigDecimal">
+            <column name="giveBrokerageCoin"/>
+        </property>
+        <property name="totalOutPut" type="java.math.BigDecimal">
+            <column name="totalOutPut"/>
+        </property>
+    </class>
+</hibernate-mapping>  

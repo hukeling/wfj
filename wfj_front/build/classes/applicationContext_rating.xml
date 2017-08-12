@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	<!-- 买家等级升迁记录 begin -->
+	<bean id="buyersRecordService" class="rating.buyersRecord.service.imp.BuyersRecordService" parent="baseService">
+		<property name="buyersRecordDao"><ref bean="buyersRecordDao" /></property>
+	</bean>
+	<bean id="buyersRecordDao" class="rating.buyersRecord.dao.imp.BuyersRecordDao" parent="baseDao"></bean>
+	<!-- 买家等级升迁记录 end -->
+	
+	<!-- 买家等级策略 begin -->
+	<bean id="buyersStrategyService" class="rating.buyersStrategy.service.imp.BuyersStrategyService" parent="baseService">
+		<property name="buyersStrategyDao"><ref bean="buyersStrategyDao" /></property>
+	</bean>
+	<bean id="buyersStrategyDao" class="rating.buyersStrategy.dao.imp.BuyersStrategyDao" parent="baseDao"></bean>
+	<!-- 买家等级策略 end -->
+	
+	<!-- 卖家等级升迁记录 begin -->
+	<bean id="sellersRecordService" class="rating.sellersRecord.service.imp.SellersRecordService" parent="baseService">
+		<property name="sellersRecordDao"><ref bean="sellersRecordDao" /></property>
+	</bean>
+	<bean id="sellersRecordDao" class="rating.sellersRecord.dao.imp.SellersRecordDao" parent="baseDao"></bean>
+	<!-- 卖家等级升迁记录 end -->
+	
+	<!-- 卖家等级策略 begin -->
+	<bean id="sellersStrategyService" class="rating.sellersStrategy.service.imp.SellersStrategyService" parent="baseService">
+		<property name="sellersStrategyDao"><ref bean="sellersStrategyDao" /></property>
+	</bean>
+	<bean id="sellersStrategyDao" class="rating.sellersStrategy.dao.imp.SellersStrategyDao" parent="baseDao"></bean>
+	<!-- 卖家等级策略 end -->
+</beans>

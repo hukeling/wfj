@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="shop.homeIndex.pojo.HomeKeyBook" table="shop_home_keybook" schema="b2b2c" lazy="false" >
+            <cache usage="read-write"/>
+        <id name="homeKeyBookId" type="java.lang.Integer">
+            <column name="homeKeyBookId" precision="8" scale="0"/>
+            <generator class="native" />
+        </id>
+        <property name="value" type="java.lang.String">
+            <column name="value" length="20" not-null="true"/>
+        </property>
+        <property name="name" type="java.lang.String">
+            <column name="name" length="50" not-null="true"/>
+        </property>
+        <property name="type" type="java.lang.String">
+            <column name="type" length="20" not-null="true"/>
+        </property>
+        <property name="typeName" type="java.lang.String">
+            <column name="typeName" length="50" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

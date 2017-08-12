@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="shop.shops.pojo.ShopsShopinfo" table="shop_shops_shopinfo" schema="b2b2c">
+		<id name="shopsShopinfoId" type="java.lang.Integer">
+			<column name="shopsShopinfoId" />
+			<generator class="native" />
+		</id>
+		<property name="shopsId" type="java.lang.Integer">
+			<column name="shopsId" />
+		</property>
+		<property name="shopInfoId" type="java.lang.Integer">
+			<column name="shopInfoId" />
+		</property>
+		<property name="shopCategoryId" type="java.lang.Integer">
+			<column name="shopCategoryId" />
+		</property>
+		<property name="regionLocation" type="java.lang.String">
+            <column name="regionLocation" length="100" not-null="true"/>
+        </property>
+        <property name="city" type="java.lang.String">
+            <column name="city" length="100" not-null="true"/>
+        </property>
+	</class>
+</hibernate-mapping>

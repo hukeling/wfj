@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="shop.mailSubscribe.pojo.MailSubscribe" table="shop_mail_subscribe" catalog="b2b2c">
+        <id name="articleId" type="java.lang.Integer">
+            <column name="articleId" />
+            <generator class="native" />
+        </id>
+       	<property name="title" type="java.lang.String">
+            <column name="title" />
+        </property>
+        <property name="brief" type="java.lang.String">
+            <column name="brief" />
+        </property>
+        <property name="content" type="java.lang.String">
+            <column name="content"></column>
+        </property>
+        <property name="imgUrl" type="java.lang.String">
+            <column name="imgUrl"></column>
+        </property>
+        <property name="isSend" type="java.lang.Integer">
+            <column name="isSend" />
+        </property>
+        <property name="publishUser" type="java.lang.String">
+            <column name="publishUser" />
+        </property>
+        <property name="modifyUser" type="java.lang.String">
+            <column name="modifyUser"/>
+        </property>
+        <property name="createTime" type="java.util.Date">
+            <column name="createTime"/>
+        </property>
+        <property name="updateTime" type="java.util.Date">
+            <column name="updateTime"></column>
+        </property>
+    </class>
+</hibernate-mapping>

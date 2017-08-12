@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="phoneCategoryHibDao" class="phone.dao.imp.PhoneCategoryhibDao">
+		<property name="hibernateTemplate">
+			<ref bean="hibernateTemplate" />
+		</property>
+	</bean>
+
+	<bean id="feedbackDao" class="phone.dao.imp.PhoneFeedBackDao"
+		parent="baseDao" />
+
+	<bean id="phoneLBTDao" class="phone.dao.imp.PhoneLBTDao" parent="baseDao"></bean>
+
+	<bean id="feedbackService" class="phone.service.imp.PhoneFeedBackService"
+		parent="baseService">
+		<property name="feedbackDao">
+			<ref bean="feedbackDao" />
+		</property>
+	</bean>
+	<bean id="phoneCategoryHibService" class="phone.service.imp.PhoneCategoryhibService">
+		<property name="phoneCategoryHibDao">
+			<ref bean="phoneCategoryHibDao" />
+		</property>
+	</bean>
+
+	<bean id="feedbackAction" class="phone.action.PhoneFeedBackAction"
+		scope="prototype">
+		<property name="feedbackService" ref="feedbackService" />
+		<property name="customerService" ref="customerService" />
+	</bean>
+
+	<bean id="phoneCategoryAction" class="phone.action.PhoneCategoryAction"
+		scope="prototype">
+		<property name="phoneCategoryHibService" ref="phoneCategoryHibService" />
+	</bean>
+
+	<bean id="phoneBrandAction" class="phone.action.PhoneBrandAction"
+		scope="prototype">
+		<property name="phoneCategoryHibService" ref="phoneCategoryHibService" />
+		<property name="brandService" ref="brandService" />
+		<property name="brandInfoService" ref="brandInfoService" />
+		<property name="productInfoService" ref="productInfoService" />
+		<property name="brandTypeService" ref="brandTypeService" />
+	</bean>
+
+	<bean id="phoneCartAction" class="phone.action.PhoneCartAction"
+		scope="prototype">
+		<property name="shoppingCartService" ref="shoppingCartService"></property>
+		<property name="productInfoService" ref="productInfoService"></property>
+		<property name="customerService" ref="customerService"></property>
+		<property name="memberShipService" ref="memberShipService"></property>
+		<property name="shoppingCartOrderService" ref="shoppingCartOrderService"></property>
+		<property name="customerAcceptAddressService" ref="customerAcceptAddressService"></property>
+		<property name="mallCoinService" ref="mallCoinService"></property>
+		<property name="customerdiscountcouponService" ref="customerdiscountcouponService"></property>
+	</bean>
+
+	<bean id="phoneLoginAction" class="phone.action.PhoneLoginAction"
+		scope="prototype">
+		<property name="customerService" ref="customerService"></property>
+		<property name="productInfoService" ref="productInfoService"></property>
+		<property name="shopCustomerInfoService" ref="shopCustomerInfoService"></property>
+		<property name="customerCollectProductService" ref="customerCollectProductService"></property>
+		<property name="customerCollectShopService" ref="customerCollectShopService"></property>
+		<property name="shopInfoService">
+			<ref bean="shopInfoService" />
+		</property>
+		<property name="shoppingCartService" ref="shoppingCartService"></property>
+		<property name="ordersService" ref="ordersService"></property>
+	</bean>
+
+	<bean id="phoneUserAction" class="phone.action.PhoneUserAction"
+		scope="prototype">
+		<property name="customerService" ref="customerService"></property>
+		<property name="customerCollectProductService" ref="customerCollectProductService"></property>
+		<property name="customerCollectShopService" ref="customerCollectShopService"></property>
+		<property name="customerAcceptAddressService" ref="customerAcceptAddressService"></property>
+		<property name="shopCustomerInfoService" ref="shopCustomerInfoService"></property>
+		<property name="shopInfoService" ref="shopInfoService"></property>
+		<property name="areaService" ref="areaService"></property>
+		<property name="ordersService" ref="ordersService"></property>
+	</bean>
+
+	<bean id="phoneOrderAction" class="phone.action.PhoneOrderAction"
+		scope="prototype">
+		<property name="ordersListService" ref="ordersListService"></property>
+		<property name="shoppingCartOrderService" ref="shoppingCartOrderService"></property>
+		<property name="ordersOPLogService" ref="ordersOPLogService"></property>
+		<property name="returnsApplyService" ref="returnsApplyService"></property>
+		<property name="areaService">
+			<ref bean="areaService" />
+		</property>
+		<property name="customerAcceptAddressService">
+			<ref bean="customerAcceptAddressService" />
+		</property>
+		<property name="virtualCoinService">
+			<ref bean="virtualCoinService" />
+		</property>
+		<property name="mallCoinService">
+			<ref bean="mallCoinService" />
+		</property>
+		<property name="shoppingCartService">
+			<ref bean="shoppingCartService" />
+		</property>
+		<property name="lineofcreditItemService">
+			<ref bean="lineofcreditItemService" />
+		</property>
+		<property name="ordersService">
+			<ref bean="ordersService" />
+		</property>
+		<property name="buyersRecordService">
+			<ref bean="buyersRecordService" />
+		</property>
+		<property name="shopInfoService">
+			<ref bean="shopInfoService" />
+		</property>
+		<property name="customerdiscountcouponService">
+			<ref bean="customerdiscountcouponService" />
+		</property>
+	</bean>
+
+	<bean id="phoneShopAction" class="phone.action.PhoneShopAction"
+		scope="prototype">
+		<property name="shopInfoService" ref="shopInfoService"></property>
+		<property name="productInfoService" ref="productInfoService"></property>
+	</bean>
+
+
+	<bean id="phoneReturnSalesAction" class="phone.action.ReturnSalesAction"
+		scope="prototype">
+		<property name="productInfoService" ref="productInfoService"></property>
+		<property name="ordersService" ref="ordersService"></property>
+		<property name="ordersListService" ref="ordersListService"></property>
+		<property name="customerService" ref="customerService"></property>
+		<property name="returnsApplyService" ref="returnsApplyService"></property>
+		<property name="returnsApplyOPLogService" ref="returnsApplyOPLogService"></property>
+	</bean>
+
+
+	<bean id="phoneEvaluateAction" class="phone.action.PhoneEvaluateAction"
+		scope="prototype"></bean>
+
+	<bean id="phoneLBTAction" class="phone.action.PhoneLBTAction"
+		scope="prototype">
+		<property name="phoneLBTService" ref="phoneLBTService"></property>
+	</bean>
+
+	<bean id="phoneLBTService" class="phone.service.imp.PhoneLBTService">
+		<property name="phoneLBTDao" ref="phoneLBTDao"></property>
+	</bean>
+	
+	<bean id="phoneSweetyAction" class="phone.action.PhoneSweetyAction"
+		scope="prototype">
+		<property name="productInfoService" ref="productInfoService"></property>
+		<property name="productTypeService" ref="productTypeService"></property>
+		<property name="brandTypeService" ref="brandTypeService"></property>
+		<property name="specificationService" ref="specificationService"></property>
+		<property name="specificationValueService" ref="specificationValueService"></property>
+		<property name="attributeValueService" ref="attributeValueService"></property>
+	</bean>
+	
+	<bean id="phoneOldBrandAction" class="phone.action.PhoneOldBrandAction">
+		<property name="shopInfoService" ref="shopInfoService"></property>
+	</bean>
+
+</beans>

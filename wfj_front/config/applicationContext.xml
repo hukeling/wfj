@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://www.springframework.org/schema/aop 
+       http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+       http://www.springframework.org/schema/tx 
+       http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+		lazy-init="true">
+		<property name="ignoreResourceNotFound" value="true" />
+		<!-- 使用locations属性定义单个配置文件 -->
+		<property name="location">
+			<value>classpath:/database.properties</value>
+		</property>
+
+		<!-- 使用locations属性定义多个配置文件 
+		<property name="locations"> 
+		<list> 
+			<value>classpath:config/database.properties</value> 
+			<value>classpath:config/systemConfig.properties</value> 
+		</list> 
+		</property> -->
+	</bean>
+
+	<!--1 创建数据源和c3p0连接池 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="${jdbc.driver}" />
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<property name="user" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+		<!--c3p0的配置 -->
+		<!--连接池中保留的最小连接数。 -->
+		<property name="minPoolSize" value="5" />
+		<!--连接池中保留的最大连接数。Default: 15 -->
+		<property name="maxPoolSize" value="30" />
+		<!--初始化时获取的连接数，取值应在minPoolSize与maxPoolSize之间。Default: 3 -->
+		<property name="initialPoolSize" value="10" />
+		<!--最大空闲时间,60秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0 -->
+		<property name="maxIdleTime" value="60" />
+		<!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 -->
+		<property name="acquireIncrement" value="5" />
+		<!--JDBC的标准参数，用以控制数据源内加载的PreparedStatements数量。但由于预缓存的statements 属于单个connection而不是整个连接池。所以设置这个参数需要考虑到多方面的因素。 
+			如果maxStatements与maxStatementsPerConnection均为0，则缓存被关闭。Default: 0 -->
+		<property name="maxStatements" value="0" />
+		<!--每60秒检查所有连接池中的空闲连接。Default: 0 -->
+		<property name="idleConnectionTestPeriod" value="60" />
+		<!--定义在从数据库获取新连接失败后重复尝试的次数。Default: 30 -->
+		<property name="acquireRetryAttempts" value="30" />
+		<!--获取连接失败将会引起所有等待连接池来获取连接的线程抛出异常。但是数据源仍有效 保留，并在下次调用getConnection()的时候继续尝试获取连接。如果设为true，那么在尝试 
+			获取连接失败后该数据源将申明已断开并永久关闭。Default: false -->
+		<property name="breakAfterAcquireFailure" value="true" />
+		<!--因性能消耗大请只在需要的时候使用它。如果设为true那么在每个connection提交的时候都将校验其有效性。 建议使用idleConnectionTestPeriod或automaticTestTable等方法来提升连接测试的性能。Default: 
+			false -->
+		<property name="testConnectionOnCheckout" value="false" />
+	</bean>
+
+	<!-- 创建sessionFactory模板 -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+				<!-- 指定Hibernate在何时释放JDBC连接. 默认情况下,直到Session被显式关闭或被断开连接时,才会释放JDBC连接. -->
+				<prop key="hibernate.connection.release_mode">${hibernate.connection.release_mode}</prop>
+				<!-- Hibernate连接数据库超时设置 -->
+				<prop key="hibernate.autoReconnect">${hibernate.autoReconnect}</prop>
+				<prop key="hibernate.jdbc.batch_size">${hibernate.jdbc.batch_size}</prop>
+				<prop key="hibernate.jdbc.fetch_size">${hibernate.jdbc.fetch_size}</prop>
+				<!--connection.useUnicode连接数据库时是否使用Unicode编码 -->
+				<prop key="Connection.useUnicode">${Connection.useUnicode}</prop>
+				<!--connection.characterEncoding连接数据库时数据的传输字符集编码方式，最好设置为UTF-8 -->
+				<prop key="connection.characterEncoding">${connection.characterEncoding}</prop>
+				<!-- 开启二级缓存 -->
+				<prop key="hibernate.cache.use_second_level_cache">${hibernate.cache.use_second_level_cache}</prop>
+				<prop key="hibernate.cache.provider_class">${hibernate.cache.provider_class}</prop>
+				<!-- 开启二级缓存的查询缓存 -->
+				<prop key="hibernate.cache.use_query_cache">${hibernate.cache.use_query_cache}</prop>
+			</props>
+		</property>
+		<property name="mappingLocations">
+			<list>
+				<value>classpath:/**/pojo/*.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<!--配置hibernate的事务管理器 -->
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 配置事务特性 ，配置add、delete和update开始的方法，事务传播特性为required -->
+	<tx:advice id="txadvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- 配置切面，配置那些类的方法进行事务管理，当前cn.com.xx.service包中的子包、类中所有方法需要，还需要参考tx:advice的设置 -->
+	<aop:config>
+		<aop:pointcut id="commonPointcut" expression="execution(* *..service..*.*(..))" />
+		<aop:advisor advice-ref="txadvice" pointcut-ref="commonPointcut" />
+	</aop:config>
+
+	<aop:aspectj-autoproxy />
+	<context:component-scan base-package="*.*" />
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<!--配置日志监听 暂时封闭日志，有问题，关键是保存时，主键重复 <aop:config proxy-target-class="true" 
+		/> <bean id="mylog" class="util.listener.LogListener"> <property name="opLogService" 
+		ref="opLogService"/> <property name="usersService" ref="usersService"/> </bean> 
+		<aop:config> <aop:aspect id="myaop" ref="mylog"> <aop:pointcut id="mycut" 
+		expression="execution(* basic.action..*.*(..))"/> <aop:before pointcut-ref="mycut" 
+		method="doAccessCheck"/> <aop:around pointcut-ref="mycut" method="doBasicProfiling"/> 
+		</aop:aspect> </aop:config> -->
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="baseDao" class="util.dao.BaseDao">
+		<property name="hibernateTemplate">
+			<ref bean="hibernateTemplate" />
+		</property>
+	</bean>
+
+	<bean id="baseService" class="util.service.BaseService">
+		<property name="baseDao">
+			<ref bean="baseDao" />
+		</property>
+	</bean>
+
+</beans>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	 <!-- 前台优惠劵Action -->
+  	<bean id="couponAction" class="discountcoupon.action.CouponAction" scope="prototype">
+  		<property name="customerHaveCouponService"><ref bean="customerHaveCouponService"/></property>
+  		<property name="discountCouponService"><ref bean="discountCouponService"/></property>
+  		<property name="shopCategoryService"><ref bean="shopCategoryService"/></property>
+  		<property name="shopInfoService"><ref bean="shopInfoService"/></property>
+  		<property name="articleService"><ref bean="articleService"/></property>
+  	</bean>
+  <!-- 前台优惠劵end-->
+  
+   <!-- 商品优惠券发放Action -->
+  	<bean id="shopCouponAction" class="discountcoupon.action.ShopCouponAction" scope="prototype">
+  		<property name="discountCouponService"><ref bean="discountCouponService"/></property>
+  		<property name="shopInfoService"><ref bean="shopInfoService"/></property>
+  	</bean>
+  <!-- 商品优惠券发放end-->
+  
+  <!-- 我的优惠券 begin -->
+	<bean id="myCouponAction" class="discountcoupon.action.MyCouponAction" scope="prototype">
+  		<property name="customerHaveCouponService"><ref bean="customerHaveCouponService" /></property>  
+  		<property name="shopBrandService"><ref bean="shopBrandService" /></property>  
+	</bean>
+	<!-- 我的优惠券 end -->
+	
+	<!-- 用户优惠卷begin -->
+	<bean id="customerdiscountcouponDao" class="discountcoupon.dao.imp.CustomerdiscountcouponDao" parent="baseDao"/>
+	<bean id="customerdiscountcouponService" class="discountcoupon.service.imp.CustomerdiscountcouponService" parent="baseService">
+		<property name="customerdiscountcouponDao"><ref bean="customerdiscountcouponDao"/></property>
+	</bean>
+	<bean id="customerdiscountcouponAction" class="discountcoupon.action.CustomerdiscountcouponAction" scope="prototype">
+		<property name="customerdiscountcouponService"><ref bean="customerdiscountcouponService"/></property>
+		<property name="discountCouponService"><ref bean="discountCouponService"/></property>
+	</bean>
+	<!-- 用户优惠卷end -->
+	
+	<!-- 优惠券begin -->
+		<bean id="discountCouponDao" class="discountcoupon.dao.imp.DiscountCouponDao"  parent="baseDao"/>
+		<bean id="discountCouponService" class="discountcoupon.service.imp.DiscountCouponService"  parent="baseService">
+			<property name="discountCouponDao" ref="discountCouponDao" />
+		</bean>
+		<bean id="discountCouponAction" class="discountcoupon.action.DiscountCouponAction" scope="prototype">
+			<property name="discountCouponService" ref="discountCouponService"/>
+			<property name="shopInfoService" ref="shopInfoService"/>
+		</bean>
+	<!-- 优惠券end -->
+</beans>

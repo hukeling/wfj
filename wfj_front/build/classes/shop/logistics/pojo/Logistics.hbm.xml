@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="shop.logistics.pojo.Logistics" table="shop_logistics" schema="b2b2c" >
+        <id name="logisticsId" type="java.lang.Integer">
+            <column name="logisticsId" precision="10" scale="0" />
+            <generator class="native"/>
+        </id>
+        <property name="code" type="java.lang.String">
+            <column name="code" length="100" not-null="true"/>
+        </property>
+        <property name="deliveryCorpName" type="java.lang.String">
+            <column name="deliveryCorpName" length="200"/>
+        </property>
+        <property name="deliveryUrl" type="java.lang.String">
+            <column name="deliveryUrl" length="300"/>
+        </property>
+        <property name="createDate" type="java.util.Date">
+            <column name="createDate"/>
+        </property>
+        <property name="sortCode" type="java.lang.Integer">
+            <column name="sortCode" length="10"/>
+        </property>
+        <property name="isCommon" type="java.lang.Integer">
+            <column name="isCommon" length="1"/>
+        </property>
+    </class>
+</hibernate-mapping>  

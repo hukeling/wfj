@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 适合行业标签和使用场合标签关联表 -->
+<!-- mqr -->
+<hibernate-mapping>
+    <class name="shop.tags.pojo.ShopTradeSituationTag" table="shop_trade_situation_tag" schema="b2b2c" >
+    	<!-- 适合行业使用场合标签ID -->
+        <id name="tstId" type="java.lang.Integer">
+            <column name="tstId"/>
+            <generator class="native"/>
+        </id>
+        <!--  适合行业标签ID -->
+        <property name="ttId" type="java.lang.Integer">
+            <column name="ttId"/>
+        </property>
+     	 <!-- 使用场合标签ID -->
+        <property name="stId" type="java.lang.Integer">
+            <column name="stId"/>
+        </property>
+    </class>
+</hibernate-mapping>  

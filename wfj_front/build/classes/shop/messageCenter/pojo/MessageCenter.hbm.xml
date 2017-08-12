@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="shop.messageCenter.pojo.MessageCenter" table="shop_messagecenter" catalog="b2b2c">
+        <id name="messageId" type="java.lang.Integer">
+            <column name="messageId" />
+            <generator class="native" />
+        </id>
+       	<property name="fromMemberId" type="java.lang.Integer">
+            <column name="fromMemberId" />
+        </property>
+        <property name="fromMemberName" type="java.lang.String">
+            <column name="fromMemberName" />
+        </property>
+        <property name="toMemberId" type="java.lang.String">
+            <column name="toMemberId"></column>
+        </property>
+        <property name="toMemberName" type="java.lang.String">
+            <column name="toMemberName"></column>
+        </property>
+        <property name="messageTitle" type="java.lang.String">
+            <column name="messageTitle" />
+        </property>
+        <property name="content" type="java.lang.String">
+            <column name="content" />
+        </property>
+        <property name="messageOpen" type="java.lang.Integer">
+            <column name="messageOpen"/>
+        </property>
+        <property name="messageState" type="java.lang.Integer">
+            <column name="messageState"/>
+        </property>
+        <property name="messageType" type="java.lang.Integer">
+            <column name="messageType"></column>
+        </property>
+        <property name="readMemberId" type="java.lang.String">
+            <column name="readMemberId"></column>
+        </property>
+        <property name="deleteMemberId" type="java.lang.String">
+            <column name="deleteMemberId"></column>
+        </property>
+        <property name="messageIsMore" type="java.lang.Integer">
+            <column name="messageIsMore" />
+        </property>
+        <property name="ip" type="java.lang.String">
+            <column name="ip"></column>
+        </property>
+        <property name="messageSendState" type="java.lang.Integer">
+            <column name="messageSendState"></column>
+        </property>
+        <property name="createDate" type="java.util.Date">
+            <column name="createDate"></column>
+        </property>
+    </class>
+</hibernate-mapping>

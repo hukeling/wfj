@@ -1,0 +1,55 @@
+@charset "utf-8";
+/*-----王府井魅力、文化、历史、时尚-----*/
+.con{width:1200px;height:300px;background:#fff;margin:10px auto;padding-left:0px;padding-top:0px;}
+.con ul li{width:290px;height:300px;float:left;margin-right:10px;margin-bottom:10px;position:relative;overflow:hidden;cursor:pointer;}
+.wfj_bottom_txt{width:299px;height:90px;background:rgba(102,51,204,0.7);/*透明背景色，不透明其文字内容*/position:absolute;left:0;bottom:0;color:#fff;font-family:"微软雅黑";}
+.wfj_bottom_txt h3{font-size:20px;font-weight:100;height:45px;text-align:center;line-height:45px;}
+.wfj_bottom_txt p{font-size:14px;text-align:center;}
+
+.wfj_left_txt{width:90px;height:300px;background:rgba(255,51,0,0.7);/*透明背景色，不透明其文字内容*/position:absolute;left:0;bottom:0;color:#fff;font-family:"微软雅黑";}
+.wfj_left_txt h3{font-size:20px;font-weight:100;height:45px;text-align:center;line-height:45px;word-wrap: break-word; letter-spacing: 20px;}
+.wfj_left_txt p{font-size:14px;text-align:center;}
+
+.wfj_top_txt{width:290px;height:90px;background:rgba(255,51,102,0.8);/*透明背景色，不透明其文字内容*/position:absolute;top:0;bottom:0;color:#fff;font-family:"微软雅黑";}
+.wfj_top_txt h3{font-size:20px;font-weight:100;height:45px;text-align:center;line-height:45px;}
+.wfj_top_txt p{font-size:14px;text-align:center;}
+
+.wfj_right_txt{width:100px;height:300px;background:rgba(51,51,255,0.8);/*透明背景色，不透明其文字内容*/position:absolute;right:0;bottom:0;color:#fff;font-family:"微软雅黑";}
+.wfj_right_txt h3{font-size:20px;font-weight:100;height:45px;text-align:center;line-height:45px;word-wrap: break-word; letter-spacing: 20px;}
+.wfj_right_txt p{font-size:14px;text-align:center;}
+
+<!--购物商场-->
+.mall_wrap{
+	height:610px; margin-top:20px;}
+.mall{
+	width:1200px; margin:0 auto;}
+.mall_left{
+	width:595px; height:300px; margin:0; float:left; border:1px dotted #ccc;}
+.mall_right{
+	width:595px; height:300px;margin-left:10px;	float:left;}
+.mall_title{
+	width:595px;height:30px;background-color:#cc0000;}
+.mall_title p{
+	font-size:16px; line-height:30px;margin-left:20px;color:#f9f9f9;	line-height:30px;}
+.mall_con{
+	width:595px;height:228px;margin:12px 0;}
+.mall_img{
+	width:315px;height:228px;margin-left:10px;float:left;}
+.mall_img a{display:block;}
+.mall_text{	width:250px;height:228px;margin-left:10px;	float:left;}
+.mall_text_tuijian{	width:250px;height:20px;float:left;}
+.mall_text_tuijian h1 {	font-size: 16px;width:70px;float:left;line-height:20px;}
+.mall_text_tuijian b {	width:30px;font-size: 12px;	line-height:20px;margin-left:115px;	float:left;}
+.mall_text_tuijian b a{	font-size: 12px;line-height:20px;color:#666;display:block;}
+.mall_text_tuijian b a:hover{color:#00f;}
+.mall_text_con{	width:175px;margin-top:5px;overflow:hidden;	float:left;}
+.mall_text_con ul li{margin-top:0px;}
+.mall_text_con ul li h2{font-size:16px;}
+.mall_text_con ul li p{font-size:12px;	letter-spacing:5px;}
+.mall_text_con ul li a{	display:block;color:#333;}
+.mall_text_con ul li a:hover{color:#00f;}
+.mall_text_zhe{	width:70px;text-align:center;float:left;font-weight:bold;margin-top:10px;}
+.mall_text_zhe p{color:#cc0000;font-size:16px;line-height:30px;margin:10px;}
+
+
+

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="phonePackage" namespace="/phone" extends="struts-default">
+		<action name="phonecategory" class="phoneCategoryAction"
+			method="phonecategory"></action>
+		<action name="categorylist" class="phoneCategoryAction" method="listCategory">
+			<result>/WEB-INF/phone/home/product-list.jsp</result>
+		</action>
+		<action name="sancategorylist" class="phoneCategoryAction"
+			method="listSanCategory"></action>
+		<action name="proinfolist" class="phoneCategoryAction" method="listProInfo">
+			<result>/WEB-INF/phone/home/product-list.jsp</result>
+		</action>
+		<action name="conditionProinfo" class="phoneCategoryAction"
+			method="selectProInfoByTypeId"></action>
+		<action name="mohuProinfo" class="phoneCategoryAction" method="mohuSearch"></action>
+		<action name="mohuOrderByProinfo" class="phoneCategoryAction"
+			method="mohuSearchOrderBy"></action>
+		<action name="recommandProinfo" class="phoneCategoryAction"
+			method="recommandPro"></action>
+		<action name="feedback" class="feedbackAction" method="addFeedBack"></action>
+
+		<action name="getAllBrands" class="phoneBrandAction" method="getAllBrands"></action>
+		
+		<action name="addProToCart" class="phoneCartAction" method="addProToCart"></action>
+		<action name="goPhoneCart" class="phoneCartAction" method="goPhoneCart">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/phone</param>
+				<param name="actionName">gotoPhoneCart</param>
+			</result>
+		</action>
+		<action name="login" class="phoneLoginAction" method="login"></action>
+		<action name="getCustomerCollectPro" class="phoneLoginAction"
+			method="getCustomerCollectPro"></action>
+		<action name="getCustomerCollectShop" class="phoneLoginAction"
+			method="getCustomerCollectShop"></action>
+		<action name="addProToCollect" class="phoneLoginAction" method="addProToCollect">
+			<result>/WEB-INF/shop/home/detail.jsp</result>
+		</action>
+		<action name="addShopToCollect" class="phoneLoginAction"
+			method="addShopToCollect"></action>
+		<action name="gotoPhoneCart" class="phoneCartAction" method="gotoPhoneCart">
+			<result>/WEB-INF/phone/home/phoneCart.jsp</result>
+		</action>
+
+		<action name="phoneForGotValidate" class="phoneUserAction"
+			method="forGotValidate"></action>
+		<action name="phoneReSetPassword" class="phoneUserAction"
+			method="reSetPassword">
+			<result>/WEB-INF/phone/login/reset_password.jsp</result>
+		</action>
+		<action name="phoneReSetPasswordValidate" class="phoneUserAction"
+			method="reSetPasswordValidate"></action>
+		<action name="phoneReSetPasswordOk" class="phoneUserAction"
+			method="reSetPasswordOk">
+			<result>/WEB-INF/phone/login/reset_passwordOk.jsp</result>
+		</action>
+
+
+		<action name="register" class="phoneUserAction" method="register"></action>
+		<action name="editCustomer" class="phoneUserAction" method="editCustomer"></action>
+		<action name="changepass" class="phoneUserAction" method="changepass"></action>
+		<action name="uploadPic" class="phoneUserAction" method="uploadPic"></action>
+		<action name="getReceiveAddress" class="phoneUserAction"
+			method="getReceiveAddress">
+			<result>/WEB-INF/phone/home/address.jsp</result>
+		</action>
+		<action name="setDefault" class="phoneUserAction" method="setDefault">
+			<result>/WEB-INF/phone/home/address.jsp</result>
+		</action>
+		<action name="delAddress" class="phoneUserAction" method="delAddress">
+			<result>/WEB-INF/phone/home/address.jsp</result>
+		</action>
+		<action name="newAddress" class="phoneUserAction" method="newAddress">
+			<result>/WEB-INF/phone/home/newAddress.jsp</result>
+		</action>
+		<action name="saveOrUpdateCustomerAcceptAddress" class="phoneUserAction"
+			method="saveOrUpdateCustomerAcceptAddress">
+			<result>/WEB-INF/phone/home/address.jsp</result>
+		</action>
+		<action name="flushUser" class="phoneUserAction" method="flushUser"></action>
+		<action name="changeNum" class="phoneCartAction" method="changeNum">
+			<result>
+				/WEB-INF/phone/home/phoneCart.jsp
+			</result>
+		</action>
+		<action name="toCheckOut" class="phoneCartAction" method="toCheckOut">
+			<!--<result>/WEB-INF/shop/onlineBuy/cart_order.jsp</result> -->
+			<result>/WEB-INF/phone/order/orderSubmit.jsp</result>
+		</action>
+
+		<action name="orderPro" class="phoneCartAction" method="orderPro">
+			<result>/WEB-INF/phone/order/orderPro.jsp</result>
+		</action>
+
+		<action name="gotoPhoneShoppingCartOrder" class="phoneCartAction"
+			method="toCheckOut">
+			<result>/WEB-INF/shop/onlineBuy/cart_order.jsp</result>
+		</action>
+		<action name="customerIdSession" class="phoneLoginAction"
+			method="customerIdSession">
+		</action>
+		<action name="toPhoneSuccessOrder" class="phoneOrderAction"
+			method="toPhoneSuccessOrder">
+			<result>/WEB-INF/phone/order/orderSuccess.jsp</result>
+		</action>
+		<action name="payOrder" class="phoneOrderAction" method="payOrder"></action>
+		<action name="confirmGoods" class="phoneOrderAction" method="confirmGoods">
+
+		</action>
+		<action name="deleteOrders" class="phoneOrderAction" method="deleteOrder"></action>
+		<action name="searchAllOrders" class="phoneOrderAction" method="searchAllOrders"></action>
+		<action name="searchOrdersbyTotalOrdersNo" class="phoneOrderAction"
+			method="searchOrdersByTotalOrdersNo"></action>
+		<action name="searchOrdersbyOrdersNo" class="phoneOrderAction"
+			method="searchOrdersByOrdersNo"></action>
+		<action name="phoneProductInfoById" class="productsDetailAction"
+			method="phoneProductInfoById">
+			<result>/WEB-INF/shop/home/detail.jsp</result>
+		</action>
+		<action name="gotoShopPage" class="phoneShopAction" method="gotoShopPage">
+			<result name="success">/WEB-INF/phone/home/shop.jsp</result>
+		</action>
+
+		<action name="returnSales" class="phoneReturnSalesAction"
+			method="returnGoods"></action>
+		<action name="evaluateGoods" class="phoneEvaluateAction"
+			method="evaluateGoods"></action>
+
+		<action name="readdToPhoneCart" method="readdToPhoneCart"
+			class="phoneCartAction">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/phone</param>
+				<param name="actionName">gotoPhoneCart</param>
+			</result>
+		</action>
+		<action name="getSimpleOrders" class="phoneOrderAction" method="getSimpleOrders"></action>
+
+		<action name="delCart" class="phoneCartAction" method="delCart">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/phone</param>
+				<param name="actionName">gotoPhoneCart</param>
+			</result>
+		</action>
+		<action name="evaluateGood" class="phoneEvaluateAction" method="evaluateGood"></action>
+
+		<action name="getPhoneLbt" class="phoneLBTAction" method="getPhoneLbt"></action>
+
+		<action name="photoAndList" class="phoneSweetyAction" method="photoAndList"></action>
+
+		<action name="getDayRecommend" class="phone.action.PhoneRecommendAction" method="getDayRecommend"></action>
+			
+		<action name="getAllOldShop" class="phoneOldBrandAction" method="searchOldShop"></action>
+		
+		<action name="getProInfoByBrandId" class="phoneBrandAction" method="getProInfoByBrandId">
+			<result>/WEB-INF/phone/home/brandProductList.jsp</result>
+		</action>
+		<action name="getProductInfoByBrandId" class="phoneBrandAction" method="getProductInfoByBrandId"></action>
+		<action name="selectBrandInfoById" class="brandInfoAction" method="selectBrandInfoById"></action>
+		<action name="saveOrUpdatebrandInfo" class="brandInfoAction" method="saveOrUpdatebrandInfo"></action>
+		<action name="deleteBrandInfoById" class="brandInfoAction" method="deleteBrandInfoById"></action>
+		
+		<action name="goToExcelProductInfo" class="frontAddProductInfoAction" method="goToExcelProductInfo">
+			<result>/WEB-INF/shop/product/productInfoExcel.jsp</result>
+		</action>
+		<action name="saveOrUpdateExcelProductInfo" class="frontAddProductInfoAction" method="saveOrUpdateExcelProductInfo"></action>
+	</package>
+</struts>

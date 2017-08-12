@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="cms.liveMessage.pojo.Livemessage" table="cms_livemessage" catalog="b2b2c">
+        <id name="messageId" type="java.lang.Integer">
+            <column name="messageId" />
+            <generator class="native" />
+        </id>
+        <property name="usersId" type="java.lang.Integer">
+            <column name="usersId">
+                <comment>不做对用户表的强制关联</comment>
+            </column>
+        </property>
+        <property name="userName" type="java.lang.String">
+            <column name="userName" length="20" />
+        </property>
+        <property name="trueName" type="java.lang.String">
+            <column name="trueName" length="20" />
+        </property>
+        <property name="phone" type="java.lang.String">
+            <column name="phone" length="20" />
+        </property>
+        <property name="email" type="java.lang.String">
+            <column name="email" length="40" />
+        </property>
+        <property name="content" type="java.lang.String">
+            <column name="content" length="65535" />
+        </property>
+    </class>
+</hibernate-mapping>

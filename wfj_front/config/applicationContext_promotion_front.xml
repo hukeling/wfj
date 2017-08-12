@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- 平台管理促销活动begin -->
+	<bean id="platformPromotionAction" class="promotion.action.PlatformPromotionAction" scope="prototype">
+		<property name="platformPromotionService"><ref bean="platformPromotionService" /></property>
+		<property name="storeApplyPromotionService"><ref bean="storeApplyPromotionService" /></property>
+		<property name="productTypeService"><ref bean="productTypeService" /></property>
+		<property name="shopInfoService"><ref bean="shopInfoService" /></property>
+	</bean>
+	<!-- 平台管理促销活动end -->
+	
+	<!-- 店铺申请参加促销begin -->
+	<bean id="storeApplyPromotionAction" class="promotion.action.StoreApplyPromotionAction" scope="prototype">
+		<property name="storeApplyPromotionService"><ref bean="storeApplyPromotionService" /></property>
+		<property name="productInfoService"><ref bean="productInfoService" /></property>
+		<property name="shopInfoService"><ref bean="shopInfoService" /></property>
+		<property name="productTypeService"><ref bean="productTypeService" /></property>
+	</bean>
+	<!-- 店铺申请参加促销end -->
+	
+	<!-- 促销活动商品(瀑布流) begin -->
+	<bean id="salesPromotionCenterAction" class="promotion.action.SalesPromotionCenterAction" scope="prototype">
+		<property name="storeApplyPromotionService"><ref bean="storeApplyPromotionService" /></property>
+		<property name="platformPromotionService"><ref bean="platformPromotionService" /></property>
+	</bean>
+	<!-- 促销活动商品(瀑布流) end -->
+	
+</beans>

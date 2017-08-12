@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="shop.product.pojo.ProductInfo" table="shop_productinfo" schema="b2b2c" >
+		<id name="productId" type="java.lang.Integer">
+			<column name="productId" />
+			<generator class="native" />
+		</id>
+		<property name="brandId" type="java.lang.Integer">
+			<column name="brandId" />
+		</property>
+		<property name="shopInfoId" type="java.lang.Integer">
+			<column name="shopInfoId" />
+		</property>
+		<property name="productName" type="java.lang.String">
+			<column name="productName" />
+		</property>
+		<property name="categoryLevel1" type="java.lang.Integer">
+			<column name="category_level1" />
+		</property>
+		<property name="categoryLevel2" type="java.lang.Integer">
+			<column name="category_level2" />
+		</property>
+		<property name="categoryLevel3" type="java.lang.Integer">
+			<column name="category_level3" />
+		</property>
+		<property name="categoryLevel4" type="java.lang.Integer">
+			<column name="category_level4" />
+		</property>
+		<property name="memberPrice" type="java.math.BigDecimal">
+			<column name="memberPrice"  />
+		</property>
+		<property name="marketPrice" type="java.math.BigDecimal">
+			<column name="marketPrice"  />
+		</property>
+		<property name="salesPrice" type="java.math.BigDecimal">
+			<column name="salesPrice"  />
+		</property>
+		<property name="salesPriceBack" type="java.math.BigDecimal">
+			<column name="salesPriceBack"  />
+		</property>
+		<property name="costPrice" type="java.math.BigDecimal">
+			<column name="costPrice"  />
+		</property>
+		<property name="describle" type="java.lang.String">
+			<column name="describle"  />
+		</property>
+		<property name="putSaleDate" type="java.util.Date">
+			<column name="putSaleDate"  />
+		</property>
+		<property name="createDate" type="java.util.Date">
+			<column name="createDate"  />
+		</property>
+		<property name="updateDate" type="java.util.Date">
+			<column name="updateDate"  />
+		</property>
+		<property name="isPutSale" type="java.lang.Integer">
+			<column name="isPutSale"  />
+		</property>
+		<property name="productCode" type="java.lang.String">
+			<column name="productCode"  />
+		</property>
+		<property name="functionDesc" type="java.lang.String">
+			<column name="functionDesc" />
+		</property>
+		<property name="barCode" type="java.lang.String">
+			<column name="barCode" />
+		</property>
+		<property name="storeNumber" type="java.lang.Integer">
+			<column name="storeNumber" />
+		</property>
+		<property name="productAttributeValue" type="java.lang.String">
+			<column name="productAttributeValue" />
+		</property>
+		<property name="productParametersValue" type="java.lang.String">
+			<column name="productParametersValue" />
+		</property>
+		<property name="isPass" type="java.lang.Integer">
+			<column name="isPass" />
+		</property>
+		<property name="productTypeId" type="java.lang.Integer">
+			<column name="productTypeId" />
+		</property>
+		<property name="productFullName" type="java.lang.String">
+			<column name="productFullName" />
+		</property>
+		<property name="weight" type="java.lang.Double">
+			<column name="weight" />
+		</property>
+		<property name="weightUnit" type="java.lang.String">
+			<column name="weightUnit" />
+		</property>
+		<property name="measuringUnitName" type="java.lang.String">
+			<column name="measuringUnitName" />
+		</property>
+		<property name="packingSpecifications" type="java.lang.String">
+			<column name="packingSpecifications" />
+		</property>
+		<property name="manufacturerModel" type="java.lang.String">
+			<column name="manufacturerModel" />
+		</property>
+		<property name="specification" type="java.lang.String">
+			<column name="specification" />
+		</property>
+		<property name="isChargeFreight" type="java.lang.Integer">
+			<column name="isChargeFreight" />
+		</property>
+		<property name="freightPrice" type="java.math.BigDecimal">
+			<column name="freightPrice" />
+		</property>
+		<property name="goods" type="java.lang.Integer">
+			<column name="goods" />
+		</property>
+		<property name="productRemark" type="java.lang.Integer">
+			<column name="productRemark" />
+		</property>
+		<property name="note" type="java.lang.String">
+			<column name="note" />
+		</property>
+		<property name="productTag" type="java.lang.String">
+			<column name="productTag" />
+		</property>
+		<property name="seoTitle" type="java.lang.String">
+			<column name="seoTitle" />
+		</property>
+		<property name="seoKeyWord" type="java.lang.String">
+			<column name="seoKeyWord" />
+		</property>
+		<property name="seoDescription" type="java.lang.String">
+			<column name="seoDescription" />
+		</property>
+		<property name="totalHits" type="java.lang.Integer">
+			<column name="totalHits" />
+		</property>
+		<property name="totalSales" type="java.lang.Integer">
+			<column name="totalSales" />
+		</property>
+		<property name="isRecommend" type="java.lang.Integer">
+			<column name="isRecommend" />
+		</property>
+		<property name="isNew" type="java.lang.Integer">
+			<column name="isNew" />
+		</property>
+		<property name="isHot" type="java.lang.Integer">
+			<column name="isHot" />
+		</property>
+		<property name="isTop" type="java.lang.Integer">
+			<column name="isTop" />
+		</property>
+		<property name="logoImg" type="java.lang.String">
+			<column name="logoImg" />
+		</property>
+		<property name="productAttribute" type="java.lang.String">
+			<column name="productAttribute" />
+		</property>
+		<property name="isShow" type="java.lang.Integer">
+			<column name="isShow" />
+		</property>
+		<property name="virtualCoinNumber" type="java.math.BigDecimal">
+			<column name="virtualCoinNumber" />
+		</property>
+		<property name="giveAwayCoinNumber" type="java.math.BigDecimal">
+			<column name="giveAwayCoinNumber" />
+		</property>
+		<property name="qrCode" type="java.lang.String">
+			<column name="qrCode" />
+		</property>
+		<property name="stockUpDate" type="java.lang.Integer">
+			<column name="stockUpDate"></column>
+		</property>
+		<property name="deliveryAddressProvince" type="java.lang.Integer">
+			<column name="deliveryAddressProvince"></column>
+		</property>
+		<property name="deliveryAddressCities" type="java.lang.Integer">
+			<column name="deliveryAddressCities"></column>
+		</property>
+		<property name="sku" type="java.lang.String">
+			<column name="sku"></column>
+		</property>
+<!-- 		<property name="brandName" type="java.lang.String" formula="(select b.brandName from shop_brand b where b.brandId = brandId)"></property> -->
+		<property name="shopName" type="java.lang.String" formula="(select b.shopName from shop_shopinfo b where b.shopInfoId = shopInfoId)"></property>
+		<property name="tisPass" type="java.lang.Integer" formula="(select b.isPass from shop_shopinfo b where b.shopInfoId = shopInfoId)"></property>
+		<property name="tisClose" type="java.lang.Integer" formula="(select b.isClose from shop_shopinfo b where b.shopInfoId = shopInfoId)"></property>
+		<!-- <many-to-one name="shopInfo" column="shopInfoId" class="shop.store.pojo.ShopInfo" insert="false" update="false"  lazy="false"></many-to-one> -->
+	</class>
+</hibernate-mapping>  

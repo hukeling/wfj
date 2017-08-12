@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="rating.buyersRecord.pojo.BuyersRecord" table="rating_buyers_record" catalog="b2b2c">
+        <id name="ratingRecordId" type="java.lang.Integer">
+            <column name="ratingRecordId" />
+            <generator class="native" />
+        </id>
+       <property name="customerId" type="java.lang.Integer">
+            <column name="customerId" />
+        </property>
+        <property name="buyersLevel" type="java.lang.Integer">
+            <column name="buyersLevel" />
+        </property>
+        <property name="buyerRank" type="java.lang.String">
+            <column name="buyerRank" />
+        </property>
+        <property name="levelIcon" type="java.lang.String">
+            <column name="levelIcon" />
+        </property>
+        <property name="remark" type="java.lang.String">
+            <column name="remark" />
+        </property>
+        <property name="optionDate" type="java.util.Date">
+            <column name="optionDate" />
+        </property>
+        <property name="operator" type="java.lang.String">
+            <column name="operator" />
+        </property>
+         <property name="lineOfCredit" type="java.math.BigDecimal">
+            <column name="lineOfCredit" />
+        </property>
+        <property name="creditDate" type="java.lang.Integer">
+            <column name="creditDate" />
+        </property>
+        <property name="minRefValue" type="java.lang.Integer">
+            <column name="minRefValue" />
+        </property>
+        <property name="maxRefValue" type="java.lang.Integer">
+            <column name="maxRefValue" />
+        </property>
+        <property name="levelDiscountValue" type="java.lang.Integer">
+            <column name="levelDiscountValue" />
+        </property>
+    </class>
+</hibernate-mapping>

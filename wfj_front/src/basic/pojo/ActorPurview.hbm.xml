@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="basic.pojo.ActorPurview" table="basic_actorpurview" schema="b2b2c" >
+        <id name="actorPurviewId" type="java.lang.Integer">
+            <column name="actorPurviewId"/>
+            <generator class="native"/>
+        </id>
+        <property name="actorId" type="java.lang.Integer">
+            <column name="actorId"/>
+        </property>
+         <property name="purviewId" type="java.lang.Integer">
+            <column name="purviewId"/>
+        </property>
+         <property name="functions" type="java.lang.String">
+            <column name="functions"/>
+        </property>
+    </class>
+</hibernate-mapping>  

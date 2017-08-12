@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="cms.seo.pojo.CmsSeo" table="cms_seo" catalog="b2b2c">
+        <id name="seoId" type="java.lang.Integer">
+            <column name="seoId" />
+            <generator class="native" />
+        </id>
+        <property name="title" type="java.lang.String">
+            <column name="title" length="500" />
+        </property>
+        <property name="keywords" type="java.lang.String">
+            <column name="keywords" length="500" />
+        </property>
+        <property name="description" type="java.lang.String">
+            <column name="description" length="500" />
+        </property>
+    </class>
+</hibernate-mapping>

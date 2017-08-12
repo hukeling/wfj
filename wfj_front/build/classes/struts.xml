@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+ "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<!--常量重新定义 -->
+	<!-- 开发模式下使用,这样可以打印出更详细的错误信息 -->
+	<constant name="struts.devmode" value="true" />
+	<!-- 国际化-->
+	<constant name="struts.custom.i18n.resources" value="message"></constant>
+	<constant name="struts.multipart.saveDir" value="D:\\tmp"></constant>
+	<constant name="struts.multipart.maxSize" value="2097152000"></constant>
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant> 
+	<!-- 控制<s:textfield name="user.userName"/>标签自动添加多余代码：<td class="tdLabel"></td> -->
+	<constant name="struts.ui.theme" value="simple" />
+	<!-- 自动重新加载映射加载 -->
+	<constant name="struts.convention.classes.reload" value="false"/>
+	<!-- 搜寻action的根包  Convention默认的根packages  -->
+    <!-- 	<constant name="struts.convention.packages.locators" value="" /> -->
+	<!-- 国际化 -->
+	<constant name="struts.i18n.reload" value="true"></constant>
+	<!-- 重新设置Struts 2的请求后缀,默认为*.action -->
+	<constant name="struts.action.extension" value="action"/>
+    <!-- 当struts的配置文件修改后,系统是否自动重新加载该文件 -->
+    <constant name="struts.configuration.xml.reload" value="true"/>
+    <!-- action 对象是由Spring负责创建  -->
+    <constant name="struts.objectFactory" value="spring" />
+    
+    <!-- 引入其他模块struts配置文件 -->
+	<include file="struts_shop.xml"></include>
+	<include file="struts_rating.xml"></include>
+	<include file="struts_tuan.xml"></include>
+	<include file="struts_promotion.xml"></include>
+	<include file="struts_discountcoupon.xml"></include>
+	<include file="struts_phone.xml"></include>
+	<include file="struts_gou.xml"></include>
+	
+	<package name="functionPurview" namespace="/" extends="struts-default">
+        <!-- 功能权限声明拦截器 -->
+	    <interceptors>
+	       <interceptor name="functionPurviewInterceptor" class="util.interceptor.FunctionPurviewInterceptor" />
+	       <!-- 功能权限配置拦截器栈 -->
+	       <interceptor-stack name="functionPurviewStack">
+	           <interceptor-ref name="defaultStack" />
+	           <interceptor-ref name="functionPurviewInterceptor" />
+	       </interceptor-stack>
+	    </interceptors>
+	</package>
+	<package name="publicUpload" namespace="" extends="struts-default"> 
+	   <action name="uploadFile" class="util.action.MultiFileOperatorAction" method="uploadFile"/>
+	   <action name="getURLResult" class="util.action.MultiFileOperatorAction" method="getURLResult"/>
+	   <action name="reomveSessionInfo" class="util.action.MultiFileOperatorAction" method="reomveSessionInfo"/>
+	   <action name="deleteFile" class="util.action.MultiFileOperatorAction" method="deleteFile"/>
+	 </package>
+	 
+     <package name="publicDownload" namespace="" extends="struts-default">
+       <action name="downloadFile" class="util.action.DownLoadFileAction" method="downloadFile">
+		    <result name="success" type="stream">
+		        <!-- 指定下载文件的内容类型，text/plain是默认类型 -->
+                <!--    <param name="contentType">text/plain</param> -->
+		        <!-- inputName默认值是inputStream，如果action中用于读取下载文件内容的属性名是inputStream，那么可以省略这个参数 -->
+		        <param name="inputName">downloadStream</param>
+		        <!--动态获取文件名，从Action中的取得filename-->
+		        <param name="contentDisposition">
+		            attachment;filename="${downloadFileName}"
+		        </param>
+		        <param name="bufferSize">2048</param>
+		    </result>
+		    <result name="error">/error.jsp</result>
+		    <result name="input">/error.jsp</result>
+		</action>
+     </package>
+     
+      <!-- 通用导出下载文件配置 begin -->			
+	<package name="publicExport" namespace="/publicExport" extends="struts-default" >
+		<action name="exportExcel" class="exportExcelAction" method="exportExcel">
+			<result name="success" type="stream">
+				<!-- 指定下载文件的内容类型，text/plain是默认类型 -->
+				<param name="contentType">application/vnd.ms-excel;charset=UTF-8</param>
+				<!-- inputName默认值是inputStream，如果action中用于读取下载文件内容的属性名是inputStream，那么可以省略这个参数 -->
+				<param name="inputName">excelInputStream</param>
+				<!-- 动态获取文件名，从Action中的取得filename -->
+				<param name="contentDisposition">attachment;filename="${fileName}.xls"</param>
+				<!-- 读取缓冲区 -->
+				<param name="bufferSize">2048</param>
+			</result>
+			<result name="error">/error.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+	</package>
+	<!-- 通用导出下载文件配置 end -->
+     
+     	<!-- 快钱文件配置 begin -->
+		<package name="quickBuck" namespace="/quickBuck" extends="struts-default"> 
+		   <!-- 支付请求 -->
+		   <action name="quickBuckAPI" class="quickBuckAction" method="quickBuckAPI">
+		   		<result name="success">/WEB-INF/shop/quickBuck/quickBuck.jsp</result>
+		   </action>
+	   </package>
+     	<!-- 快钱文件配置 end -->
+     	
+	<package name="common" namespace="/" extends="struts-default" >
+		<action name="header">
+			<result>/WEB-INF/shop/include/header.jsp</result>
+		</action>
+	</package>     	
+</struts>    

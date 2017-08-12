@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	
+	<package name="discountcoupon" namespace="/front/discountcoupon/coupon" extends="struts-default">
+		<action name="gotofrontcoupon" class="discountCouponAction" method="gotofrontcoupon">
+			<result>/WEB-INF/discountcoupon/frontCouponList.jsp</result>
+		</action>
+	</package>
+	
+	<!-- 用户优惠券begin -->
+	<package name="Customercoupon" namespace="/front/customer/customercoupon" extends="struts-default">
+		<action name="addCustomerdiscountcoupon" class="customerdiscountcouponAction" method="addCustomerdiscountcoupon"></action>
+	 	<action name="gotoMyAccountCustoCouponList" class="customerdiscountcouponAction" method="gotoMyAccountCustoCouponList">
+	       	<result>/WEB-INF/discountcoupon/myaccount_customercouponlist.jsp</result>
+		</action>
+	</package>
+	<!-- 优惠券 end -->
+	
+</struts>

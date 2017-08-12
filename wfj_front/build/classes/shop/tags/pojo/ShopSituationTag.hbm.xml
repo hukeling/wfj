@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 适合行业标签 -->
+<!-- mqr -->
+<hibernate-mapping>
+    <class name="shop.tags.pojo.ShopSituationTag" table="shop_situation_tag" schema="b2b2c" >
+    	<!-- 适合行业标签ID -->
+        <id name="stId" type="java.lang.Integer">
+            <column name="stId"/>
+            <generator class="native"/>
+        </id>
+        <!--  标签名 -->
+        <property name="tageName" type="java.lang.String">
+            <column name="tageName"/>
+        </property>
+     	 <!-- 使用状态*0、废弃 1、正常使用 -->
+        <property name="useState" type="java.lang.Integer">
+            <column name="useState"/>
+        </property>
+    </class>
+</hibernate-mapping>  

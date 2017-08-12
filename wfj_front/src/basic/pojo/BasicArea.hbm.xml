@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 
+    地区表 
+-->
+<hibernate-mapping>
+    <class name="basic.pojo.BasicArea" table="basic_area" catalog="b2b2c">
+        <id name="areaId" type="java.lang.Integer">
+            <column name="areaId" precision="8" scale="0" />
+            <generator class="native" />
+        </id>
+        <property name="createDate" type="java.util.Date">
+            <column name="createDate"  not-null="true" />
+        </property>
+        <property name="modifyDate" type="java.util.Date">
+            <column name="modifyDate"/>
+        </property>
+        <property name="orders" type="java.lang.Integer">
+            <column name="orders"/>
+        </property>
+        <property name="fullName" type="java.lang.String">
+            <column name="fullName" not-null="true" length="200" />
+        </property>
+        <property name="name" type="java.lang.String">
+            <column name="name" length="50" not-null="true" />
+        </property>
+        <property name="treePath" type="java.lang.String">
+            <column name="treePath" not-null="true" length="100"/>
+        </property>
+        <property name="parentId" type="java.lang.Integer">
+            <column name="parentId" not-null="true" />
+        </property>
+        <property name="areaCode" type="java.lang.String">
+            <column name="areaCode" length="100" not-null="true" />
+        </property>
+        <property name="isLeaf" type="java.lang.Integer">
+            <column name="isLeaf" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

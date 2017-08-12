@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="rating.sellersRecord.pojo.SellersRecord" table="rating_sellers_record" catalog="b2b2c">
+        <id name="ratingRecordId" type="java.lang.Integer">
+            <column name="ratingRecordId" />
+            <generator class="native" />
+        </id>
+       <property name="customerId" type="java.lang.Integer">
+            <column name="customerId" />
+        </property>
+        <property name="sellersLevel" type="java.lang.Integer">
+            <column name="sellersLevel" />
+        </property>
+        <property name="sellersRank" type="java.lang.String">
+            <column name="sellersRank" />
+        </property>
+        <property name="levelIcon" type="java.lang.String">
+            <column name="levelIcon" />
+        </property>
+        <property name="remark" type="java.lang.String">
+            <column name="remark" />
+        </property>
+        <property name="optionDate" type="java.util.Date">
+            <column name="optionDate" />
+        </property>
+        <property name="operator" type="java.lang.String">
+            <column name="operator" />
+        </property>
+    </class>
+</hibernate-mapping>

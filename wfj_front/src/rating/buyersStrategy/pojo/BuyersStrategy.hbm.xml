@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="rating.buyersStrategy.pojo.BuyersStrategy" table="rating_buyers_strategy" catalog="b2b2c">
+        <id name="buyersLevelId" type="java.lang.Integer">
+            <column name="buyersLevelId" />
+            <generator class="native" />
+        </id>
+       <property name="buyersLevel" type="java.lang.Integer">
+            <column name="buyersLevel" />
+        </property>
+        <property name="buyerRank" type="java.lang.String">
+            <column name="buyerRank" />
+        </property>
+        <property name="levelIcon" type="java.lang.String">
+            <column name="levelIcon" />
+        </property>
+        <property name="minRefValue" type="java.lang.Integer">
+            <column name="minRefValue" />
+        </property>
+        <property name="maxRefValue" type="java.lang.Integer">
+            <column name="maxRefValue" />
+        </property>
+        <property name="levelDiscountValue" type="java.lang.Integer">
+            <column name="levelDiscountValue" />
+        </property>
+        <property name="lineOfCredit" type="java.math.BigDecimal">
+            <column name="lineOfCredit" />
+        </property>
+        <property name="creditDate" type="java.lang.Integer">
+            <column name="creditDate" />
+        </property>
+    </class>
+</hibernate-mapping>

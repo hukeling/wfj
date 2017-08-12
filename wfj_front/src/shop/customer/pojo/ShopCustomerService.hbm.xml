@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="shop.customer.pojo.ShopCustomerService" table="shop_shop_customerservice" schema="b2b2c" >
+        <id name="ccsId" type="java.lang.Integer">
+            <column name="ccsId"/>
+            <generator class="native"/>
+        </id>
+        <property name="customerId" type="java.lang.Integer">
+            <column name="customerId"/>
+        </property>
+        <property name="customerServiceId" type="java.lang.Integer">
+            <column name="customerServiceId"/>
+        </property>
+    </class>
+</hibernate-mapping>  

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="shop.common.pojo.CoinRules" table="basic_coin_rules" schema="b2b2c">
+        <id name="coinRulesId" type="java.lang.Integer">
+            <column name="coinRulesId"/>
+            <generator class="native" />
+        </id>
+        <property name="value" type="java.lang.String">
+            <column name="value"/>
+        </property>
+        <property name="name" type="java.lang.String">
+            <column name="name"/>
+        </property>
+        <property name="type" type="java.lang.String">
+            <column name="type"/>
+        </property>
+        <property name="typeName" type="java.lang.String">
+            <column name="typeName"/>
+        </property>
+        <property name="userId" type="java.lang.Integer">
+            <column name="userId"/>
+        </property>
+        <property name="userName" type="java.lang.String">
+            <column name="userName"/>
+        </property>
+        <property name="createTime" type="java.util.Date">
+            <column name="createTime"/>
+        </property>
+        <property name="updateTime" type="java.util.Date">
+            <column name="updateTime"/>
+        </property>
+    </class>
+</hibernate-mapping>

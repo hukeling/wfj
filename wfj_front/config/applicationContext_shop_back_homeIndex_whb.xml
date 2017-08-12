@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+       
+	<!-- 初始化数据字典到全局上下文中 ServletContext -->
+	<bean id="initializingHomeKeyBook" class="util.init.InitializingHomeKeyBook" init-method="afterPropertiesSet" >
+		<property name="homeKeyBookService"><ref bean="homeKeyBookService" /></property>
+	</bean> 
+       
+	 <!-- 首页轮播图-->
+	<bean id="homeLBTDao" class="shop.homeIndex.dao.imp.HomeLBTDao"  parent="baseDao"/>
+	<bean id="homeLBTService" class="shop.homeIndex.service.imp.HomeLBTService"  parent="baseService">
+		<property name="homeLBTDao"><ref bean="homeLBTDao" /></property>
+	</bean>
+	<bean id="homeLBTAction" class="shop.homeIndex.action.HomeLBTAction" scope="prototype">
+		<property name="homeLBTService"><ref bean="homeLBTService" /></property>
+	</bean>
+	<!-- 首页轮播图end -->
+	 <!-- 首页广告位begin-->
+	<bean id="homeAdvertisementDao" class="shop.homeIndex.dao.imp.HomeAdvertisementDao"  parent="baseDao"/>
+	<bean id="homeAdvertisementService" class="shop.homeIndex.service.imp.HomeAdvertisementService"  parent="baseService">
+		<property name="homeAdvertisementDao"><ref bean="homeAdvertisementDao" /></property>
+	</bean>
+	<bean id="homeAdvertisementAction" class="shop.homeIndex.action.HomeAdvertisementAction" scope="prototype">
+		<property name="homeAdvertisementService"><ref bean="homeAdvertisementService" /></property>
+	</bean>
+	<!-- 首页广告位end -->
+	 <!-- 首页特别商品begin-->
+	<bean id="homeParticularlyTabDao" class="shop.homeIndex.dao.imp.HomeParticularlyTabDao"  parent="baseDao"/>
+	<bean id="homeParticularlyTabService" class="shop.homeIndex.service.imp.HomeParticularlyTabService"  parent="baseService">
+		<property name="homeParticularlyTabDao"><ref bean="homeParticularlyTabDao" /></property>
+	</bean>
+	<bean id="homeParticularlyTabAction" class="shop.homeIndex.action.HomeParticularlyTabAction" scope="prototype">
+		<property name="homeParticularlyTabService"><ref bean="homeParticularlyTabService" /></property>
+	</bean>
+	<!-- 首页特别商品end -->
+
+	<!-- 首页数据字典begin -->
+    <bean id="homeKeyBookDao" class="shop.homeIndex.dao.imp.HomeKeyBookDao"  parent="baseDao"/>
+	<bean id="homeKeyBookService" class="shop.homeIndex.service.imp.HomeKeyBookService"  parent="baseService">
+		<property name="homeKeyBookDao"><ref bean="homeKeyBookDao" /></property>
+	</bean>
+	<bean id="homeKeyBookAction" class="shop.homeIndex.action.HomeKeyBookAction" scope="prototype">
+		<property name="homeKeyBookService"><ref bean="homeKeyBookService" /></property>
+	</bean>
+	<!-- 首页数据字典end -->
+	
+	<!-- 首页中间分类 begin -->
+    <bean id="shopHomeMiddleCategoryDao" class="shop.homeIndex.dao.imp.ShopHomeMiddleCategoryDao"  parent="baseDao"/>
+	<bean id="shopHomeMiddleCategoryService" class="shop.homeIndex.service.imp.ShopHomeMiddleCategoryService"  parent="baseService">
+		<property name="shopHomeMiddleCategoryDao"><ref bean="shopHomeMiddleCategoryDao" /></property>
+	</bean>
+	<bean id="shopHomeMiddleCategoryAction" class="shop.homeIndex.action.ShopHomeMiddleCategoryAction" scope="prototype">
+		<property name="shopHomeMiddleCategoryService"><ref bean="shopHomeMiddleCategoryService" /></property>
+	</bean>
+	<!-- 首页中间分类 end -->
+	
+	<!-- 首页中间分类两侧维护 begin -->
+    <bean id="shopHomeMiddleCategoryBilateralDao" class="shop.homeIndex.dao.imp.ShopHomeMiddleCategoryBilateralDao"  parent="baseDao"/>
+	<bean id="shopHomeMiddleCategoryBilateralService" class="shop.homeIndex.service.imp.ShopHomeMiddleCategoryBilateralService"  parent="baseService">
+		<property name="shopHomeMiddleCategoryBilateralDao"><ref bean="shopHomeMiddleCategoryBilateralDao" /></property>
+	</bean>
+	<bean id="shopHomeMiddleCategoryBilateralAction" class="shop.homeIndex.action.ShopHomeMiddleCategoryBilateralAction" scope="prototype">
+		<property name="shopHomeMiddleCategoryBilateralService"><ref bean="shopHomeMiddleCategoryBilateralService" /></property>
+	</bean>
+	<!-- 首页中间分类两侧维护 end -->
+	
+	<!-- 首页中间分类tab维护 begin -->
+    <bean id="shopHomeMiddleCategoryTABDao" class="shop.homeIndex.dao.imp.ShopHomeMiddleCategoryTABDao"  parent="baseDao"/>
+	<bean id="shopHomeMiddleCategoryTABService" class="shop.homeIndex.service.imp.ShopHomeMiddleCategoryTABService"  parent="baseService">
+		<property name="shopHomeMiddleCategoryTABDao"><ref bean="shopHomeMiddleCategoryTABDao" /></property>
+	</bean>
+	<bean id="shopHomeMiddleCategoryTABAction" class="shop.homeIndex.action.ShopHomeMiddleCategoryTABAction" scope="prototype">
+		<property name="shopHomeMiddleCategoryTABService"><ref bean="shopHomeMiddleCategoryTABService" /></property>
+	</bean>
+	<!-- 首页中间分类tab维护 end -->
+	
+</beans>

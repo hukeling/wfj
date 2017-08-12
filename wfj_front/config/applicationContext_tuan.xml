@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+       
+    <!-- 团购商品begin -->
+	<bean id="tuanProductDao" class="tuan.dao.imp.TuanProductDao"  parent="baseDao"/>
+	<bean id="tuanProductService" class="tuan.service.imp.TuanProductService"  parent="baseService">
+		<property name="tuanProductDao"><ref bean="tuanProductDao" /></property>
+	</bean>
+	<bean id="tuanProductAction" class="tuan.action.TuanProductAction" scope="prototype">
+		<property name="tuanProductTypeService"><ref bean="tuanProductTypeService" /></property>
+		<property name="tuanProductService"><ref bean="tuanProductService" /></property>
+		<property name="shopInfoService"><ref bean="shopInfoService" /></property>
+	</bean>
+	<!-- 团购商品end -->
+		
+	<!-- 团购商品分类begin -->
+	<bean id="tuanProductTypeDao" class="tuan.dao.imp.TuanProductTypeDao"  parent="baseDao"/>
+	<bean id="tuanProductTypeService" class="tuan.service.imp.TuanProductTypeService"  parent="baseService">
+		<property name="tuanProductTypeDao"><ref bean="tuanProductTypeDao" /></property>
+	</bean>
+	<!-- 团购商品分类end -->
+	
+	<!-- 团购begin -->
+	<bean id="groupAction" class="tuan.action.GroupAction" scope="prototype">
+		<property name="tuanProductTypeService"><ref bean="tuanProductTypeService" /></property>
+		<property name="tuanProductService"><ref bean="tuanProductService" /></property>
+		<property name="productInfoService"><ref bean="productInfoService" /></property>
+		<property name="evaluateGoodsService"><ref bean="evaluateGoodsService" /></property>
+		<property name="shopInfoService"><ref bean="shopInfoService" /></property>
+	</bean>
+	<!-- 团购end -->
+	
+	<!-- 团购订单begin -->
+	<bean id="tuanOrderAction" class="tuan.action.TuanOrderAction" scope="prototype">
+		<property name="tuanProductService"><ref bean="tuanProductService" /></property>
+		<property name="productInfoService"><ref bean="productInfoService" /></property>
+		<property name="customerAcceptAddressService"><ref bean="customerAcceptAddressService" /></property>
+		<property name="shopInfoService"><ref bean="shopInfoService" /></property>
+	</bean>
+	<!-- 团购订单end -->
+	
+</beans>

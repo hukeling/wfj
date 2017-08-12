@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="shop.customer.pojo.Customer" table="basic_customer" schema="b2b2c" >
+        <id name="customerId" type="java.lang.Integer">
+            <column name="customerId"/>
+            <generator class="native"/>
+        </id>
+        <property name="loginName" type="java.lang.String">
+            <column name="loginName"/>
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="password"/>
+        </property>
+        <property name="nickName" type="java.lang.String">
+            <column name="nickName"/>
+        </property>
+        <property name="phone" type="java.lang.String">
+            <column name="phone"/>
+        </property>
+        <property name="email" type="java.lang.String">
+            <column name="email"/>
+        </property>
+        <property name="photoUrl" type="java.lang.String">
+            <column name="photoUrl"/>
+        </property>
+        <property name="registerIp" type="java.lang.String">
+            <column name="registerIp"/>
+        </property>
+        <property name="registerDate" type="java.util.Date">
+            <column name="registerDate"/>
+        </property>
+        <property name="lockedState" type="java.lang.Integer">
+            <column name="lockedState"/>
+        </property>
+        <property name="lockedDate" type="java.util.Date">
+            <column name="lockedDate"/>
+        </property>
+        <property name="type" type="java.lang.Integer">
+            <column name="type"/>
+        </property>
+        <property name="shareType" type="java.lang.Integer">
+            <column name="shareType"/>
+        </property>
+         <property name="isCanBuy" type="java.lang.Integer">
+            <column name="isCanBuy"/>
+        </property>
+    </class>
+</hibernate-mapping>  

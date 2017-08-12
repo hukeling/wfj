@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="cms.friendLink.pojo.Friendlink" table="cms_friendlink" catalog="b2b2c">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="native" />
+        </id>
+        <property name="linkName" type="java.lang.String">
+            <column name="linkName" length="50" />
+        </property>
+        <property name="url" type="java.lang.String">
+            <column name="url" length="100" />
+        </property>
+        <property name="imgUrl" type="java.lang.String">
+            <column name="imgUrl" length="200" />
+        </property>
+    </class>
+</hibernate-mapping>

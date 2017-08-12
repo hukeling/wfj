@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="shop.customer.pojo.CusService" table="shop_customerservice" schema="b2b2c" >
+        <id name="customerServiceId" type="java.lang.Integer">
+            <column name="customerServiceId"/>
+            <generator class="native"/>
+        </id>
+        <property name="trueName" type="java.lang.String">
+            <column name="trueName"/>
+        </property>
+        <property name="nikeName" type="java.lang.String">
+            <column name="nikeName"/>
+        </property>
+        <property name="qq" type="java.lang.String">
+            <column name="qq"/>
+        </property>
+        <property name="useState" type="java.lang.Integer">
+            <column name="useState"/>
+        </property>
+        <property name="photoUrl" type="java.lang.String">
+            <column name="photoUrl"/>
+        </property>
+        <property name="mobile" type="java.lang.String">
+            <column name="mobile"/>
+        </property>
+        <property name="phone" type="java.lang.String">
+            <column name="phone"/>
+        </property>
+        <property name="workNumber" type="java.lang.String">
+            <column name="workNumber"/>
+        </property>
+    </class>
+</hibernate-mapping>  
